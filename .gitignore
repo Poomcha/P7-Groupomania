@@ -2,3 +2,4 @@
 /front/node_modules
 /.env
 /back/images
+/back/config/config.json
