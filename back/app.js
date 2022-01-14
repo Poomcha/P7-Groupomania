@@ -4,31 +4,9 @@ require('dotenv').config({ path: '../.env' });
 const path = require('path');
 const fs = require('fs');
 const helmet = require('helmet');
-// const db = require(__dirname + '/models/index');
+const db = require(__dirname + '/models/index');
 
 // Import routes :
-
-// const env = process.env;
-
-// // Infos de connexion :
-// const sequelize = new Sequelize(
-//   env.MYSQL_DB_NAME,
-//   env.MYSQL_USERNAME,
-//   env.MYSQL_PWD,
-//   {
-//     host: 'localhost',
-//     dialect: 'mysql',
-//     port: env.MYSQL_PORT,
-//   }
-// );
-
-// Connexion :
-// db
-//   .authenticate()
-//   .then(() => console.log('Connexion à MySql établie.'))
-//   .catch((err) => {
-//     console.log('connexion à MySql échouée.', err);
-//   });
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
