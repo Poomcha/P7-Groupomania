@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const db = require(__dirname + '/models/index');
 
 // Import routes :
+const userRoute = require('./routes/user');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -44,5 +45,6 @@ fs.access('./images', fs.constants.F_OK, (error) => {
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Routage
+app.use('/', userRoute);
 
 module.exports = app;
