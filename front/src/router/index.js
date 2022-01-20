@@ -18,13 +18,23 @@ const routes = [
   },
   {
     path: '/signin',
-    name: 'Sigini',
+    name: 'Signin',
     component: () => import('../views/Signin.vue'),
   },
   {
     path: '/signup',
     name: 'Signup',
     component: () => import('../views/Signup.vue'),
+  },
+  {
+    path: '/profil',
+    name: 'Profil',
+    component: () => import('../views/Profil.vue'),
+  },
+  {
+    path: '/loggout',
+    name: 'Loggout',
+    component: () => import('../views/Logout.vue'),
   },
 ];
 

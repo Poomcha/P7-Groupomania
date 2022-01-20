@@ -5,11 +5,16 @@ const path = require('path');
 const fs = require('fs');
 const helmet = require('helmet');
 const db = require(__dirname + '/models/index');
+const session = require('express-session');
+const sessionOptions = require('./config/cookie-config');
 
 // Import routes :
 const userRoute = require('./routes/user');
+const profilRoute = require('./routes/profil');
+const pubRoute = require('./routes/publication');
 
 const app = express();
+app.use(session(sessionOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
@@ -46,5 +51,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Routage
 app.use('/', userRoute);
+app.use('/', profilRoute);
+app.use('/', pubRoute);
 
 module.exports = app;

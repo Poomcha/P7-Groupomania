@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Profil.init(
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
       position: DataTypes.STRING,
