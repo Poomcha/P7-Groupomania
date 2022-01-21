@@ -1,27 +1,10 @@
 import { createStore } from 'vuex';
+import createPersistedStore from 'vuex-persistedstate';
+import auth from './modules/auth';
 
 export default createStore({
-  state: {
-    
+  modules: {
+    auth,
   },
-  mutations: {
-  
-  },
-  actions: {
-    signupUser(email, password) {
-      // fetch('http://localhost:3000/signup', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ email: email, password: password }),
-      // }).then(() =>
-      //   console.log(
-      //     'User signed up, email : ' + email + ', password : ' + password
-      //   )
-      // );
-      console.log(`email: ${email} | password: ${password}`);
-    },
-  },
-  modules: {},
+  plugins: [createPersistedStore()],
 });

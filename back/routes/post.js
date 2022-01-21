@@ -3,8 +3,8 @@ const router = express.Router();
 
 const auth = require('../middleware/auth');
 
-const pubCtrl = require('../controllers/publication');
+const postCtrl = require('../controllers/post');
 
-router.get('/home', auth, pubCtrl.publicationTest);
+router.get('/home', auth, postCtrl.publicationTest);
 
 module.exports = router;

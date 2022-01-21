@@ -3,3 +3,4 @@
 /back/.env
 /back/images
 /back/config/config.json
+*.js.idea

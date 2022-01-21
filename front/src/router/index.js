@@ -36,6 +36,11 @@ const routes = [
     name: 'Loggout',
     component: () => import('../views/Logout.vue'),
   },
+  {
+    path: '/test_login',
+    name: 'Test_Login',
+    component: () => import('../views/Test_Login.vue'),
+  },
 ];
 
 const router = createRouter({

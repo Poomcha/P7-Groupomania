@@ -1,10 +1,10 @@
 <template>
   <div class="login">
     <label id="email-label" for="email">Email : </label>
-    <input id="email-input" type="text" v-model="email" />
+    <input id="email-input" type="text" v-model="input.email" />
     <label id="pwd-label" for="password">Password : </label>
-    <input id="pwd-input" type="text" v-model="password" />
-    <button id="submit-login" @click="signinUser(email, password)">
+    <input id="pwd-input" type="text" v-model="input.password" />
+    <button id="submit-login" @click="signinUser(input.email, input.password)">
       Submit
     </button>
   </div>
@@ -17,8 +17,7 @@ export default {
   name: "Signin",
   data: () => {
     return {
-      email: "",
-      password: "",
+      input: { email: "", password: "" },
     };
   },
   methods: {
@@ -31,7 +30,7 @@ export default {
         body: JSON.stringify({ email: email, password: password }),
       }).then((response) => {
         if (response.ok) {
-          router.push({ name: "Home" });
+          router.push({ name: "Test_Login" });
         }
       });
     },
