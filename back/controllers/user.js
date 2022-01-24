@@ -16,6 +16,7 @@ exports.signup = (req, res, next) => {
       return user;
     })
     .then((user) => {
+      // Creating cookie
       req.session.user = user.id;
       db.User.findOne({ where: { email: req.body.email } }).then((user) => {
         db.Profil.create({ userId: user.id });
@@ -32,7 +33,7 @@ exports.signin = (req, res, next) => {
   db.User.findOne({ where: { email: req.body.email } })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ error });
+        return res.status(403).json({ error });
       }
       bcrypt
         .compare(req.body.password, user.password)
@@ -41,7 +42,6 @@ exports.signin = (req, res, next) => {
             return res.status(401).json({ error });
           }
           req.session.user = user.id;
-          console.log(req.session);
           res.status(200).json({
             userId: user.id,
             token: jwt.sign({ userId: user.id }, 'TOKEN_SECRET_PHRASE', {

@@ -3,8 +3,9 @@ const router = express.Router();
 
 const auth = require('../middleware/auth');
 
-const profilCtrl = require('../controllers/profile');
+const profileCtrl = require('../controllers/profile');
 
-router.get('/profile', auth, profilCtrl.profilTest);
+router.get('/users', auth, profileCtrl.getAllProfile);
+router.get('/users/:userId', auth, profileCtrl.getProfileById);
 
 module.exports = router;
