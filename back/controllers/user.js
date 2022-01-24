@@ -19,7 +19,7 @@ exports.signup = (req, res, next) => {
       // Creating cookie
       req.session.user = user.id;
       db.User.findOne({ where: { email: req.body.email } }).then((user) => {
-        db.Profil.create({ userId: user.id });
+        db.Profile.create({ userId: user.id });
       });
     })
     .then(() =>

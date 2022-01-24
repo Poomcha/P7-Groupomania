@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Profils', {
+    await queryInterface.createTable('Profiles', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -24,6 +24,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
+      profilPictureURL: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -35,6 +38,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Profils');
+    await queryInterface.dropTable('Profiles');
   },
 };
