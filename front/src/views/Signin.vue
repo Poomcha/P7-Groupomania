@@ -24,6 +24,7 @@ export default {
     signinUser(email, password) {
       fetch("http://localhost:3000/signin", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

@@ -8,4 +8,5 @@ module.exports = {
   },
   resave: false,
   saveUninitialized: false,
+  domain: 'htpp://localhost:8080',
 };

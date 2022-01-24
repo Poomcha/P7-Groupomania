@@ -1,19 +1,16 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+    <Nav></Nav>
+  </div>
 </template>
 
 <script>
-// @ is an alias to /src
-fetch("http://localhost:3000/home", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-}).then((res) => {
-  console.log(res);
-});
+import Nav from "../components/Nav.vue";
 
 export default {
   name: "Home",
+  components: {
+    Nav,
+  },
 };
 </script>

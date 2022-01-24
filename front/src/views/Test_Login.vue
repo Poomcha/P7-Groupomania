@@ -18,6 +18,7 @@ export default {
       axios
         .delete("logout", {
           withCredentials: true,
+          
         })
         .then((res) => console.log(res));
     },

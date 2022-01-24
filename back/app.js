@@ -14,14 +14,14 @@ const profilRoute = require('./routes/profil');
 const postRoute = require('./routes/post');
 
 const app = express();
-app.use(session(sessionOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
+app.use(session(sessionOptions));
 
 // Configuration des headers :
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'

@@ -5,7 +5,24 @@ const state = {
   posts: null,
 };
 
-const getters = {};
+const getters = {
+  isAuthenticated: (state) => !!state.user,
+  statePosts: (state) => state.posts,
+  stateUser: (state) => state.user,
+};
+
+const mutations = {
+  SET_USER(state, email) {
+    state.user = email;
+  },
+  SET_POSTS(state, posts) {
+    state.posts = posts;
+  },
+  LOG_OUT(state) {
+    state.user = null;
+    state.posts = null;
+  },
+};
 
 const actions = {
   signup({ dispatch }, form) {
@@ -17,8 +34,6 @@ const actions = {
     });
   },
 };
-
-const mutations = {};
 
 export default {
   state,

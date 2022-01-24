@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 const jwt = require('jsonwebtoken');
 
 const db = require('../models/index');
@@ -13,6 +14,7 @@ exports.signup = (req, res, next) => {
         password: hash,
       });
       req.session.user = user;
+      session.save();
       return user;
     })
     .then(() => res.status(201).json({ message: 'User created.' }))
@@ -32,7 +34,8 @@ exports.signin = (req, res, next) => {
           if (!valid) {
             return res.status(401).json({ error });
           }
-          req.session.user = user;
+          req.session.user = user.email;
+          console.log(req.session);
           res.status(200).json({
             userId: user.id,
             token: jwt.sign({ userId: user.id }, 'TOKEN_SECRET_PHRASE', {
@@ -61,6 +64,4 @@ exports.logout = (req, res, next) => {
 };
 
 // Changement de mot de passe:
-exports.changePassword = (req, res, next) => {
-  
-};
+exports.changePassword = (req, res, next) => {};

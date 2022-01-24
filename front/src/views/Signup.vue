@@ -2,10 +2,12 @@
   <div class="login">
     <label id="email-label" for="email">Email : </label>
     <input id="email-input" type="text" v-model="email" />
-    <p>{{ email }}</p>
+    <label id="email-confirmation-label" for="email-confirmation-id"
+      >Confirm Email :
+    </label>
+    <input id="email-confirmation-input" type="text" />
     <label id="pwd-label" for="password">Password : </label>
     <input id="pwd-input" type="text" v-model="password" />
-    <p>{{ password }}</p>
     <label id="pwd-confirmation-label" for="pwd-confirmation-id"
       >Confirm Password :
     </label>
@@ -17,7 +19,6 @@
 </template>
 
 <script>
-// import {  mapActions } from "vuex";
 import router from "../router";
 
 export default {
@@ -30,9 +31,7 @@ export default {
   },
   computed: {},
   methods: {
-    // ...mapActions({signupUser: 'signupUser'})
     signupUser(email, password) {
-      // console.log(email + ' ' + password);
       fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: {
