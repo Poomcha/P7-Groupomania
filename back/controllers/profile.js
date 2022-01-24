@@ -36,7 +36,7 @@ exports.updateProfile = (req, res, next) => {
           : req.body;
         db.Profile.update(
           { ...profileObj },
-          { where: { userid: req.params.userId } }
+          { where: { userId: req.params.userId } }
         )
           .then(() => {
             res.status(201).json({ message: 'Profile modified.' });
