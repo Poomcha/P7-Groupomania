@@ -3,8 +3,8 @@ const router = express.Router();
 
 const auth = require('../middleware/auth');
 
-const profilCtrl = require('../controllers/profil');
+const profilCtrl = require('../controllers/profile');
 
-router.get('/profil', auth, profilCtrl.profilTest);
+router.get('/profile', auth, profilCtrl.profilTest);
 
 module.exports = router;

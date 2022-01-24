@@ -10,7 +10,7 @@ const sessionOptions = require('./config/cookie-config');
 
 // Import routes :
 const userRoute = require('./routes/user');
-const profilRoute = require('./routes/profil');
+const profilRoute = require('./routes/profile');
 const postRoute = require('./routes/post');
 
 const app = express();

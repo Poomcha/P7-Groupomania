@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const db = require('../models/index');
 
-// Create new user:
+// Create new user and his empty profile:
 exports.signup = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -13,11 +13,17 @@ exports.signup = (req, res, next) => {
         email: req.body.email,
         password: hash,
       });
-      req.session.user = user;
-      session.save();
       return user;
     })
-    .then(() => res.status(201).json({ message: 'User created.' }))
+    .then((user) => {
+      req.session.user = user.id;
+      db.User.findOne({ where: { email: req.body.email } }).then((user) => {
+        db.Profil.create({ userId: user.id });
+      });
+    })
+    .then(() =>
+      res.status(201).json({ message: 'User and his profil created.' })
+    )
     .catch((error) => res.status(400).json({ error }));
 };
 
@@ -34,7 +40,7 @@ exports.signin = (req, res, next) => {
           if (!valid) {
             return res.status(401).json({ error });
           }
-          req.session.user = user.email;
+          req.session.user = user.id;
           console.log(req.session);
           res.status(200).json({
             userId: user.id,
