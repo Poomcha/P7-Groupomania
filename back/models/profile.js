@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       Profile.belongsTo(models.User, {
         foreignKey: { name: 'userId', allowNull: false },
       });
+      Profile.hasMany(models.Post, {
+        foreignkey: { name: 'profileId', as: 'posts' },
+      });
     }
   }
   Profile.init(

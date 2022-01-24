@@ -53,4 +53,3 @@ exports.updateProfile = (req, res, next) => {
   }
 };
 
-// Delete a user and his profile:
