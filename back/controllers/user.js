@@ -91,3 +91,18 @@ exports.changePassword = (req, res, next) => {
     res.status(401).json({ message: 'Unauthaurized access.' });
   }
 };
+
+// Suppression d'un utilisateur:
+exports.destroyUser = (req, res, next) => {
+  if (req.session.user === req.params.id) {
+    db.User.destroy({ where: { id: req.params.id } })
+      .then(() => {
+        res.status(201).json({ message: 'User destroyed.' });
+      })
+      .catch((error) => {
+        res.status(400).json({ error });
+      });
+  } else {
+    res.status(401).json({ message: 'Unauthorized access.' });
+  }
+};
