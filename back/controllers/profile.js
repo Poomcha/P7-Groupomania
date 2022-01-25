@@ -53,3 +53,34 @@ exports.updateProfile = (req, res, next) => {
   }
 };
 
+// Supprimer un profil et un user:
+exports.deleteProfile = (req, res, next) => {
+  if (req.session.user === req.params.userId) {
+    db.Profile.destroy({ where: { useriId: req.params.userId } })
+      .then(() => {
+        db.User.destroy({ where: { id: req.params.userId } })
+          .then(() => {
+            res
+              .status(200)
+              .json({
+                message: `User ${req.params.userId} successfully deleted.`,
+              });
+          })
+          .catch((error) => {
+            res.status(400).json({
+              message:
+                `Can't delete profile with userId ${req.params.userId}: ` +
+                error,
+            });
+          });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          message:
+            `Can't delete profile with userId ${req.params.userId}: ` + error,
+        });
+      });
+  } else {
+    res.status(401).json({ message: 'Unauthorized access.' });
+  }
+};
