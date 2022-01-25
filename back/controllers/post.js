@@ -66,8 +66,10 @@ exports.createPost = (req, res, next) => {
           }
         : { ...req.body, profileId: profile.id };
       db.Post.create({ ...postObj })
-        .then(() => {
-          res.status(201).json({ message: 'Post successfully created. ' });
+        .then((post) => {
+          res
+            .status(201)
+            .json({ message: 'Post successfully created. ' + post.id });
         })
         .catch((error) => {
           res.status(400).json({ error });
@@ -80,7 +82,31 @@ exports.createPost = (req, res, next) => {
 
 // Modify a post:
 exports.modifyPost = (req, res, next) => {
-  
+  db.Profile.findOne({ where: { userId: req.session.user }, include: db.Post })
+    .then((profile) => {
+      if (profile.Posts.find((post) => post.id === req.params.postId)) {
+        const postObj = req.file
+          ? {
+              ...req.body,
+              postPictureURL: `/back/images/${req.file.filename}`,
+            }
+          : { ...req.body };
+        db.Post.update({ ...postObj }, { where: { id: req.params.postId } })
+          .then(() => {
+            res
+              .status(201)
+              .json({ message: `Post ${req.params.postId} modified.` });
+          })
+          .catch((error) => {
+            res.status(400).json({ message: 'Update failed: ' + error });
+          });
+      } else {
+        res.status(401).json({ message: 'Unauthorized access.' });
+      }
+    })
+    .catch((error) => {
+      res.status(404).json({ message: 'Profile not found: ' + error });
+    });
 };
 
 // Delete a post:
