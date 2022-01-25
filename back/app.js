@@ -12,6 +12,7 @@ const sessionOptions = require('./config/cookie-config');
 const userRoute = require('./routes/user');
 const profilRoute = require('./routes/profile');
 const postRoute = require('./routes/post');
+const commentRoute = require('./routes/comment');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -57,5 +58,6 @@ const auth = require('./middleware/auth');
 app.use('/', userRoute);
 app.use('/users', auth, profilRoute);
 app.use('/posts', auth, postRoute);
+app.use('/comments', auth, commentRoute);
 
 module.exports = app;
