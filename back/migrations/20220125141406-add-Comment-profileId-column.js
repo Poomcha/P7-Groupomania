@@ -8,14 +8,14 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    return queryInterface.addColumn('posts', 'profileId', {
+    return queryInterface.addColumn('comments', 'profileId', {
       type: Sequelize.UUID,
       references: {
         model: 'profiles',
         key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'SET DEFAULT',
+      onDelete: 'CASCADE',
     });
   },
 

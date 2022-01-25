@@ -10,7 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Post.belongsTo(models.Profile, {
-        foreignKey: { name: 'profileId', allowNull: false },
+        foreignKey: {
+          name: 'profileId',
+          allowNull: false,
+          defaultValue: 'Old Account',
+        },
+      });
+      Post.hasMany(models.Comment, {
+        foreignKey: { name: 'postId', as: 'comments' },
       });
     }
   }

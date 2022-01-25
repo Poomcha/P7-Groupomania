@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       Profile.hasMany(models.Post, {
         foreignkey: { name: 'profileId', as: 'posts' },
       });
+      Profile.hasMany(models.Comment, {
+        foreignKey: { name: 'profileId', as: 'comments' },
+      });
     }
   }
   Profile.init(
