@@ -98,7 +98,7 @@ exports.modifyPost = (req, res, next) => {
               .json({ message: `Post ${req.params.postId} modified.` });
           })
           .catch((error) => {
-            res.status(400).json({ message: 'Update failed: ' + error });
+            res.status(400).json({ message: 'Post update failed: ' + error });
           });
       } else {
         res.status(401).json({ message: 'Unauthorized access.' });
@@ -110,3 +110,24 @@ exports.modifyPost = (req, res, next) => {
 };
 
 // Delete a post:
+exports.deletepost = (req, res, next) => {
+  db.Profile.findOne({ where: { userId: req.session.user }, include: db.Post })
+    .then((profile) => {
+      if (profile.Posts.find((post) => post.id === req.params.postId)) {
+        db.Post.destroy({ where: { id: req.params.postId } })
+          .then(() => {
+            res
+              .status(200)
+              .json({ message: `Post ${req.params.postId} deleted.` });
+          })
+          .catch((error) => {
+            res.status(400).json({ message: 'Post delete failed: ' + error });
+          });
+      } else {
+        res.status(401).json({ message: 'Unauthorized access.' });
+      }
+    })
+    .catch((error) => {
+      res.status(404).json({ message: 'Profil not found: ' + error });
+    });
+};

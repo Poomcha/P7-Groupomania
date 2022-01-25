@@ -11,5 +11,6 @@ router.get('/:postType', postCtrl.getAllPostByType);
 router.get('/:profileId', postCtrl.getAllPostFromUser);
 router.post('/createPost', multer, postCtrl.createPost);
 router.put('/:postId', multer, postCtrl.modifyPost);
+router.delete('/:postId', postCtrl.deletepost);
 
 module.exports = router;
