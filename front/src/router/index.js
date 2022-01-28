@@ -18,28 +18,18 @@ const routes = [
   },
   {
     path: '/signin',
-    name: 'Signin',
+    name: 'signin',
     component: () => import('../views/Signin.vue'),
   },
   {
     path: '/signup',
-    name: 'Signup',
+    name: 'signup',
     component: () => import('../views/Signup.vue'),
   },
   {
-    path: '/profil',
-    name: 'Profil',
-    component: () => import('../views/Profil.vue'),
-  },
-  {
-    path: '/loggout',
-    name: 'Loggout',
-    component: () => import('../views/Logout.vue'),
-  },
-  {
-    path: '/test_login',
-    name: 'Test_Login',
-    component: () => import('../views/Test_Login.vue'),
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/Profile.vue'),
   },
 ];
 
