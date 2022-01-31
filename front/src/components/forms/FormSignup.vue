@@ -1,5 +1,5 @@
 <template>
-  <div id="formSignup">
+  <div id="formSignup" @submit.prevent="signup()">
     <form>
       <div>
         <label for="email">Email :</label>
@@ -12,6 +12,7 @@
           v-model="email"
         />
       </div>
+      <span>{{ email }}</span>
       <div>
         <label for="password">Mot de Passe :</label>
         <input
@@ -34,12 +35,13 @@
           v-model="passwordConf"
         />
       </div>
-      <SubmitButton :label="label" @click="signup()" />
+      <SubmitButton :label="submitLabel" />
     </form>
   </div>
 </template>
 
 <script>
+// import EmailInput from "../inputs/EmailInput.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
 import axios from "axios";
 import router from "../../router";
@@ -48,11 +50,13 @@ export default {
   name: "FormSignup",
   el: "#formSignup",
   components: {
+    // EmailInput,
     SubmitButton,
   },
   data() {
     return {
-      label: "Inscription",
+      submitLabel: "Inscription",
+      emailInputLabel: "Email",
       email: "",
       password: "",
       passwordConf: "",

@@ -1,5 +1,7 @@
 <template>
-  <div id="profile">Page de Profil</div>
+  <div id="profile">
+    <form action="" method="post"></form>
+  </div>
 </template>
 
 <script>
