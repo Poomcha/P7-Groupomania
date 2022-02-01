@@ -43,7 +43,7 @@
 <script>
 // import EmailInput from "../inputs/EmailInput.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
-import axios from "axios";
+// import axios from "axios";
 import router from "../../router";
 
 export default {
@@ -65,13 +65,13 @@ export default {
   computed: {},
   methods: {
     signup() {
-      axios
+      this.axios
         .post("/signup", {
           email: this.email,
           password: this.password,
         })
-        .then(() => {
-          router.push({ name: "profile" });
+        .then((res) => {
+          router.push({ name: "profile", params: { userId: res.data.userId } });
         })
         .catch((error) => {
           console.log(error);

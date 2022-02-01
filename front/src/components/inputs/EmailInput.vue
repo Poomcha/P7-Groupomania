@@ -11,7 +11,6 @@
       v-model="email"
       @change="$emit('change', $event.target.email)"
     />
-    <span>{{ email }}</span>
   </div>
 </template>
 

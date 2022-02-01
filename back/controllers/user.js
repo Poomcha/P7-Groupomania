@@ -21,11 +21,14 @@ exports.signup = (req, res, next) => {
       db.User.findOne({ where: { email: req.body.email } }).then((user) => {
         db.Profile.create({ userId: user.id });
       });
+      return user;
     })
-    .then(() =>
-      res.status(201).json({ message: 'User and his profil created.' })
+    .then((user) =>
+      res
+        .status(201)
+        .json({ message: 'User and his profil created.', userId: user.id })
     )
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => res.status(400).json({ message: error }));
 };
 
 // Connect user:
@@ -44,15 +47,18 @@ exports.signin = (req, res, next) => {
           req.session.user = user.id;
           res.status(200).json({
             userId: user.id,
-            token: jwt.sign({ userId: user.id }, 'TOKEN_SECRET_PHRASE', {
-              expiresIn: '24h',
-            }),
+            // token: jwt.sign({ userId: user.id }, 'TOKEN_SECRET_PHRASE', {
+            //   expiresIn: '24h',
+            // }),
           });
         })
         .catch((error) => res.status(500).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+// Get a userId:
+exports.getUser = (req, res, next) => {};
 
 // Logout :
 exports.logout = (req, res, next) => {
