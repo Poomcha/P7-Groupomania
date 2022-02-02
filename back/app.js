@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(session(sessionOptions));
 app.use(cors(corsOptions));
+
 // Configuration des headers :
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Request-Headers', '*');

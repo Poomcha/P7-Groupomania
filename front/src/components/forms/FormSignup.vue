@@ -1,8 +1,8 @@
 <template>
-  <div id="formSignup" @submit.prevent="signup()">
-    <form>
+  <div id="formsignup">
+    <form @submit.prevent="signup()">
       <div>
-        <label for="email">Email :</label>
+        <label for="email">Email : </label>
         <input
           type="email"
           id="email"
@@ -12,9 +12,8 @@
           v-model="email"
         />
       </div>
-      <span>{{ email }}</span>
       <div>
-        <label for="password">Mot de Passe :</label>
+        <label for="password">Mot de Passe : </label>
         <input
           type="password"
           id="password"
@@ -48,7 +47,7 @@ import router from "../../router";
 
 export default {
   name: "FormSignup",
-  el: "#formSignup",
+  el: "#formsignup",
   components: {
     // EmailInput,
     SubmitButton,

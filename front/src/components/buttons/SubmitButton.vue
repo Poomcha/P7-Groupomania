@@ -1,5 +1,5 @@
 <template>
-  <div id="submitButton">
+  <div id="submitbutton">
     <input type="submit" :value="label" />
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "SubmitButton",
-  el: "#submitButton",
+  el: "#submitbutton",
   props: {
     label: String,
   },
