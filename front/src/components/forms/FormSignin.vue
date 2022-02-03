@@ -1,7 +1,6 @@
 <template>
   <div id="formsignin">
-    <!-- <span>{{ getEmail }}</span> -->
-    <form @submit.prevent="signin()">
+    <form @submit.prevent="signin()" @input="submitValidation()">
       <div>
         <label for="email">E-mail : </label>
         <input
@@ -10,8 +9,11 @@
           name="email"
           autocomplete="email"
           required
-          v-model="email"
+          v-model="form.email"
+          @input="emailValidation()"
+          placeholder="exemple@groupomania.fr"
         />
+        <span v-if="validator.email">Email invalide.</span>
       </div>
       <div>
         <label for="password">Mot de Passe : </label>
@@ -21,10 +23,10 @@
           name="password"
           autocomplete="new-password"
           required
-          v-model="password"
+          v-model="form.password"
         />
       </div>
-      <SubmitButton :label="submitLabel" />
+      <SubmitButton :label="label.submit" :disabled="disableSubmit" />
     </form>
   </div>
 </template>
@@ -32,6 +34,7 @@
 <script>
 import SubmitButton from "../buttons/SubmitButton.vue";
 import { mapState, mapActions, mapGetters } from "vuex";
+import { validateEmail, validateForm } from "../../scripts/validate";
 
 export default {
   name: "FormSignin",
@@ -41,9 +44,17 @@ export default {
   },
   data() {
     return {
-      submitLabel: "Connexion",
-      email: "",
-      password: "",
+      label: {
+        submit: "Connexion",
+      },
+      form: {
+        email: "",
+        password: "",
+      },
+      validator: {
+        email: false,
+      },
+      disableSubmit: true,
     };
   },
   computed: {
@@ -51,16 +62,25 @@ export default {
     ...mapGetters({ getEmail: "GET_EMAIL" }),
   },
   methods: {
+    emailValidation() {
+      this.validator.email = validateEmail(this.form.email);
+    },
+    submitValidation() {
+      this.disableSubmit = validateForm(this.validator, this.form);
+    },
     ...mapActions({
       setEmail: "set_email",
       setUserid: "set_userid",
     }),
     signin() {
       this.axios
-        .post("/signin", { email: this.email, password: this.password })
+        .post("/signin", {
+          email: this.form.email,
+          password: this.form.password,
+        })
         .then((res) => {
           this.setUserid(res.data.userId);
-          this.setEmail(this.email);
+          this.setEmail(this.form.email);
         })
         .then(() => {
           console.log(this.localUser.user);

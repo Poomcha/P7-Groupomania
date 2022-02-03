@@ -1,6 +1,6 @@
 <template>
   <div id="submitbutton">
-    <input type="submit" :value="label" />
+    <input type="submit" :value="label" :disabled="disabled"/>
   </div>
 </template>
 
@@ -10,6 +10,7 @@ export default {
   el: "#submitbutton",
   props: {
     label: String,
+    disabled: Boolean,
   },
 };
 </script>

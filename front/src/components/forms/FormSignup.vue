@@ -1,6 +1,6 @@
 <template>
   <div id="formsignup">
-    <form @submit.prevent="signup()">
+    <form @submit.prevent="signup()" @input="submitValidation()">
       <div>
         <label for="email">Email : </label>
         <input
@@ -9,8 +9,14 @@
           name="email"
           autocomplete="email"
           required
-          v-model="email"
+          v-model="form.email"
+          @input="emailValidation()"
+          placeholder="exemple@groupomania.com"
         />
+        <span v-if="validator.email"
+          >Email invalide, doit être de la forme :
+          exemple@groupomania.com.</span
+        >
       </div>
       <div>
         <label for="password">Mot de Passe : </label>
@@ -20,8 +26,14 @@
           name="password"
           autocomplete="new-password"
           required
-          v-model="password"
+          v-model="form.password"
+          @input="passwordValidation()"
         />
+        <span v-if="validator.password"
+          >Mot de passe invalide, doit contenir au moins 1 lettre majuscule, une
+          miniscule, un chiffre, un caractère spécial et entre 8 et 16
+          caractères.</span
+        >
       </div>
       <div>
         <label for="passwordConf">Confirmez votre mot de passe :</label>
@@ -31,19 +43,25 @@
           name="passwordConf"
           autocomplete="new-password"
           required
-          v-model="passwordConf"
+          v-model="form.passwordConf"
+          @input="passwordConfValidation()"
         />
+        <span v-if="validator.passwordConf">Mots de passe différents.</span>
       </div>
-      <SubmitButton :label="submitLabel" />
+      <SubmitButton :label="label.submit" :disabled="disableSubmit" />
     </form>
   </div>
 </template>
 
 <script>
-// import EmailInput from "../inputs/EmailInput.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
-// import axios from "axios";
 import router from "../../router";
+import {
+  validateEmail,
+  validatePassword,
+  validatePasswordConf,
+  validateForm,
+} from "../../scripts/validate";
 
 export default {
   name: "FormSignup",
@@ -54,21 +72,42 @@ export default {
   },
   data() {
     return {
-      submitLabel: "Inscription",
-      emailInputLabel: "Email",
-      email: "",
-      password: "",
-      passwordConf: "",
+      label: {
+        submit: "Inscription",
+      },
+      form: {
+        email: "",
+        password: "",
+        passwordConf: "",
+      },
+      validator: {
+        email: false,
+        password: false,
+        passwordConf: false,
+      },
+      disableSubmit: true,
     };
   },
   computed: {},
   methods: {
+    emailValidation() {
+      this.validator.email = validateEmail(this.form.email);
+    },
+    passwordValidation() {
+      this.validator.password = validatePassword(this.form.password);
+    },
+    passwordConfValidation() {
+      this.validator.passwordConf = validatePasswordConf(
+        this.form.password,
+        this.form.passwordConf
+      );
+    },
+    submitValidation() {
+      this.disableSubmit = validateForm(this.validator, this.form);
+    },
     signup() {
       this.axios
-        .post("/signup", {
-          email: this.email,
-          password: this.password,
-        })
+        .post("/signup", this.form)
         .then((res) => {
           router.push({ name: "profile", params: { userId: res.data.userId } });
         })
