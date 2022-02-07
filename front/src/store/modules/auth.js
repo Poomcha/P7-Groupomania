@@ -8,7 +8,7 @@ const state = {
     profile: {
       firstName: null,
       lastName: null,
-      position: null,
+      position: undefined,
       description: null,
       profilPictureUrl: null,
     },
@@ -61,7 +61,7 @@ const mutations = {
 };
 const actions = {
   sign_up({ dispatch }, form) {
-    const data = {email: form.email, password: form.password}
+    const data = { email: form.email, password: form.password };
     axios
       .post('/signup', data)
       .then(() => {

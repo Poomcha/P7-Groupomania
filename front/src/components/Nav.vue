@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <router-link to="home">Fil d'Actualité </router-link>
+    <router-link :to="pathToHome">Fil d'Actualité </router-link>
     <router-link :to="pathToProfile">Mon Profil </router-link>
     <router-link to="/" @click="logout()">Déconnexion</router-link>
   </div>
@@ -11,12 +11,15 @@ export default {
   name: "Nav",
   el: "#nav",
   data() {
-    return{
-      pathToProfile: {name: 'profile', params: {userId: this.$store.getters.get_user_id}}
+    return {
+      pathToHome: { name: "home" },
+      pathToProfile: {
+        name: "profile",
+        params: { userId: this.$store.getters.get_user_id },
+      },
     };
   },
-  computed: {
-  },
+  computed: {},
   created() {},
   methods: {
     logout() {

@@ -134,7 +134,7 @@ export default {
     },
     ...mapActions(["update_profile"]),
     updateProfile() {
-      this.update_profile(this.form, this.$route.params.userId);
+      this.update_profile({form: this.form, userId: this.$route.params.userId});
     },
   },
 };
