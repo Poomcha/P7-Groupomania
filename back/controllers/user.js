@@ -16,8 +16,6 @@ exports.signup = (req, res, next) => {
       return user;
     })
     .then((user) => {
-      // Creating cookie
-      req.session.user = user.id;
       db.User.findOne({ where: { email: req.body.email } }).then((user) => {
         db.Profile.create({ userId: user.id });
       });
@@ -44,12 +42,10 @@ exports.signin = (req, res, next) => {
           if (!valid) {
             return res.status(401).json({ error });
           }
+          // Creating cookie
           req.session.user = user.id;
           res.status(200).json({
             userId: user.id,
-            // token: jwt.sign({ userId: user.id }, 'TOKEN_SECRET_PHRASE', {
-            //   expiresIn: '24h',
-            // }),
           });
         })
         .catch((error) => res.status(500).json({ error }));
@@ -58,7 +54,13 @@ exports.signin = (req, res, next) => {
 };
 
 // Get a userId:
-exports.getUser = (req, res, next) => {};
+exports.getUser = (req, res, next) => {
+  if (req.session) {
+    res.status(200).json({ userId: req.session.user });
+  } else {
+    res.status(200).json({ message: 'Cookie not present.' });
+  }
+};
 
 // Logout :
 exports.logout = (req, res, next) => {

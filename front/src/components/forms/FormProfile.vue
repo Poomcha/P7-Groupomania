@@ -8,7 +8,7 @@
       <div>
         <input type="file" @change="handleFileUpload($event)" />
         <span v-if="validator.file"
-          >Fichiers autorisés : .jpg, .jpeg, .png 5Mo maximum.</span
+          >Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.</span
         >
       </div>
       <div>
@@ -70,7 +70,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import SubmitButton from "../buttons/SubmitButton.vue";
 import {
   validateName,

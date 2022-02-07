@@ -3,6 +3,10 @@
     <h1>Connexion</h1>
     <p>Description</p>
     <FormSignin></FormSignin>
+    <p>
+      Pas encore inscrit ?
+      <a href="" @click.prevent="changeSignView()">Inscrivez-vous !</a>
+    </p>
   </div>
 </template>
 
@@ -13,6 +17,11 @@ export default {
   el: "#signin",
   components: {
     FormSignin,
+  },
+  methods: {
+    changeSignView() {
+      this.$store.dispatch("change_sign_in_up");
+    },
   },
 };
 </script>

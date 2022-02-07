@@ -8,7 +8,7 @@ const profileCtrl = require('../controllers/profile');
 
 router.get('/', profileCtrl.getAllProfile);
 router.get('/:userId', profileCtrl.getProfileById);
-router.put('/:userId/profile', multer, profileCtrl.updateProfile);
-router.delete('/:userId/profile', profileCtrl.deleteProfile);
+router.put('/:userId', multer, profileCtrl.updateProfile);
+router.delete('/:userId', profileCtrl.deleteProfile);
 
 module.exports = router;

@@ -1,14 +1,8 @@
 <template>
   <div id="nav">
-    <div v-if="isLogged">
-      <router-link to="home">Accueil</router-link>
-      <router-link to="loggout">Déconnexion</router-link>
-    </div>
-    <div v-else>
-      <router-link to="signin">Connexion</router-link>
-      <router-link to="signup">Inscription</router-link>
-    </div>
-    <router-view />
+    <router-link to="home">Fil d'Actualités </router-link>
+    <router-link :to="pathToProfile">Mon Profil </router-link>
+    <router-link to="/" @click="logout()">Déconnexion</router-link>
   </div>
 </template>
 
@@ -17,10 +11,20 @@ export default {
   name: "Nav",
   el: "#nav",
   data() {
-    return {
-      isLogged: false,
+    return{
+      pathToProfile: {name: 'profile', params: {userId: this.$store.getters.get_user_id}}
     };
   },
+  computed: {
+    userId() {
+      return this.$store.getters.get_user_id;
+    }
+  },
   created() {},
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
+  },
 };
 </script>

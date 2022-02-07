@@ -1,6 +1,6 @@
 <template>
   <div id="formsignin">
-    <form @submit.prevent="signin()" @input="submitValidation()">
+    <form @submit.prevent="logIn()" @input="submitValidation()">
       <div>
         <label for="email">E-mail : </label>
         <input
@@ -33,7 +33,7 @@
 
 <script>
 import SubmitButton from "../buttons/SubmitButton.vue";
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import { validateEmail, validateForm } from "../../scripts/validate";
 
 export default {
@@ -57,10 +57,7 @@ export default {
       disableSubmit: true,
     };
   },
-  computed: {
-    ...mapState({ localUser: "user" }),
-    ...mapGetters({ getEmail: "GET_EMAIL" }),
-  },
+  computed: {},
   methods: {
     emailValidation() {
       this.validator.email = validateEmail(this.form.email);
@@ -68,26 +65,9 @@ export default {
     submitValidation() {
       this.disableSubmit = validateForm(this.validator, this.form);
     },
-    ...mapActions({
-      setEmail: "set_email",
-      setUserid: "set_userid",
-    }),
-    signin() {
-      this.axios
-        .post("/signin", {
-          email: this.form.email,
-          password: this.form.password,
-        })
-        .then((res) => {
-          this.setUserid(res.data.userId);
-          this.setEmail(this.form.email);
-        })
-        .then(() => {
-          console.log(this.localUser.user);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    ...mapActions(["signin"]),
+    logIn() {
+      this.signin(this.form);
     },
   },
 };
