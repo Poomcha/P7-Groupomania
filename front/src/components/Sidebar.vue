@@ -1,6 +1,10 @@
 <template>
   <div id="sidebar">
-      
+    <ul>
+      <li v-for="value in sidebar_items" :key="value">
+        <a href="" @click.prevent="value.method">{{ value.label }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -11,11 +15,7 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    numOfLink() {
-      return Object.values(sidebar_items).length;
-    },
-  },
+  computed: {},
   props: {
     sidebar_items: {
       type: Object,
