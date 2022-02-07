@@ -4,6 +4,7 @@ const state = {
   user: {
     email: null,
     _id: null,
+    profileFilled: null,
     profile: {
       firstName: null,
       lastName: null,
@@ -26,6 +27,9 @@ const getters = {
   get_user_profile(state) {
     return state.user.profile;
   },
+  get_profile_status(state) {
+    return state.user.profileFilled;
+  },
 };
 const mutations = {
   set_user_email(state, email) {
@@ -37,10 +41,14 @@ const mutations = {
   set_user_profile(state, profile) {
     state.user.profile = { ...profile };
   },
+  set_profile_status(state, payload) {
+    state.user.profileFilled = payload;
+  },
   log_out(state) {
     state.user = {
       email: null,
       _id: null,
+      profileFilled: null,
       profile: {
         firstName: null,
         lastName: null,
@@ -52,17 +60,18 @@ const mutations = {
   },
 };
 const actions = {
-  signup({ dispatch }, form) {
+  sign_up({ dispatch }, form) {
+    const data = {email: form.email, password: form.password}
     axios
-      .post('/signup', form)
+      .post('/signup', data)
       .then(() => {
-        dispatch('signin', form);
+        dispatch('sign_in', data);
       })
       .catch((error) => {
         return error;
       });
   },
-  signin({ commit, state }, form) {
+  sign_in({ commit, state, dispatch }, form) {
     axios
       .post('/signin', form)
       .then((res) => {
@@ -73,12 +82,13 @@ const actions = {
         axios
           .get(`users/${state.user._id}`)
           .then((res) => {
-            console.log(res.data.profile.firstName);
             if (res.data.profile.firstName) {
+              // Set user profile
+              dispatch('change_profile_status', true);
               commit('set_user_profile', res.data);
               router.push({ name: 'home' });
             } else {
-              console.log('Going here');
+              dispatch('change_profile_status', false);
               router.push({
                 name: 'profile',
                 params: { userId: state.user._id },
@@ -103,6 +113,9 @@ const actions = {
       .catch((error) => {
         console.log(error);
       });
+  },
+  change_profile_status({ commit }, payload) {
+    commit('set_profile_status', payload);
   },
 };
 

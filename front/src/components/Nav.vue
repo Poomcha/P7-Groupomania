@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <router-link to="home">Fil d'Actualités </router-link>
+    <router-link to="home">Fil d'Actualité </router-link>
     <router-link :to="pathToProfile">Mon Profil </router-link>
     <router-link to="/" @click="logout()">Déconnexion</router-link>
   </div>
@@ -16,9 +16,6 @@ export default {
     };
   },
   computed: {
-    userId() {
-      return this.$store.getters.get_user_id;
-    }
   },
   created() {},
   methods: {

@@ -71,6 +71,7 @@
 
 <script>
 import SubmitButton from "../buttons/SubmitButton.vue";
+import { mapActions } from "vuex";
 import {
   validateName,
   validateDescription,
@@ -81,6 +82,9 @@ import {
 export default {
   name: "FormProfile",
   el: "#formProfile",
+  components: {
+    SubmitButton,
+  },
   data() {
     return {
       label: {
@@ -91,7 +95,7 @@ export default {
         description: "Description",
       },
       form: {
-        file: "",
+        image: "",
         firstName: "",
         lastName: "",
         position: "",
@@ -107,9 +111,7 @@ export default {
       disableSubmit: true,
     };
   },
-  components: {
-    SubmitButton,
-  },
+  computed: {},
   methods: {
     firstNameValidation() {
       this.validator.firstName = validateName(this.form.firstName);
@@ -127,38 +129,12 @@ export default {
       this.disableSubmit = validateProfileForm(this.validator, this.form);
     },
     handleFileUpload(event) {
-      this.form.file = event.target.files[0];
-      this.validator.file = validateImage(this.form.file);
+      this.form.image = event.target.files[0];
+      this.validator.file = validateImage(this.form.image);
     },
+    ...mapActions(["update_profile"]),
     updateProfile() {
-      const formData = new FormData();
-      if (this.file) {
-        formData.append("image", this.form.file);
-      }
-      formData.append("firstName", this.firstName);
-      formData.append("lastName", this.lastName);
-      formData.append("position", this.position);
-      formData.append("description", this.description);
-      this.axios
-        .put(`/users/${this.$route.params.userId}/profile`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then(() => console.log("SUCCESS"))
-        .catch((error) => {
-          console.log(error.toJSON());
-        });
-    },
-    getAllProfileTest() {
-      this.axios
-        .get("/users")
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((error) => {
-          console.log(error.toJSON());
-        });
+      this.update_profile(this.form, this.$route.params.userId);
     },
   },
 };

@@ -65,9 +65,9 @@ export default {
     submitValidation() {
       this.disableSubmit = validateForm(this.validator, this.form);
     },
-    ...mapActions(["signin"]),
+    ...mapActions(["sign_in"]),
     logIn() {
-      this.signin(this.form);
+      this.sign_in(this.form);
     },
   },
 };

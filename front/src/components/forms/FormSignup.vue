@@ -55,7 +55,7 @@
 
 <script>
 import SubmitButton from "../buttons/SubmitButton.vue";
-import router from "../../router";
+import { mapActions } from "vuex";
 import {
   validateEmail,
   validatePassword,
@@ -105,15 +105,9 @@ export default {
     submitValidation() {
       this.disableSubmit = validateForm(this.validator, this.form);
     },
+    ...mapActions(["sign_up"]),
     signup() {
-      this.axios
-        .post("/signup", this.form)
-        .then((res) => {
-          router.push({ name: "profile", params: { userId: res.data.userId } });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      this.sign_up(this.form);
     },
   },
 };
