@@ -117,6 +117,27 @@ const actions = {
   change_profile_status({ commit }, payload) {
     commit('set_profile_status', payload);
   },
+  change_pwd({ state }, form) {
+    axios
+      .post('/signin', { email: state.user.email, password: form.oldPassword })
+      .then(() => {
+        if (form.password != form.passwordConf) {
+          return false;
+        } else {
+          axios
+            .put(`/${state.user._id}`, { password: form.password })
+            .then(() => {
+              return true;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      })
+      .catch(() => {
+        return undefined;
+      });
+  },
 };
 
 export default {

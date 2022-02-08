@@ -2,18 +2,38 @@
   <div id="profile">
     <Nav></Nav>
     <Sidebar :sidebar_items="this.sidebar_items"></Sidebar>
-    <CardProfile
-      v-if="!updateProfile && profileFilled"
-      :profilePicURL="
-        getProfile.profilePictureUrl ? profile.profilePictureUrl : undefined
-      "
-      :firstName="getProfile.firstName"
-      :lastName="getProfile.lastName"
-      :position="getProfile.position ? profile.position : undefined"
-      :description="getProfile.description ? profile.description : undefined"
-    ></CardProfile>
-
-    <FormProfile v-else></FormProfile>
+    <section id="change-profile" v-if="links.changeProfile || !profileFilled">
+      <h3>Modification du profil</h3>
+      <FormProfile></FormProfile>
+    </section>
+    <section id="mes-infos" v-else-if="links.myInfos">
+      <h3>Mes informations</h3>
+      <ul>
+        <li>Email : {{ get_user_email }}</li>
+      </ul>
+    </section>
+    <section id="change-pwd" v-else-if="links.changePwd">
+      <h3>Modification du mot de passe</h3>
+      <FormPwd></FormPwd>
+    </section>
+    <section id="profile" v-else>
+      <h3>Mon profil</h3>
+      <CardProfile
+        :profilePicURL="
+          getProfile.profilePictureUrl ? profile.profilePictureUrl : undefined
+        "
+        :firstName="getProfile.firstName"
+        :lastName="getProfile.lastName"
+        :position="getProfile.position ? profile.position : undefined"
+        :description="getProfile.description ? profile.description : undefined"
+      ></CardProfile>
+    </section>
+    <div
+      id="back-link-ctn"
+      v-if="seeBackLink && !this.links.myProfile && profileFilled"
+    >
+      <a href="" @click.prevent="back()">{{ backlink }} </a>
+    </div>
   </div>
 </template>
 
@@ -22,6 +42,7 @@ import Nav from "../components/Nav.vue";
 import FormProfile from "../components/forms/FormProfile.vue";
 import CardProfile from "../components/cards/CardProfile.vue";
 import Sidebar from "../components/Sidebar.vue";
+import FormPwd from "../components/forms/FormPwd.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Profile",
@@ -29,48 +50,73 @@ export default {
   data() {
     return {
       sidebar_items: {
+        myProfile: {
+          label: "Mon profil",
+          method: this.goToProfil,
+        },
         myInfos: {
           label: "Mes informations",
           method: this.goToInfos,
         },
         updateProfile: {
           label: "Modifier mon profil",
-          method: this.goToUpdateProfile(),
+          method: this.goToUpdateProfile,
         },
         updatePwd: {
           label: "Modifier mon mot de passe",
           method: this.goToUpdatePwd,
         },
       },
+      backlink: "< Retour",
+      links: {
+        myProfile: true,
+        changePwd: false,
+        changeProfile: false,
+        myInfos: false,
+      },
     };
   },
-  components: { Nav, Sidebar, CardProfile, FormProfile },
+  components: { Nav, Sidebar, CardProfile, FormProfile, FormPwd },
   computed: {
     ...mapGetters([
       "get_update_status",
       "get_user_profile",
       "get_profile_status",
+      "get_user_email",
     ]),
     updateProfile() {
       return this.get_update_status;
     },
     getProfile() {
-      return this.get_user_profile.profile;
+      return this.get_user_profile;
     },
     profileFilled() {
       return this.get_profile_status;
     },
+    seeBackLink() {
+      return Object.values(this.links).find((value) => value);
+    },
   },
   methods: {
     ...mapActions(["commit_update_status"]),
+    goToProfil() {
+      Object.keys(this.links).forEach((key) => (this.links[key] = false));
+      this.links.myProfile = true;
+    },
     goToInfos() {
-      return "goToInfos";
+      Object.keys(this.links).forEach((key) => (this.links[key] = false));
+      this.links.myInfos = true;
     },
     goToUpdateProfile() {
-      return this.commit_update_status;
+      Object.keys(this.links).forEach((key) => (this.links[key] = false));
+      this.links.changeProfile = true;
     },
     goToUpdatePwd() {
-      return "goToUpdatePwd";
+      Object.keys(this.links).forEach((key) => (this.links[key] = false));
+      this.links.changePwd = true;
+    },
+    back() {
+      Object.keys(this.links).forEach((key) => (this.links[key] = false));
     },
   },
 };
