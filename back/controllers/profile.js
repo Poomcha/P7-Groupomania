@@ -22,6 +22,17 @@ exports.getProfileById = (req, res, next) => {
     });
 };
 
+// Get a profile by profileId:
+// exports.getProfileByProfileId = (req, res, next) => {
+//   db.Profile.findOne({ where: { id: req.params.profileId } })
+//     .then((profile) => {
+//       res.status(200).json({ profile });
+//     })
+//     .catch((error) => {
+//       res.status(404).json({ error });
+//     });
+// };
+
 // Update a profile:
 exports.updateProfile = (req, res, next) => {
   db.Profile.findOne({ where: { userId: req.params.userId } })

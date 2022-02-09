@@ -1,6 +1,6 @@
 <template>
   <div id="profile">
-    <Nav></Nav>
+    <!-- <Nav></Nav> -->
     <Sidebar :sidebar_items="this.sidebar_items"></Sidebar>
     <section id="change-profile" v-if="links.changeProfile || !profileFilled">
       <h3>Modification du profil</h3>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Nav from "../components/Nav.vue";
+// import Nav from "../components/Nav.vue";
 import FormProfile from "../components/forms/FormProfile.vue";
 import CardProfile from "../components/cards/CardProfile.vue";
 import Sidebar from "../components/Sidebar.vue";
@@ -76,7 +76,13 @@ export default {
       },
     };
   },
-  components: { Nav, Sidebar, CardProfile, FormProfile, FormPwd },
+  components: {
+    // Nav,
+    Sidebar,
+    CardProfile,
+    FormProfile,
+    FormPwd,
+  },
   computed: {
     ...mapGetters([
       "get_update_status",

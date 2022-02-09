@@ -4,7 +4,7 @@ const db = require('../models');
 exports.getAllPosts = (req, res, next) => {
   // Limitation de date ? (where: {updatedAt < 1j} ?)
   // Ou findAndCountAll avec limite de posts visibles par pages ?
-  db.Post.findAll()
+  db.Post.findAll({ include: db.Profile })
     .then((posts) => {
       res.status(200).json({ posts });
     })
@@ -13,9 +13,9 @@ exports.getAllPosts = (req, res, next) => {
     });
 };
 
-// Get one post by postId:
+// Get one post by postId, including profile of creator:
 exports.getOnePostById = (req, res, next) => {
-  db.Post.findByPk(req.params.id)
+  db.Post.findOne({ where: { id: req.params.postId }, include: db.Profile })
     .then((post) => {
       res.status(200).json({ post });
     })

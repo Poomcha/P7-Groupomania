@@ -2,7 +2,7 @@
   <div id="app">
     <div v-if="isLoggedIn">
       <!-- <Home></Home> -->
-      <!-- <Nav></Nav> -->
+      <Nav></Nav>
       <router-view></router-view>
     </div>
     <div v-else>
@@ -16,7 +16,7 @@
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
 // import Home from "./views/Home";
-// import Nav from './components/Nav.vue'
+import Nav from './components/Nav.vue'
 
 export default {
   name: "App",
@@ -25,7 +25,7 @@ export default {
     Signin,
     Signup,
     // Home,
-    // Nav,
+    Nav,
   },
   data() {
     return {};

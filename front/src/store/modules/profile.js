@@ -51,6 +51,17 @@ const actions = {
         console.log(error.toJSON());
       });
   },
+  get_one_profile(profileId) {
+    axios
+      .get(`/users/${profileId}`)
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 
 export default { state, getters, mutations, actions };
