@@ -22,7 +22,7 @@ const actions = {
   },
   update_profile({ commit, dispatch }, data) {
     const formData = new FormData();
-    if (data.form.file) {
+    if (data.form.image) {
       formData.append('image', data.form.image);
     }
     formData.append('firstName', data.form.firstName);
@@ -39,7 +39,8 @@ const actions = {
         axios
           .get(`users/${data.userId}`)
           .then((res) => {
-            commit('set_user_profile', res.data);
+            console.log(res.data.profile);
+            commit('set_user_profile', res.data.profile);
             dispatch('change_profile_status', true);
             commit('set_update_status');
           })

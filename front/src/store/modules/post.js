@@ -25,6 +25,7 @@ const actions = {
     axios
       .get('/posts')
       .then((res) => {
+        console.log(res.data.posts[0])
         commit('set_local_posts', res.data.posts);
       })
       .catch((error) => {
@@ -35,7 +36,7 @@ const actions = {
     axios
       .get(`/posts/${postId}`)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         commit('set_local_post', res.data.post);
       })
       .catch((error) => {

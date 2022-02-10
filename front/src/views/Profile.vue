@@ -1,8 +1,10 @@
 <template>
   <div id="profile">
-    <!-- <Nav></Nav> -->
     <Sidebar :sidebar_items="this.sidebar_items"></Sidebar>
-    <section id="change-profile" v-if="links.changeProfile || !profileFilled">
+    <section
+      id="change-profile"
+      v-if="links.changeProfile || !get_profile_status"
+    >
       <h3>Modification du profil</h3>
       <FormProfile></FormProfile>
     </section>
@@ -20,17 +22,25 @@
       <h3>Mon profil</h3>
       <CardProfile
         :profilePicURL="
-          getProfile.profilePictureUrl ? profile.profilePictureUrl : undefined
+          get_user_profile.profilPictureURL
+            ? get_user_profile.profilPictureURL
+            : undefined
         "
-        :firstName="getProfile.firstName"
-        :lastName="getProfile.lastName"
-        :position="getProfile.position ? profile.position : undefined"
-        :description="getProfile.description ? profile.description : undefined"
+        :firstName="get_user_profile.firstName"
+        :lastName="get_user_profile.lastName"
+        :position="
+          get_user_profile.position ? get_user_profile.position : undefined
+        "
+        :description="
+          get_user_profile.description
+            ? get_user_profile.description
+            : undefined
+        "
       ></CardProfile>
     </section>
     <div
       id="back-link-ctn"
-      v-if="seeBackLink && !this.links.myProfile && profileFilled"
+      v-if="seeBackLink && !this.links.myProfile && get_profile_status"
     >
       <a href="" @click.prevent="back()">{{ backlink }} </a>
     </div>
@@ -38,7 +48,6 @@
 </template>
 
 <script>
-// import Nav from "../components/Nav.vue";
 import FormProfile from "../components/forms/FormProfile.vue";
 import CardProfile from "../components/cards/CardProfile.vue";
 import Sidebar from "../components/Sidebar.vue";
@@ -77,7 +86,6 @@ export default {
     };
   },
   components: {
-    // Nav,
     Sidebar,
     CardProfile,
     FormProfile,
@@ -90,15 +98,6 @@ export default {
       "get_profile_status",
       "get_user_email",
     ]),
-    updateProfile() {
-      return this.get_update_status;
-    },
-    getProfile() {
-      return this.get_user_profile;
-    },
-    profileFilled() {
-      return this.get_profile_status;
-    },
     seeBackLink() {
       return Object.values(this.links).find((value) => value);
     },

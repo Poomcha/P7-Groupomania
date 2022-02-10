@@ -15,7 +15,6 @@
       <a href="" @click.prevent="goToPost()">
         <div id="post-img-ctn">
           <img :src="imgUrl" alt="" />
-          <!-- <img src="../../assets/user-solid.svg" width="20" /> -->
         </div>
         <div>
           <div id="title-post-ctn">{{ title }}</div>

@@ -1,22 +1,20 @@
 <template>
   <div class="home">
-    <!-- <Nav></Nav> -->
     <CardPost
       v-for="post in get_local_posts"
       :key="post.id"
       :title="post.title"
       :content="post.text"
-      :imgUrl="post.postPictureUrl"
+      :imgUrl="post.postPictureURL"
       :id="post.id"
       :creatorFirstName="post.Profile.firstName"
       :creatorLastName="post.Profile.lastName"
-      :creatorImgUrl="post.Profile.profilePictureURL"
+      :creatorImgUrl="post.Profile.profilPictureURL"
     ></CardPost>
   </div>
 </template>
 
 <script>
-// import Nav from "../components/Nav.vue";
 import CardPost from "../components/cards/CardPost.vue";
 import { mapActions, mapGetters } from "vuex";
 
@@ -24,7 +22,6 @@ export default {
   name: "Home",
   el: "#home",
   components: {
-    // Nav,
     CardPost,
   },
   beforeCreate() {
