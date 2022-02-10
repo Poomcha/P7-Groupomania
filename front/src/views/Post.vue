@@ -2,7 +2,12 @@
   <div id="post">
     <div>
       <a href="" @click.prevent="goToProfile()">
-        <div><img :src="creatorImgUrl" alt="Profil Picture" /></div>
+        <div>
+          <img
+            :src="get_local_post.Profile.profilPictureURL"
+            alt="Profil Picture"
+          />
+        </div>
         <div>
           <span>{{ get_local_post.Profile.firstName }}</span>
         </div>
@@ -13,13 +18,11 @@
     </div>
     <div>
       <div id="post-img-ctn">
-        <img :src="get_local_post.imgUrl" alt="Post Picture" />
-        <!-- <img src="../../assets/user-solid.svg" width="20" /> -->
+        <img :src="get_local_post.postPictureURL" alt="Post Picture" />
       </div>
       <div>
         <div id="title-post-ctn">{{ get_local_post.title }}</div>
         <div id="content-post-ctn">{{ get_local_post.content }}</div>
-        <!-- <div id="comments-post-ctn">{{ nbOfCom }} commentaires</div> -->
       </div>
     </div>
   </div>
@@ -37,9 +40,6 @@ export default {
   created() {},
   computed: {
     ...mapGetters(["get_local_post"]),
-    creatorImgUrl() {
-      return this.get_local_post.Profile.profilePictureURL;
-    },
   },
 };
 </script>

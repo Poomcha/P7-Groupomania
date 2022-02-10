@@ -9,7 +9,7 @@ router.get('/', postCtrl.getAllPosts);
 router.get('/:postId', postCtrl.getOnePostById);
 router.get('/:postType', postCtrl.getAllPostByType);
 router.get('/:profileId', postCtrl.getAllPostFromUser);
-router.post('/createPost', multer, postCtrl.createPost);
+router.post('/', multer, postCtrl.createPost);
 router.put('/:postId', multer, postCtrl.modifyPost);
 router.delete('/:postId', postCtrl.deletepost);
 
