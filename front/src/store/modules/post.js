@@ -26,6 +26,9 @@ const mutations = {
   set_my_posts(state, posts) {
     state.myPosts = posts;
   },
+  remove_my_post(state, postId) {
+    state.myPosts = state.myPosts.filter((post) => post[postId] !== postId);
+  },
 };
 const actions = {
   commit_local_posts({ commit }) {
@@ -78,6 +81,17 @@ const actions = {
   //       console.log(error);
   //     });
   // },
+  delete_my_post({ commit }, postId) {
+    axios
+      .delete(`/posts/${postId}`)
+      .then(() => {
+        commit('remove_my_post', postId);
+        console.log(`Post ${postId} supprimé.`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 
 export default {

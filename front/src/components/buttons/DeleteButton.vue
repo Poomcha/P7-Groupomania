@@ -1,15 +1,17 @@
 <template>
-    <div id="delete-button">
-        <button>Supprimer</button>
-    </div>
+  <div id="delete-button">
+    <button @click="deletePost">Supprimer</button>
+  </div>
 </template>
  <script>
- export default {
-    name: "DeleteButton",
-    el: "#delete-button",
-    props: {
-        type: Function,
-        required: true,
-    }
- }
- </script>
+export default {
+  name: "DeleteButton",
+  el: "#delete-button",
+  props: {
+    deletePost: {
+      type: Function,
+      required: true,
+    },
+  },
+};
+</script>
