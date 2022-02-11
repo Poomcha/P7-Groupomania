@@ -2,11 +2,15 @@
   <div id="form-post">
     <form
       enctype="multipart/form-data"
-      @submit.prevent="createPost()"
+      @submit.prevent="createOrModifyPost()"
       @input="submitValidation()"
     >
       <div>
-        <input type="file" @change="handleFileUpload($event)" />
+        <input
+          type="file"
+          @change="handleFileUpload($event)"
+          :value="oldPicture"
+        />
         <span v-if="validator.file"
           >Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.</span
         >
@@ -48,8 +52,13 @@
         <span v-if="validator.text"></span>
       </div>
       <SubmitButton
+        v-if="this.$route.name === 'create-post'"
         :label="label.submit"
         :disabled="disableSubmit"
+      ></SubmitButton>
+      <SubmitButton
+        v-if="this.$route.name === 'modify-post'"
+        :label="label.modify"
       ></SubmitButton>
     </form>
   </div>
@@ -76,12 +85,13 @@ export default {
         content: "Contenu",
         type: "Catégorie",
         submit: "Publier",
+        modify: "Modifier",
       },
       form: {
-        image: "",
-        title: "",
-        type: "",
-        text: "",
+        image: this.oldPicture,
+        title: this.oldTitle,
+        type: this.oldType,
+        text: this.oldText,
         isImportant: false,
       },
       validator: {
@@ -113,7 +123,7 @@ export default {
       this.validator.text = false;
     },
     ...mapActions(["create_post"]),
-    createPost() {
+    createOrModifyPost() {
       const formData = new FormData();
       if (this.form.image) {
         formData.append("image", this.form.image);
@@ -122,15 +132,43 @@ export default {
       formData.append("type", this.form.type);
       formData.append("text", this.form.text);
       formData.append("isImportant", this.form.isImportant);
-      console.log(formData);
-      this.axios
-        .post("/posts", formData)
-        .then(() => {
-          this.$router.push({ name: "home" });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.$route.name === "create-post") {
+        this.axios
+          .post("/posts", formData)
+          .then(() => {
+            this.$router.push({ name: "home" });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        this.axios
+          .put(`/posts/${this.$route.params.postId}`, formData)
+          .then(() => {
+            this.$router.push({ name: "home" });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+  },
+  props: {
+    oldTitle: {
+      type: String,
+      default: "",
+    },
+    oldPicture: {
+      type: File,
+      default: null,
+    },
+    oldText: {
+      type: String,
+      default: "",
+    },
+    oldType: {
+      type: String,
+      default: "",
     },
   },
 };

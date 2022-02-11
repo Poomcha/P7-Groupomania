@@ -1,7 +1,10 @@
 <template>
   <div id="card-post" class="card-post" v-if="!deleted">
-    <div id="controllers" v-if="this.$route.name === 'profile'">
-      <ModifyButton></ModifyButton>
+    <div
+      id="controllers"
+      v-if="this.$route.name === 'profile'"
+    >
+      <ModifyButton :modifyPost="modifyPost"></ModifyButton>
       <DeleteButton :deletePost="deletePost"></DeleteButton>
     </div>
     <div class="card-post__creator-infos" v-if="this.$route.name === 'home'">
@@ -33,6 +36,8 @@
 <script>
 import DeleteButton from "../buttons/DeleteButton.vue";
 import ModifyButton from "../buttons/ModifyButton.vue";
+import { mapGetters } from "vuex";
+
 export default {
   name: "CardPost",
   el: "#card-post",
@@ -42,6 +47,10 @@ export default {
   },
   props: {
     id: {
+      type: String,
+      required: true,
+    },
+    creatorId: {
       type: String,
       required: true,
     },
@@ -82,13 +91,23 @@ export default {
     };
   },
   methods: {
+    ...mapGetters(["get_profile_id"]),
     goToPost() {
       this.$router.push({ name: "post", params: { postId: this.postId } });
     },
     goToProfile() {},
     deletePost() {
       this.$store.dispatch("delete_my_post", this.postId);
+      if (this.$route.name === "post") {
+        this.$router.push({ name: "home" });
+      }
       this.deleted = true;
+    },
+    modifyPost() {
+      this.$router.push({
+        name: "modify-post",
+        params: { postId: this.postId },
+      });
     },
   },
 };
