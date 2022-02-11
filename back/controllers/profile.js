@@ -22,17 +22,6 @@ exports.getProfileById = (req, res, next) => {
     });
 };
 
-// Get a profile by profileId:
-// exports.getProfileByProfileId = (req, res, next) => {
-//   db.Profile.findOne({ where: { id: req.params.profileId } })
-//     .then((profile) => {
-//       res.status(200).json({ profile });
-//     })
-//     .catch((error) => {
-//       res.status(404).json({ error });
-//     });
-// };
-
 // Update a profile:
 exports.updateProfile = (req, res, next) => {
   db.Profile.findOne({ where: { userId: req.params.userId } })
@@ -41,7 +30,9 @@ exports.updateProfile = (req, res, next) => {
         ? {
             // Modifiable en fonction du JS frontend
             ...req.body,
-            profilPictureURL: `/back/images/${req.file.filename}`,
+            profilPictureURL: `${req.protocol}://${req.get('host')}/images/${
+              req.file.filename
+            }`,
           }
         : req.body;
       db.Profile.update(

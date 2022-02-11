@@ -39,7 +39,7 @@ exports.getAllPostByType = (req, res, next) => {
 
 // Get all posts by profileId:
 exports.getAllPostFromUser = (req, res, next) => {
-  db.Post.findAll({ where: { profileId: req.param.profileId } })
+  db.Post.findAll({ where: { profileId: req.params.profileId } })
     .then((posts) => {
       res.status(200).json({ posts });
     })
@@ -61,7 +61,9 @@ exports.createPost = (req, res, next) => {
       const postObj = req.file
         ? {
             ...req.body,
-            postPictureURL: `/back/images/${req.file.filename}`,
+            postPictureURL: `${req.protocol}://${req.get('host')}/images/${
+              req.file.filename
+            }`,
             profileId: profile.id,
           }
         : { ...req.body, profileId: profile.id };
@@ -88,7 +90,9 @@ exports.modifyPost = (req, res, next) => {
         const postObj = req.file
           ? {
               ...req.body,
-              postPictureURL: `/back/images/${req.file.filename}`,
+              postPictureURL: `${req.protocol}://${req.get('host')}/images/${
+                req.file.filename
+              }`,
             }
           : { ...req.body };
         db.Post.update({ ...postObj }, { where: { id: req.params.postId } })

@@ -25,6 +25,9 @@
         <div id="content-post-ctn">{{ get_local_post.content }}</div>
       </div>
     </div>
+    <div>
+      
+    </div>
   </div>
 </template>
 

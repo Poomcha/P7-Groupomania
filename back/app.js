@@ -27,22 +27,22 @@ app.use(session(sessionOptions));
 app.use(cors(corsOptions));
 
 // Configuration des headers :
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Request-Headers', '*');
-  res.setHeader('Access-Control-Request-Method', 'GET, POST, PUT, DELETE');
-  // res.setHeader('Cookie', 'groupomania-cookie')
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, Accept-Encoding, Accept-Language, Content-Length'
-  );
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Request-Headers', '*');
+//   res.setHeader('Access-Control-Request-Method', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, Accept-Encoding, Accept-Language, Content-Length'
+//   );
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   res.setHeader(
+//     'Access-Control-Allow-Methods',
+//     'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+//   );
+//   res.setHeader('Cross-Origin-Ressource-Policy', 'cross-origin');
+//   next();
+// });
 
 // Création du dossier ./images s'il n'existe pas :
 fs.access('./images', fs.constants.F_OK, (error) => {

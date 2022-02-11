@@ -18,6 +18,10 @@
       <h3>Modification du mot de passe</h3>
       <FormPwd></FormPwd>
     </section>
+    <section id="posts" v-else-if="links.myPosts">
+      <h3>Mes publications</h3>
+      <MyPosts></MyPosts>
+    </section>
     <section id="profile" v-else>
       <h3>Mon profil</h3>
       <CardProfile
@@ -52,6 +56,7 @@ import FormProfile from "../components/forms/FormProfile.vue";
 import CardProfile from "../components/cards/CardProfile.vue";
 import Sidebar from "../components/Sidebar.vue";
 import FormPwd from "../components/forms/FormPwd.vue";
+import MyPosts from "../components/MyPosts.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Profile",
@@ -66,6 +71,10 @@ export default {
         myInfos: {
           label: "Mes informations",
           method: this.goToInfos,
+        },
+        myPosts: {
+          label: "Mes publications",
+          method: this.goToMyPosts,
         },
         updateProfile: {
           label: "Modifier mon profil",
@@ -82,6 +91,7 @@ export default {
         changePwd: false,
         changeProfile: false,
         myInfos: false,
+        myPosts: false,
       },
     };
   },
@@ -90,6 +100,7 @@ export default {
     CardProfile,
     FormProfile,
     FormPwd,
+    MyPosts,
   },
   computed: {
     ...mapGetters([
@@ -119,6 +130,10 @@ export default {
     goToUpdatePwd() {
       Object.keys(this.links).forEach((key) => (this.links[key] = false));
       this.links.changePwd = true;
+    },
+    goToMyPosts() {
+      Object.keys(this.links).forEach((key) => (this.links[key] = false));
+      this.links.myPosts = true;
     },
     back() {
       Object.keys(this.links).forEach((key) => (this.links[key] = false));

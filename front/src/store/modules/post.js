@@ -3,6 +3,7 @@ import axios from 'axios';
 const state = {
   posts: null,
   post: null,
+  myPosts: null,
 };
 const getters = {
   get_local_posts(state) {
@@ -11,6 +12,9 @@ const getters = {
   get_local_post(state) {
     return state.post;
   },
+  get_my_posts(state) {
+    return state.myPosts;
+  },
 };
 const mutations = {
   set_local_posts(state, posts) {
@@ -18,6 +22,9 @@ const mutations = {
   },
   set_local_post(state, post) {
     state.post = post;
+  },
+  set_my_posts(state, posts) {
+    state.myPosts = posts;
   },
 };
 const actions = {
@@ -35,8 +42,17 @@ const actions = {
     axios
       .get(`/posts/${postId}`)
       .then((res) => {
-        console.log(res.data);
         commit('set_local_post', res.data.post);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  commit_my_posts({ commit }, profileId) {
+    axios
+      .get(`/posts/user/${profileId}`)
+      .then((res) => {
+        commit('set_my_posts', res.data.posts);
       })
       .catch((error) => {
         console.log(error);
