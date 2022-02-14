@@ -107,7 +107,6 @@ const actions = {
       .delete(`/posts/${postId}`)
       .then(() => {
         commit('remove_my_post', postId);
-        console.log(`Post ${postId} supprimé.`);
       })
       .catch((error) => {
         console.log(error);
