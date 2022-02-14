@@ -1,9 +1,6 @@
 <template>
   <div id="card-post" class="card-post" v-if="!deleted">
-    <div
-      id="controllers"
-      v-if="this.$route.name === 'profile'"
-    >
+    <div id="controllers" v-if="this.$route.name === 'profile'">
       <ModifyButton :modifyPost="modifyPost"></ModifyButton>
       <DeleteButton :deletePost="deletePost"></DeleteButton>
     </div>
@@ -90,8 +87,10 @@ export default {
       deleted: false,
     };
   },
-  methods: {
+  computed: {
     ...mapGetters(["get_profile_id"]),
+  },
+  methods: {
     goToPost() {
       this.$router.push({ name: "post", params: { postId: this.postId } });
     },
