@@ -21,9 +21,14 @@ const routes = [
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
+    path: '/my-profile/:userId',
+    name: 'my-profile',
+    component: () => import('../views/MyProfile.vue'),
+  },
+  {
     path: '/profile/:userId',
     name: 'profile',
-    component: () => import('../views/Profile.vue'),
+    component: () => import('../views/Profile.vue')
   },
   {
     path: '/post/:postId',
@@ -38,8 +43,8 @@ const routes = [
   {
     path: '/post/modify/:postId',
     name: 'modify-post',
-    component: () => import('../views/ModifyPost.vue')
-  }
+    component: () => import('../views/ModifyPost.vue'),
+  },
 ];
 
 const router = createRouter({
