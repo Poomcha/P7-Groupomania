@@ -43,6 +43,7 @@ const mutations = {
   },
   remove_my_post(state, postId) {
     state.myPosts = state.myPosts.filter((post) => post.id !== postId);
+    state.posts = state.posts.filter((post) => post.id !== postId);
   },
 };
 const actions = {
