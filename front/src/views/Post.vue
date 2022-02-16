@@ -7,6 +7,7 @@
           <img
             :src="get_local_post.Profile.profilPictureURL"
             alt="Profil Picture"
+            width="100"
           />
         </div>
         <div>
@@ -19,7 +20,11 @@
     </div>
     <div>
       <div id="post-img-ctn">
-        <img :src="get_local_post.postPictureURL" alt="Post Picture" />
+        <img
+          :src="get_local_post.postPictureURL"
+          alt="Post Picture"
+          width="100"
+        />
       </div>
       <div>
         <div id="title-post-ctn">{{ get_local_post.title }}</div>

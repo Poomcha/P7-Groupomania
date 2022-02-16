@@ -7,7 +7,7 @@
     <Date :type="this.type" :id="this.postId"></Date>
     <div class="card-post__creator-infos" v-if="this.$route.name === 'home'">
       <a href="" @click.prevent="goToProfile()">
-        <div><img :src="creatorImgUrl" alt="Profil Picture" /></div>
+        <div><img :src="creatorImgUrl" alt="Profil Picture" width="100" /></div>
         <div>
           <span>{{ creatorFirstName }}</span>
         </div>
@@ -19,7 +19,7 @@
     <div class="card-post__post-infos">
       <a href="" @click.prevent="goToPost()">
         <div id="post-img-ctn">
-          <img :src="imgUrl" alt="" />
+          <img :src="imgUrl" alt="" width="100" />
         </div>
         <div>
           <div id="title-post-ctn">{{ title }}</div>
@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       postId: this.id,
-      type: "POST"
+      type: "POST",
     };
   },
   computed: {
