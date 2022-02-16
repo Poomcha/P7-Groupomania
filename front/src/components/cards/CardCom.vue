@@ -78,7 +78,7 @@ export default {
     return { changeCom: false, type: "COM" };
   },
   computed: {
-    ...mapGetters(["get_profile_id", "get_change_com_status"]),
+    ...mapGetters(["get_profile_id", "get_change_com_status", "get_user_id"]),
   },
   methods: {
     ...mapActions(["delete_my_com"]),
@@ -88,6 +88,13 @@ export default {
     },
     modifyCom() {
       this.changeCom = !this.changeCom;
+    },
+    goToProfile() {
+      this.$store.dispatch("go_to_profile", {
+        local_profile_id: this.get_profile_id,
+        local_user_id: this.get_user_id,
+        target_id: this.profile.id,
+      });
     },
   },
 };
