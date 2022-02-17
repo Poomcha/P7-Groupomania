@@ -95,11 +95,11 @@ export default {
         description: "Description",
       },
       form: {
-        image: "",
-        firstName: "",
-        lastName: "",
-        position: "",
-        description: "",
+        image: this.oldImgURL,
+        firstName: this.oldFirstName,
+        lastName: this.oldLastName,
+        position: this.oldPosition,
+        description: this.oldDescription,
       },
       validator: {
         file: false,
@@ -126,13 +126,17 @@ export default {
       this.validator.description = validateDescription(this.form.description);
     },
     submitValidation() {
-      this.disableSubmit = validateProfileForm(this.validator, this.form);
+      this.disableSubmit = validateProfileForm(
+        this.validator,
+        this.form,
+        this.get_profile_status
+      );
     },
     handleFileUpload(event) {
       this.form.image = event.target.files[0];
       this.validator.file = validateImage(this.form.image);
     },
-    ...mapActions(["update_profile"]),
+    ...mapActions(["update_profile", "get_profile_status"]),
     updateProfile() {
       this.update_profile({
         form: this.form,
@@ -144,6 +148,28 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+  },
+  props: {
+    oldFirstName: {
+      type: String,
+      default: "",
+    },
+    oldLastName: {
+      type: String,
+      default: "",
+    },
+    oldPosition: {
+      type: String,
+      default: "",
+    },
+    oldDescription: {
+      type: String,
+      default: "",
+    },
+    oldImgURL: {
+      type: String,
+      default: "",
     },
   },
 };

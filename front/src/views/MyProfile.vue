@@ -6,7 +6,14 @@
       v-if="links.changeProfile || !get_profile_status"
     >
       <h3>Modification du profil</h3>
-      <FormProfile @profileupdated="goToProfil()"></FormProfile>
+      <FormProfile
+        @profileupdated="goToProfil()"
+        :oldFirstName="get_user_profile.firstName"
+        :oldLastName="get_user_profile.lastName"
+        :oldPosition="get_user_profile.position"
+        :oldDescription="get_user_profile.description"
+        :oldImgURL="get_user_profile.profilPictureURL"
+      ></FormProfile>
     </section>
     <section id="mes-infos" v-else-if="links.myInfos">
       <h3>Mes informations</h3>
