@@ -6,7 +6,7 @@
       v-if="links.changeProfile || !get_profile_status"
     >
       <h3>Modification du profil</h3>
-      <FormProfile></FormProfile>
+      <FormProfile @profileupdated="goToProfil()"></FormProfile>
     </section>
     <section id="mes-infos" v-else-if="links.myInfos">
       <h3>Mes informations</h3>
