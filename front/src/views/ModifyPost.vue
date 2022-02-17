@@ -19,9 +19,9 @@ export default {
     FormPost,
   },
   computed: {
-    ...mapGetters(["get_my_posts"]),
+    ...mapGetters(["get_local_posts"]),
     myPost() {
-      return this.get_my_posts.find(
+      return this.get_local_posts.find(
         (post) => post.id === this.$route.params.postId
       );
     },

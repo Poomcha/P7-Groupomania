@@ -4,6 +4,7 @@ const state = {
   user: {
     email: null,
     _id: null,
+    isModerator: null,
     profileFilled: null,
     profile: {
       firstName: null,
@@ -33,6 +34,9 @@ const getters = {
   get_profile_id(state) {
     return state.user.profile.id;
   },
+  is_moderator(state) {
+    return state.user.isModerator;
+  },
 };
 const mutations = {
   set_user_email(state, email) {
@@ -61,6 +65,9 @@ const mutations = {
       },
     };
   },
+  set_user_rights(state, data) {
+    state.user.isModerator = data;
+  },
 };
 const actions = {
   sign_up({ dispatch }, form) {
@@ -81,6 +88,7 @@ const actions = {
         // Set user email and userId.
         commit('set_user_email', form.email);
         commit('set_user_id', res.data.userId);
+        commit('set_user_rights', res.data.isModerator);
         // Set profile if it exist, else redirect to profil completion view.
         axios
           .get(`users/${state.user._id}`)

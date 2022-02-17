@@ -1,5 +1,12 @@
 <template>
   <div id="post">
+    <div
+      id="controllers"
+      v-if="get_local_post.Profile.userId === get_user_id || is_moderator"
+    >
+      <ModifyButton :modifyThis="modifyPost"></ModifyButton>
+      <DeleteButton :deleteThis="deletePost"></DeleteButton>
+    </div>
     <Date type="POST" :id="get_local_post.id"></Date>
     <div>
       <a href="" @click.prevent="goToProfile()">
@@ -47,17 +54,19 @@ import { mapGetters, mapActions } from "vuex";
 import FluxComments from "../components/flux/FluxComments.vue";
 import FormCom from "../components/forms/FormCom.vue";
 import Date from "../components/Date.vue";
+import ModifyButton from "../components/buttons/ModifyButton.vue";
+import DeleteButton from "../components/buttons/DeleteButton.vue";
 export default {
   name: "Post",
   el: "#post",
-  components: { FormCom, FluxComments, Date },
+  components: { FormCom, FluxComments, Date, ModifyButton, DeleteButton },
   beforeCreate() {
     this.$store.dispatch("commit_local_post", this.$route.params.postId);
   },
   created() {},
   data() {},
   computed: {
-    ...mapGetters(["get_local_post", "get_local_coms"]),
+    ...mapGetters(["get_local_post", "get_local_coms", "get_user_id"]),
   },
   methods: {
     ...mapActions(["get_one_profile", "get_profile_id", "get_user_id"]),
@@ -66,6 +75,19 @@ export default {
         local_profile_id: this.get_profile_id,
         local_user_id: this.get_user_id,
         target_id: this.get_local_post.profileId,
+      });
+    },
+    deletePost() {
+      this.$store.dispatch("delete_my_post", this.postId);
+      if (this.$route.name === "post") {
+        this.$router.push({ name: "home" });
+      }
+      this.deleted = true;
+    },
+    modifyPost() {
+      this.$router.push({
+        name: "modify-post",
+        params: { postId: this.get_local_post.id },
       });
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div id="card-post" class="card-post">
-    <div id="controllers" v-if="creatorId === this.get_profile_id">
+    <div id="controllers" v-if="creatorId === get_user_id || is_moderator">
       <ModifyButton :modifyThis="modifyPost"></ModifyButton>
       <DeleteButton :deleteThis="deletePost"></DeleteButton>
     </div>
@@ -97,7 +97,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["get_profile_id", "get_user_id"]),
+    ...mapGetters(["get_profile_id", "get_user_id", "is_moderator"]),
   },
   methods: {
     goToPost() {

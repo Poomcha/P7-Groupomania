@@ -26,7 +26,11 @@ exports.signup = (req, res, next) => {
     .then((user) =>
       res
         .status(201)
-        .json({ message: 'User and his profil created.', userId: user.id })
+        .json({
+          message: 'User and his profil created.',
+          userId: user.id,
+          isModerator: user.isModerator,
+        })
     )
     .catch((error) => res.status(400).json({ message: error }));
 };
@@ -48,6 +52,7 @@ exports.signin = (req, res, next) => {
           req.session.user = user.id;
           res.status(200).json({
             userId: user.id,
+            isModerator: user.isModerator,
           });
         })
         .catch((error) => res.status(500).json({ error }));
