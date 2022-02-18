@@ -86,25 +86,19 @@ exports.logout = (req, res, next) => {
 exports.changePassword = (req, res, next) => {
   db.User.findOne({ where: { id: req.session.user } })
     .then((user) => {
-      console.log('\n' + req.params.id + '\n');
       if (req.params.id === user.id || user.isModerator) {
         bcrypt
           .hash(req.body.password, 10)
           .then((hash) => {
-            console.log('\n' + hash + '\n');
-            const userId = req.params.id;
-            console.log('\n' + userId + '\n');
             db.User.update({ password: hash }, { where: { id: req.params.id } })
               .then(() => {
                 res.status(201).json({ message: 'Password changed.' });
               })
               .catch((error) => {
-                console.log('\n\n Error here \n\n');
                 res.status(400).json({ message: error });
               });
           })
           .catch((error) => {
-            console.log('\n\n Error There \n\n');
             res.status(400).json({ message: error });
           });
       } else {

@@ -38,11 +38,10 @@ exports.createCommentForPost = (req, res, next) => {
 
 // Modify a comment for a post:
 exports.modifyCommentForPost = (req, res, next) => {
-  db.user
-    .findOne({
-      where: { id: req.session.user },
-      attributes: ['isModerator', 'id'],
-    })
+  db.User.findOne({
+    where: { id: req.session.user },
+    attributes: ['isModerator', 'id'],
+  })
     .then((user) => {
       user
         .getProfile()
@@ -65,7 +64,10 @@ exports.modifyCommentForPost = (req, res, next) => {
                   }
                 )
                   .then(() => {
-                    db.Comment.findOne({ where: { id: req.body.comId } })
+                    db.Comment.findOne({
+                      where: { id: req.body.comId },
+                      include: db.Profile,
+                    })
                       .then((com) => {
                         res.status(200).json(com);
                       })
@@ -107,7 +109,7 @@ exports.deleteCommentForPost = (req, res, next) => {
         .then((profile) => {
           db.Comment.findOne({ where: { id: req.params.comId } })
             .then((comment) => {
-              if (comment.profileId === profile.id || !user.isModerator) {
+              if (comment.profileId === profile.id || user.isModerator) {
                 db.Comment.destroy({
                   where: {
                     id: comment.id,

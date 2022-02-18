@@ -2,7 +2,7 @@
   <div id="card-com">
     <div
       id="controllers"
-      v-if="profile.id === this.get_profile_id && !changeCom"
+      v-if="profile.id === this.get_profile_id && !changeCom || is_moderator"
     >
       <ModifyButton :modifyThis="modifyCom"></ModifyButton>
       <DeleteButton :deleteThis="deleteCom"></DeleteButton>
@@ -78,7 +78,7 @@ export default {
     return { changeCom: false, type: "COM" };
   },
   computed: {
-    ...mapGetters(["get_profile_id", "get_change_com_status", "get_user_id"]),
+    ...mapGetters(["get_profile_id", "get_change_com_status", "get_user_id", "is_moderator"]),
   },
   methods: {
     ...mapActions(["delete_my_com"]),
