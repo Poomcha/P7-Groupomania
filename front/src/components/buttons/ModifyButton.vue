@@ -10,7 +10,6 @@ export default {
   props: {
     modifyThis: {
       type: Function,
-      required: true,
     },
     label: {
       type: String,

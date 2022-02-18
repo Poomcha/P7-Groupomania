@@ -1,11 +1,25 @@
 <template>
   <div id="moderate-profile">
     <ModifyButton
-      :label="label.modifyProfile"
-      @click="modifyProfile()"
+      :label="updateProfile ? label.cancel : label.modifyProfile"
+      @click="modifyProfile"
     ></ModifyButton>
-    <DeleteButton :label="label.delete" @click="deleteProfile"></DeleteButton>
+    <DeleteButton
+      v-if="updateProfile"
+      :label="label.delete"
+      @click="deleteProfile"
+    ></DeleteButton>
+    <FormProfile
+      v-if="updateProfile"
+      :oldFirstName="profile.firstName"
+      :oldLastName="profile.lastName"
+      :oldPosition="profile.position"
+      :oldDescription="profile.description"
+      :oldImgURL="profile.profilPictureURL"
+      @profileupdated="modifyProfile"
+    ></FormProfile>
     <CardProfile
+      v-if="!updateProfile"
       :userId="profile.userId"
       :email="profile.User.email"
       :firstName="profile.firstName"
@@ -14,7 +28,7 @@
       :description="profile.description"
       :profilePicURL="profile.profilPictureURL"
     ></CardProfile>
-    <FormPwd></FormPwd>
+    <FormPwd v-if="!updateProfile"></FormPwd>
   </div>
 </template>
 <script>
@@ -23,6 +37,7 @@ import ModifyButton from "../components/buttons/ModifyButton.vue";
 import DeleteButton from "../components/buttons/DeleteButton.vue";
 import CardProfile from "../components/cards/CardProfile.vue";
 import FormPwd from "../components/forms/FormPwd.vue";
+import FormProfile from "../components/forms/FormProfile.vue";
 export default {
   name: "ModerateProfile",
   el: "#moderate-profile",
@@ -31,6 +46,7 @@ export default {
     ModifyButton,
     DeleteButton,
     FormPwd,
+    FormProfile,
   },
   data() {
     return {
@@ -38,8 +54,10 @@ export default {
       label: {
         modifyPwd: "Modifier le mot de passe",
         modifyProfile: "Modifier le profil",
+        cancel: "Retour",
         delete: "Supprimer le profil",
       },
+      updateProfile: false,
     };
   },
   computed: {
@@ -51,7 +69,7 @@ export default {
   methods: {
     ...mapActions(["delete_user", "change_pwd"]),
     modifyProfile() {
-      console.log("somethng");
+      this.updateProfile = !this.updateProfile;
     },
     modifyPwd() {},
     deleteProfile() {

@@ -38,6 +38,12 @@ const mutations = {
       (profile) => profile.userId === userId
     );
   },
+  set_one_local_profile(state, profile) {
+    const profileIndex = state.local_profiles.findIndex(
+      (p) => p.id === profile.id
+    );
+    state.local_profiles[profileIndex] = profile;
+  },
 };
 
 const actions = {
@@ -63,9 +69,13 @@ const actions = {
         axios
           .get(`users/${data.userId}`)
           .then((res) => {
-            commit('set_user_profile', res.data);
-            dispatch('change_profile_status', true);
-            commit('set_update_status');
+            if (router.currentRoute.value.name === 'moderate-profile') {
+              commit('set_one_local_profile', res.data);
+            } else {
+              commit('set_user_profile', res.data);
+              dispatch('change_profile_status', true);
+              commit('set_update_status');
+            }
           })
           .catch((error) => {
             console.log(error.toJSON());

@@ -7,7 +7,7 @@
       :content="post.text"
       :imgUrl="post.postPictureURL"
       :id="post.id"
-      :creatorId="post.Profile.userId"
+      :creatorId="post.Profile ? post.Profile.userId : get_local_profile.userId"
       :creatorFirstName="
         post.Profile ? post.Profile.firstName : get_local_profile.firstName
       "

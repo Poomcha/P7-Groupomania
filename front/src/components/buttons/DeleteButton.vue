@@ -10,7 +10,6 @@ export default {
   props: {
     deleteThis: {
       type: Function,
-      required: true,
     },
     label: {
       type: String,
