@@ -1,10 +1,6 @@
 <template>
   <div id="moderate-profile">
     <ModifyButton
-      :label="label.modifyPwd"
-      @click="modifyPwd()"
-    ></ModifyButton>
-    <ModifyButton
       :label="label.modifyProfile"
       @click="modifyProfile()"
     ></ModifyButton>
@@ -18,6 +14,7 @@
       :description="profile.description"
       :profilePicURL="profile.profilPictureURL"
     ></CardProfile>
+    <FormPwd></FormPwd>
   </div>
 </template>
 <script>
@@ -25,6 +22,7 @@ import { mapGetters, mapActions } from "vuex";
 import ModifyButton from "../components/buttons/ModifyButton.vue";
 import DeleteButton from "../components/buttons/DeleteButton.vue";
 import CardProfile from "../components/cards/CardProfile.vue";
+import FormPwd from "../components/forms/FormPwd.vue";
 export default {
   name: "ModerateProfile",
   el: "#moderate-profile",
@@ -32,6 +30,7 @@ export default {
     CardProfile,
     ModifyButton,
     DeleteButton,
+    FormPwd,
   },
   data() {
     return {
@@ -50,7 +49,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["delete_user"]),
+    ...mapActions(["delete_user", "change_pwd"]),
     modifyProfile() {
       console.log("somethng");
     },

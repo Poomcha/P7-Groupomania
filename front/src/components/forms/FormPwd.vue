@@ -5,7 +5,7 @@
       @submit.prevent="changePwd()"
       @input="submitValidation()"
     >
-      <div>
+      <div v-if="!isAdminRoute">
         <label for="oldPassword">Ancien mot de passe : </label>
         <input
           type="password"
@@ -85,6 +85,11 @@ export default {
       success: false,
     };
   },
+  computed: {
+    isAdminRoute() {
+      return this.$route.name === "moderate-profile" ? true : false;
+    },
+  },
   methods: {
     passwordValidation() {
       this.validator.password = validatePassword(this.form.password);
@@ -96,7 +101,14 @@ export default {
       );
     },
     submitValidation() {
-      this.disableSubmit = validateForm(this.validator, this.form);
+      if (this.$store.getters.is_moderator) {
+        this.disableSubmit = validateForm(this.validator, {
+          password: this.password,
+          passwordConf: this.passwordConf,
+        });
+      } else {
+        this.disableSubmit = validateForm(this.validator, this.form);
+      }
     },
     ...mapActions(["change_pwd"]),
     changePwd() {

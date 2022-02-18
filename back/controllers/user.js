@@ -24,13 +24,11 @@ exports.signup = (req, res, next) => {
       return user;
     })
     .then((user) =>
-      res
-        .status(201)
-        .json({
-          message: 'User and his profil created.',
-          userId: user.id,
-          isModerator: user.isModerator,
-        })
+      res.status(201).json({
+        message: 'User and his profil created.',
+        userId: user.id,
+        isModerator: user.isModerator,
+      })
     )
     .catch((error) => res.status(400).json({ message: error }));
 };
@@ -86,22 +84,28 @@ exports.logout = (req, res, next) => {
 
 // Changement de mot de passe:
 exports.changePassword = (req, res, next) => {
-  db.User.findOne({ where: { userId: req.params.id } })
+  db.User.findOne({ where: { id: req.session.user } })
     .then((user) => {
-      if (req.session.user === user.id || user.isModerator) {
+      console.log('\n' + req.params.id + '\n');
+      if (req.params.id === user.id || user.isModerator) {
         bcrypt
           .hash(req.body.password, 10)
           .then((hash) => {
-            db.User.update({ where: { id: req.params.id } }, { password: hash })
+            console.log('\n' + hash + '\n');
+            const userId = req.params.id;
+            console.log('\n' + userId + '\n');
+            db.User.update({ password: hash }, { where: { id: req.params.id } })
               .then(() => {
                 res.status(201).json({ message: 'Password changed.' });
               })
               .catch((error) => {
+                console.log('\n\n Error here \n\n');
                 res.status(400).json({ message: error });
               });
           })
           .catch((error) => {
-            res.status(400).json(error);
+            console.log('\n\n Error There \n\n');
+            res.status(400).json({ message: error });
           });
       } else {
         res.status(401).json({ message: 'Unauthaurized access.' });
@@ -114,9 +118,9 @@ exports.changePassword = (req, res, next) => {
 
 // Suppression d'un utilisateur:
 exports.destroyUser = (req, res, next) => {
-  db.User.findOne({ where: { id: req.params.id } })
+  db.User.findOne({ where: { id: req.session.user } })
     .then((user) => {
-      if (req.session.user === req.params.id || user.isModerator) {
+      if (req.session.user === user.id || user.isModerator) {
         db.User.destroy({ where: { id: req.params.id } })
           .then(() => {
             res.status(201).json({ message: 'User destroyed.' });
