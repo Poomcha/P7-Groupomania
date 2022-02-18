@@ -1,6 +1,6 @@
 <template>
   <div id="modify-button">
-    <button @click="modifyThis">Modifier</button>
+    <button @click="modifyThis">{{ label }}</button>
   </div>
 </template>
  <script>
@@ -11,6 +11,10 @@ export default {
     modifyThis: {
       type: Function,
       required: true,
+    },
+    label: {
+      type: String,
+      default: "Modifier",
     },
   },
 };

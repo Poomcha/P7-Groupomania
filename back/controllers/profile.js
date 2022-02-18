@@ -5,6 +5,7 @@ const user = require('../models/user');
 exports.getAllProfile = (req, res, next) => {
   db.Profile.findAll({
     order: [['firstName', 'ASC']],
+    include: [{ model: db.User, attributes: ['email'] }],
   })
     .then((profiles) => {
       res.status(200).json(profiles);
@@ -64,10 +65,10 @@ exports.updateProfile = (req, res, next) => {
 
 // Supprimer un profil et un user:
 exports.deleteProfile = (req, res, next) => {
-  db.User.findOne({ where: { id: req.params.userId } })
+  db.User.findOne({ where: { id: req.session.user } })
     .then((user) => {
       if (req.session.user === req.params.userId || user.isModerator) {
-        db.Profile.destroy({ where: { useriId: req.params.userId } })
+        db.Profile.destroy({ where: { userId: req.params.userId } })
           .then(() => {
             db.User.destroy({ where: { id: req.params.userId } })
               .then(() => {

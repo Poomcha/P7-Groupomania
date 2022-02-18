@@ -17,6 +17,9 @@ const getters = {
   get_local_profiles(state) {
     return state.local_profiles;
   },
+  get_one_local_profile: (state) => (userId) => {
+    return state.local_profiles.find((profile) => profile.userId === userId);
+  },
 };
 
 const mutations = {
@@ -28,6 +31,12 @@ const mutations = {
   },
   set_local_profiles(state, profiles) {
     state.local_profiles = profiles;
+  },
+  remove_local_profile(state, userId) {
+    state.local_profile = null;
+    state.local_profiles = state.local_profiles.filter(
+      (profile) => profile.userId === userId
+    );
   },
 };
 
@@ -87,11 +96,16 @@ const actions = {
       });
   },
   go_to_profile({ dispatch }, idObj) {
-    if (idObj.local_user_id === idObj.target_id) {
-      router.push({
-        name: 'my-profile',
-        params: { userId: idObj.local_user_id },
-      });
+    if (idObj.local_user_id === idObj.target_id || idObj.isModerator) {
+      idObj.isModerator
+        ? router.push({
+            name: 'moderate-profile',
+            params: { userId: idObj.target_id },
+          })
+        : router.push({
+            name: 'my-profile',
+            params: { userId: idObj.local_user_id },
+          });
     } else {
       dispatch('get_one_profile', idObj.target_id)
         .then(() => {

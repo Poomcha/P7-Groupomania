@@ -125,6 +125,20 @@ const actions = {
         console.log(error);
       });
   },
+  delete_user({ dispatch, state }, userId) {
+    axios
+      .delete(`/users/${userId}`)
+      .then(() => {
+        if (userId === state.user._id) {
+          dispatch('logout');
+        } else {
+          router.push({ name: 'profiles' });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   change_profile_status({ commit }, payload) {
     commit('set_profile_status', payload);
   },

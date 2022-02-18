@@ -1,6 +1,6 @@
 <template>
   <div id="delete-button">
-    <button @click="deleteThis">Supprimer</button>
+    <button @click="deleteThis">{{ label }}</button>
   </div>
 </template>
  <script>
@@ -11,6 +11,10 @@ export default {
     deleteThis: {
       type: Function,
       required: true,
+    },
+    label: {
+      type: String,
+      default: "Supprimer",
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div id="cardprofile">
-    <a href="" @click.prevent="$emit('send:id', this.userId)">
+    <a href="" @click.prevent="$emit('sendid', this.userId)">
       <div id="picture-ctn">
         <img :src="profilePicURL" alt="Profile Picture" width="100" />
       </div>
@@ -55,5 +55,9 @@ export default {
     },
     computed: {},
   },
+  data() {
+    return {};
+  },
+  computed: {},
 };
 </script>
