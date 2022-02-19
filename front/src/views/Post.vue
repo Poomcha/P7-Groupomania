@@ -38,6 +38,7 @@
         <div id="content-post-ctn">{{ get_local_post.text }}</div>
       </div>
     </div>
+    <div>{{ get_com_number_for_post(get_local_post.id) }} Commentaires</div>
     <div>
       <div>
         <FluxComments></FluxComments>
@@ -66,7 +67,12 @@ export default {
   created() {},
   data() {},
   computed: {
-    ...mapGetters(["get_local_post", "get_local_coms", "get_user_id"]),
+    ...mapGetters([
+      "get_local_post",
+      "get_local_coms",
+      "get_user_id",
+      "get_com_number_for_post",
+    ]),
   },
   methods: {
     ...mapActions(["get_one_profile", "get_profile_id", "get_user_id"]),

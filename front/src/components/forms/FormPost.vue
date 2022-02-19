@@ -131,7 +131,6 @@ export default {
       this.create_modify_post({ form: this.form, route: this.$route });
     },
     cancel() {
-      console.log(this.$route);
       if (this.$route.name === "create-post") {
         this.$router.push({ name: "home" });
       } else {

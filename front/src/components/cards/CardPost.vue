@@ -30,7 +30,9 @@
         <div>
           <div id="title-post-ctn">{{ title }}</div>
           <div id="content-post-ctn">{{ content }}</div>
-          <div id="comments-post-ctn">{{ nbOfCom }} commentaires</div>
+          <div id="comments-post-ctn">
+            {{ nbOfCom }} commentaires
+          </div>
         </div>
       </a>
     </div>
@@ -97,7 +99,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["get_profile_id", "get_user_id", "is_moderator"]),
+    ...mapGetters([
+      "get_profile_id",
+      "get_user_id",
+      "is_moderator",
+      "get_com_number_for_post",
+    ]),
   },
   methods: {
     goToPost() {

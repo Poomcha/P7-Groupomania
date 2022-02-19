@@ -25,13 +25,18 @@
       <h3>Modification du mot de passe</h3>
       <FormPwd></FormPwd>
     </section>
-    <section id="posts" v-else-if="links.myPosts">
+    <section id="my-posts" v-else-if="links.myPosts">
       <h3>Mes publications</h3>
       <MyPosts></MyPosts>
+    </section>
+    <section id="my-coms" v-else-if="links.myComs">
+      <h3>Mes commentaires</h3>
+      <FluxPost></FluxPost>
     </section>
     <section id="profile" v-else>
       <h3>Mon profil</h3>
       <CardProfile
+        :userId="get_user_profile.userId"
         :profilePicURL="
           get_user_profile.profilPictureURL
             ? get_user_profile.profilPictureURL
@@ -64,6 +69,7 @@ import CardProfile from "../components/cards/CardProfile.vue";
 import Sidebar from "../components/Sidebar.vue";
 import FormPwd from "../components/forms/FormPwd.vue";
 import MyPosts from "../components/MyPosts.vue";
+import FluxPost from "../components/flux/FluxPost.vue"
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "MyProfile",
@@ -82,6 +88,10 @@ export default {
         myPosts: {
           label: "Mes publications",
           method: this.goToMyPosts,
+        },
+        myComs: {
+          label: "Mes commentaires",
+          method: this.goToMyComs,
         },
         updateProfile: {
           label: "Modifier mon profil",
@@ -108,6 +118,7 @@ export default {
     FormProfile,
     FormPwd,
     MyPosts,
+    FluxPost
   },
   computed: {
     ...mapGetters([
@@ -144,6 +155,10 @@ export default {
     },
     back() {
       Object.keys(this.links).forEach((key) => (this.links[key] = false));
+    },
+    goToMyComs() {
+      Object.keys(this.links).forEach((key) => (this.links[key] = false));
+      this.links.myComs = true;
     },
   },
 };

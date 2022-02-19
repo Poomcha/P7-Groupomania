@@ -6,7 +6,7 @@ exports.getAllPosts = (req, res, next) => {
   // Ou findAndCountAll avec limite de posts visibles par pages ?
   db.Post.findAll({
     order: [['updatedAt', 'DESC']],
-    include: db.Profile,
+    include: [{ model: db.Profile }, { model: db.Comment }],
   })
     .then((posts) => {
       res.status(200).json({ posts });

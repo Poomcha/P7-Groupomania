@@ -28,6 +28,9 @@ const getters = {
     };
     return formatDate(dates);
   },
+  get_nb_of_com: (state) => (postId) => {
+    return state.posts.find((post) => post.id === postId).Comments.length;
+  },
 };
 const mutations = {
   set_local_posts(state, posts) {

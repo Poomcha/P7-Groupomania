@@ -19,6 +19,7 @@
           ? post.Profile.profilPictureURL
           : get_local_profile.profilPictureURL
       "
+      :nbOfCom="get_nb_of_com(post.id)"
     ></CardPost>
   </div>
 </template>
@@ -37,7 +38,11 @@ export default {
     this.$store.dispatch("commit_my_posts", this.$store.getters.get_profile_id);
   },
   computed: {
-    ...mapGetters(["get_local_posts", "get_local_profile"]),
+    ...mapGetters([
+      "get_local_posts",
+      "get_local_profile",
+      "get_nb_of_com"
+    ]),
     posts() {
       return this.$route.name === "home"
         ? this.get_local_posts

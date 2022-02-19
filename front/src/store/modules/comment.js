@@ -20,6 +20,10 @@ const getters = {
     };
     return formatDate(dates);
   },
+  get_com_number_for_post: (state) => (postId) => {
+    return state.local_coms.filter((com) => com.postId === postId).length;
+  },
+  // get_coms_from_user: (state) => (userId) => {},
 };
 const mutations = {
   set_local_coms(state, coms) {
