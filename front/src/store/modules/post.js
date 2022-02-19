@@ -31,6 +31,15 @@ const getters = {
   get_nb_of_com: (state) => (postId) => {
     return state.posts.find((post) => post.id === postId).Comments.length;
   },
+  get_com_post_from_user: (state) => (profileId) => {
+    const posts = [];
+    for (const post of state.posts) {
+      if (post.Comments.find((com) => com.profileId === profileId)) {
+        posts.push(post);
+      }
+    }
+    return posts;
+  },
 };
 const mutations = {
   set_local_posts(state, posts) {

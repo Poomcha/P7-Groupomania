@@ -31,7 +31,19 @@
     </section>
     <section id="my-coms" v-else-if="links.myComs">
       <h3>Mes commentaires</h3>
-      <FluxPost></FluxPost>
+      <CardPost
+        v-for="post in get_com_post_from_user(get_profile_id)"
+        :key="post.id"
+        :id="post.id"
+        :creatorFirstName="post.Profile.firstName"
+        :creatorLastName="post.Profile.lastName"
+        :creatorImgUrl="post.Profile.profilPictureURL"
+        :creatorId="post.Profile.userId"
+        :title="post.title"
+        :content="post.text"
+        :imgUrl="post.postPictureURL"
+        :nbOfCom="get_nb_of_com(post.id)"
+      ></CardPost>
     </section>
     <section id="profile" v-else>
       <h3>Mon profil</h3>
@@ -69,7 +81,7 @@ import CardProfile from "../components/cards/CardProfile.vue";
 import Sidebar from "../components/Sidebar.vue";
 import FormPwd from "../components/forms/FormPwd.vue";
 import MyPosts from "../components/MyPosts.vue";
-import FluxPost from "../components/flux/FluxPost.vue"
+import CardPost from "../components/cards/CardPost.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "MyProfile",
@@ -90,7 +102,7 @@ export default {
           method: this.goToMyPosts,
         },
         myComs: {
-          label: "Mes commentaires",
+          label: "Mes publications commentées",
           method: this.goToMyComs,
         },
         updateProfile: {
@@ -118,7 +130,7 @@ export default {
     FormProfile,
     FormPwd,
     MyPosts,
-    FluxPost
+    CardPost,
   },
   computed: {
     ...mapGetters([
@@ -126,6 +138,10 @@ export default {
       "get_user_profile",
       "get_profile_status",
       "get_user_email",
+      "get_user_id",
+      "get_com_post_from_user",
+      "get_profile_id",
+      "get_nb_of_com",
     ]),
     seeBackLink() {
       return Object.values(this.links).find((value) => value);
