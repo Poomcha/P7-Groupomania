@@ -1,9 +1,7 @@
 const bcrypt = require('bcrypt');
 const session = require('express-session');
-const jwt = require('jsonwebtoken');
 
 const db = require('../models/index');
-const user = require('../models/user');
 
 // Create new user and his empty profile:
 exports.signup = (req, res, next) => {
@@ -34,7 +32,7 @@ exports.signup = (req, res, next) => {
 };
 
 // Connect user:
-exports.signin = (req, res, next, error) => {
+exports.signin = (req, res, next) => {
   db.User.findOne({ where: { email: req.body.email } })
     .then((user) => {
       bcrypt
