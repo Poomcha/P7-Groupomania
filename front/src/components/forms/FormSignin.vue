@@ -1,5 +1,6 @@
 <template>
   <div id="formsignin">
+    <p v-if="error.invalidCredentials">{{ label.invalidCredentials }}</p>
     <form @submit.prevent="logIn()" @input="submitValidation()">
       <div>
         <label for="email">E-mail : </label>
@@ -47,6 +48,7 @@ export default {
     return {
       label: {
         submit: "Connexion",
+        invalidCredentials: "Mot de passe ou email incorrect.",
       },
       form: {
         email: "",
@@ -54,6 +56,9 @@ export default {
       },
       validator: {
         email: false,
+      },
+      error: {
+        invalidCredentials: false,
       },
       disableSubmit: true,
     };
@@ -68,7 +73,11 @@ export default {
     },
     ...mapActions(["sign_in"]),
     logIn() {
-      this.sign_in(this.form);
+      this.sign_in(this.form).then((res) => {
+        !res
+          ? (this.error.invalidCredentials = true)
+          : (this.error.invalidCredentials = false);
+      });
     },
   },
 };

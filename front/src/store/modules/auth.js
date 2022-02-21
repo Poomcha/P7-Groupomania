@@ -85,30 +85,34 @@ const actions = {
     axios
       .post('/signin', form)
       .then((res) => {
-        // Set user email and userId.
-        commit('set_user_email', form.email);
-        commit('set_user_id', res.data.userId);
-        commit('set_user_rights', res.data.isModerator);
-        // Set profile if it exist, else redirect to profil completion view.
-        axios
-          .get(`users/${state.user._id}`)
-          .then((res) => {
-            if (res.data.firstName) {
-              // Set user profile
-              dispatch('change_profile_status', true);
-              commit('set_user_profile', res.data);
-              router.push({ name: 'home' });
-            } else {
-              dispatch('change_profile_status', false);
-              router.push({
-                name: 'my-profile',
-                params: { userId: state.user._id },
-              });
-            }
-          })
-          .catch((error) => {
-            return error;
-          });
+        if (res) {
+          // Set user email and userId.
+          commit('set_user_email', form.email);
+          commit('set_user_id', res.data.userId);
+          commit('set_user_rights', res.data.isModerator);
+          // Set profile if it exist, else redirect to profil completion view.
+          axios
+            .get(`users/${state.user._id}`)
+            .then((res) => {
+              if (res.data.firstName) {
+                // Set user profile
+                dispatch('change_profile_status', true);
+                commit('set_user_profile', res.data);
+                router.push({ name: 'home' });
+              } else {
+                dispatch('change_profile_status', false);
+                router.push({
+                  name: 'my-profile',
+                  params: { userId: state.user._id },
+                });
+              }
+            })
+            .catch((error) => {
+              return error;
+            });
+        } else {
+          return res;
+        }
       })
       .catch((error) => {
         return error;

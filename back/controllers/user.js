@@ -34,12 +34,9 @@ exports.signup = (req, res, next) => {
 };
 
 // Connect user:
-exports.signin = (req, res, next) => {
+exports.signin = (req, res, next, error) => {
   db.User.findOne({ where: { email: req.body.email } })
     .then((user) => {
-      if (!user) {
-        return res.status(403).json({ error });
-      }
       bcrypt
         .compare(req.body.password, user.password)
         .then((valid) => {
@@ -55,7 +52,7 @@ exports.signin = (req, res, next) => {
         })
         .catch((error) => res.status(500).json({ error }));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) => res.status(404).json(error));
 };
 
 // Get a userId:
