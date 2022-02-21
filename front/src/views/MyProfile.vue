@@ -45,6 +45,9 @@
         :nbOfCom="get_nb_of_com(post.id)"
       ></CardPost>
     </section>
+    <section id="delete-my-account" v-else-if="links.deleteAccount">
+      <DeleteAccount :userId="get_user_id"></DeleteAccount>
+    </section>
     <section id="profile" v-else>
       <h3>Mon profil</h3>
       <CardProfile
@@ -82,6 +85,7 @@ import Sidebar from "../components/Sidebar.vue";
 import FormPwd from "../components/forms/FormPwd.vue";
 import MyPosts from "../components/MyPosts.vue";
 import CardPost from "../components/cards/CardPost.vue";
+import DeleteAccount from "../components/forms/FormDeleteAccount.vue"
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "MyProfile",
@@ -113,6 +117,10 @@ export default {
           label: "Modifier mon mot de passe",
           method: this.goToUpdatePwd,
         },
+        deleteAccount: {
+          label: "Supprimer mon compte",
+          method: this.goToDeleteAccount,
+        },
       },
       backlink: "< Retour",
       links: {
@@ -121,6 +129,8 @@ export default {
         changeProfile: false,
         myInfos: false,
         myPosts: false,
+        myComs: false,
+        deleteAccount: false,
       },
     };
   },
@@ -131,6 +141,7 @@ export default {
     FormPwd,
     MyPosts,
     CardPost,
+    DeleteAccount
   },
   computed: {
     ...mapGetters([
@@ -175,6 +186,10 @@ export default {
     goToMyComs() {
       Object.keys(this.links).forEach((key) => (this.links[key] = false));
       this.links.myComs = true;
+    },
+    goToDeleteAccount() {
+      Object.keys(this.links).forEach((key) => (this.links[key] = false));
+      this.links.deleteAccount = true;
     },
   },
 };
