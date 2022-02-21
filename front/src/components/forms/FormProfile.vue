@@ -71,6 +71,7 @@
 
 <script>
 import SubmitButton from "../buttons/SubmitButton.vue";
+import trimAll from "../../scripts/triming"
 import { mapActions } from "vuex";
 import {
   validateName,
@@ -139,7 +140,7 @@ export default {
     ...mapActions(["update_profile", "get_profile_status"]),
     updateProfile() {
       this.update_profile({
-        form: this.form,
+        form: trimAll(this.form),
         userId: this.$route.params.userId,
       })
         .then(() => {

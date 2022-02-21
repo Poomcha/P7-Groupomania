@@ -1,5 +1,4 @@
 const db = require('../models/index');
-const user = require('../models/user');
 
 // Get all profile:
 exports.getAllProfile = (req, res, next) => {

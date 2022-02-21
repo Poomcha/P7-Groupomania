@@ -22,6 +22,7 @@
 
 <script>
 import SubmitButton from "../buttons/SubmitButton.vue";
+import trimAll from "../../scripts/triming"
 export default {
   name: "FormCom",
   el: "#form-com",
@@ -72,11 +73,11 @@ export default {
     },
     modifyCom() {
       this.$store
-        .dispatch("modify_my_com", {
+        .dispatch("modify_my_com", trimAll({
           postId: this.$route.params.postId,
           comId: this.comId,
           text: this.form.com,
-        })
+        }))
         .then(() => {
           this.$emit("change-com");
         })

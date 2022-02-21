@@ -68,6 +68,7 @@
 <script>
 import SubmitButton from "../buttons/SubmitButton.vue";
 import CancelButton from "../buttons/CancelButton.vue";
+import trimAll from "../../scripts/triming";
 import { mapActions } from "vuex";
 import {
   validateImage,
@@ -128,7 +129,7 @@ export default {
     },
     ...mapActions(["create_modify_post"]),
     createOrModifyPost() {
-      this.create_modify_post({ form: this.form, route: this.$route });
+      this.create_modify_post({ form: trimAll(this.form), route: this.$route });
     },
     cancel() {
       if (this.$route.name === "create-post") {
