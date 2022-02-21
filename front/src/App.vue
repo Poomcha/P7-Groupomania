@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <div v-if="isLoggedIn">
-      <!-- <Home></Home> -->
       <Nav></Nav>
       <router-view></router-view>
     </div>
@@ -15,8 +14,7 @@
 <script>
 import Signin from "./views/Signin.vue";
 import Signup from "./views/Signup.vue";
-// import Home from "./views/Home";
-import Nav from './components/Nav.vue'
+import Nav from "./components/Nav.vue";
 
 export default {
   name: "App",
@@ -24,9 +22,9 @@ export default {
   components: {
     Signin,
     Signup,
-    // Home,
     Nav,
   },
+  beforeCreate() {},
   data() {
     return {};
   },
@@ -38,10 +36,6 @@ export default {
       return this.$store.getters.is_logged_in;
     },
   },
-  methods: {},
-  // created() {
-  //   if() {}
-  // }
 };
 </script>
 <style lang="scss">

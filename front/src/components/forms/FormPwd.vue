@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import trimAll from "../../scripts/triming"
+// import trimAll from "../../scripts/triming"
 import {
   validatePassword,
   validatePasswordConf,
@@ -113,7 +113,7 @@ export default {
     },
     ...mapActions(["change_pwd"]),
     changePwd() {
-      this.change_pwd(trimAll(this.form))
+      this.change_pwd(this.form)
         .then(() => {
           this.success = true;
         })

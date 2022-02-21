@@ -55,7 +55,7 @@
 
 <script>
 import SubmitButton from "../buttons/SubmitButton.vue";
-import trimAll from "../../scripts/triming";
+// import trimAll from "../../scripts/triming";
 import { mapActions } from "vuex";
 import {
   validateEmail,
@@ -108,7 +108,7 @@ export default {
     },
     ...mapActions(["sign_up"]),
     signup() {
-      this.sign_up(trimAll(this.form));
+      this.sign_up(this.form);
     },
   },
 };

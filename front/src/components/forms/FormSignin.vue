@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import trimAll from "../../scripts/triming"
+// import trimAll from "../../scripts/triming"
 import SubmitButton from "../buttons/SubmitButton.vue";
 import { mapActions } from "vuex";
 import { validateEmail, validateForm } from "../../scripts/validate";
@@ -68,7 +68,7 @@ export default {
     },
     ...mapActions(["sign_in"]),
     logIn() {
-      this.sign_in(trimAll(this.form));
+      this.sign_in(this.form);
     },
   },
 };
