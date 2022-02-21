@@ -29,9 +29,16 @@ module.exports = (sequelize, DataTypes) => {
       },
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
-      position: DataTypes.STRING,
-      description: DataTypes.STRING,
-      profilPictureURL: DataTypes.STRING,
+      position: {
+        type: DataTypes.STRING,
+        defaultValue: 'Travaille chez Groupomania',
+      },
+      description: { type: DataTypes.STRING, defaultValue: '✌️' },
+      profilPictureURL: {
+        type: DataTypes.STRING,
+        defaultValue:
+          'http://localhost:3000/images_default/profile_pic_placeholder.svg',
+      },
     },
     {
       sequelize,

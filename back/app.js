@@ -59,6 +59,10 @@ fs.access('./images', fs.constants.F_OK, (error) => {
 
 // Chemin du dossier vers les images :
 app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(
+  '/images_default',
+  express.static(path.join(__dirname, 'images_default'))
+);
 
 // Import module auth :
 const auth = require('./middleware/auth');

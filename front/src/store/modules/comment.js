@@ -21,7 +21,9 @@ const getters = {
     return formatDate(dates);
   },
   get_com_number_for_post: (state) => (postId) => {
-    return state.local_coms.filter((com) => com.postId === postId).length;
+    return state.local_coms !== null
+      ? state.local_coms.filter((com) => com.postId === postId).length
+      : 0;
   },
 };
 const mutations = {

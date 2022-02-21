@@ -45,10 +45,24 @@ exports.updateProfile = (req, res, next) => {
             profilPictureURL: `${req.protocol}://${req.get('host')}/images/${
               req.file.filename
             }`,
+            position:
+              position === 'null'
+                ? 'Travaille chez Groupomania'
+                : req.body.position,
+            description:
+              req.body.description === 'null' ? '✌️' : req.body.description,
           }
         : req.body;
       db.Profile.update(
-        { ...profileObj },
+        {
+          ...profileObj,
+          position:
+            req.body.position === 'null'
+              ? 'Travaille chez Groupomania'
+              : req.body.position,
+          description:
+            req.body.description === 'null' ? '✌️' : req.body.description,
+        },
         { where: { userId: req.params.userId } }
       )
         .then(() => {
