@@ -11,15 +11,11 @@
     "axios": "^0.25.0",
     "axios-cookiejar-support": "^2.0.3",
     "core-js": "^3.6.5",
-    "tough-cookie": "^4.0.0",
-    "vee-validate": "^4.5.8",
     "vue": "^3.0.0",
     "vue-axios": "^3.4.0",
     "vue-router": "^4.0.0-0",
-    "vuelidate": "^0.7.7",
     "vuex": "^4.0.0-0",
-    "vuex-persistedstate": "^4.1.0",
-    "yup": "^0.32.11"
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
