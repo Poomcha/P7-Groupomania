@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: { name: 'userId', allowNull: false },
       });
       Profile.hasMany(models.Post, {
-        foreignkey: { name: 'profileId', as: 'posts' },
+        foreignKey: { name: 'profileId', as: 'posts' },
       });
       Profile.hasMany(models.Comment, {
         foreignKey: { name: 'profileId', as: 'comments' },

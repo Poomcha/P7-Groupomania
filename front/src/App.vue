@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="body">
+  <div id="app" class="main ctn">
     <div v-if="isLoggedIn">
       <Nav></Nav>
       <router-view></router-view>
@@ -38,9 +38,12 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-.body {
-  font-family: Inter, sans-serif;
-}
+
+
+
 </style>
+
+
+

@@ -1,5 +1,5 @@
 <template>
-  <div id="signin">
+  <div id="signin" class="ctn__column">
     <h1>Connexion</h1>
     <p>Description</p>
     <FormSignin></FormSignin>
@@ -25,3 +25,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.border {
+  border: 2em black;
+}
+</style>

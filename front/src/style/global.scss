@@ -1,0 +1,19 @@
+@import './utils/colors';
+@import './layout/ctn';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  font-family: Inter, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background: url("../assets/icon-left-font-monochrome-white.svg") no-repeat 5% 5% / 15%, linear-gradient(to bottom , $p_darker, 80%,  $p_lighter);
+}
