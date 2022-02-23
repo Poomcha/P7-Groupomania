@@ -1,9 +1,9 @@
 <template>
-  <div id="signin" class="ctn__column">
-    <h1>Connexion</h1>
-    <p>Description</p>
+  <div id="signin" class="bg--white sign">
+    <h1 class="title--main text--center">Se Connecter</h1>
+    <p class="text--normal-w text--center text--small-f">Déjà inscrit sur Groupomania ?<br/> Connectez-vous à votre réseau social préféré !</p>
     <FormSignin></FormSignin>
-    <p>
+    <p class="text--normal-w text--small-f text--center">
       Pas encore inscrit ?
       <a href="" @click.prevent="changeSignView()">Inscrivez-vous !</a>
     </p>
@@ -27,7 +27,4 @@ export default {
 </script>
 
 <style lang="scss">
-.border {
-  border: 2em black;
-}
 </style>

@@ -1,8 +1,14 @@
 .ctn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &--column {
-      flex-direction: column;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &--column {
+    flex-direction: column;
   }
+  &--btn {
+    padding: 0.5rem;
+  }
+  &--input {
+    padding: 0.5rem;
+  }
+}

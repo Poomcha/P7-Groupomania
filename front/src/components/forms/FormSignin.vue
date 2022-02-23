@@ -1,9 +1,20 @@
 <template>
   <div id="formsignin">
-    <p v-if="error.invalidCredentials">{{ label.invalidCredentials }}</p>
-    <form @submit.prevent="logIn()" @input="submitValidation()">
-      <div>
-        <label for="email">E-mail : </label>
+    <p
+      v-if="error.invalidCredentials"
+      class="text--normal-f test--normal-w text--error"
+    >
+      {{ label.invalidCredentials }}
+    </p>
+    <form
+      @submit.prevent="logIn()"
+      @input="submitValidation()"
+      class="ctn ctn--column form"
+    >
+      <div class="ctn--input">
+        <label for="email" class="text--label text--normal-f text--normal-w box"
+          >E-mail</label
+        >
         <input
           type="email"
           id="email"
@@ -13,11 +24,20 @@
           v-model="form.email"
           @input="emailValidation()"
           placeholder="exemple@groupomania.fr"
+          class="input input--sign box text--normal-f text--light-w"
         />
-        <span v-if="validator.email">Email invalide.</span>
+        <span
+          v-if="validator.email"
+          class="text--normal-f text--bold-w text--error"
+          >Email invalide.</span
+        >
       </div>
-      <div>
-        <label for="password">Mot de Passe : </label>
+      <div class="ctn--input">
+        <label
+          for="password"
+          class="text--label text--normal-f text--normal-w box"
+          >Mot de Passe</label
+        >
         <input
           type="password"
           id="password"
@@ -25,9 +45,14 @@
           autocomplete="new-password"
           required
           v-model="form.password"
+          class="input box text--normal-f text--light-w"
         />
       </div>
-      <SubmitButton :label="label.submit" :disabled="disableSubmit" />
+      <SubmitButton
+        :label="label.submit"
+        :disabled="disableSubmit"
+        class="ctn"
+      />
     </form>
   </div>
 </template>
