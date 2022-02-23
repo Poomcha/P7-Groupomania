@@ -1,8 +1,14 @@
 <template>
   <div id="formsignup">
-    <form @submit.prevent="signup()" @input="submitValidation()">
-      <div>
-        <label for="email">Email : </label>
+    <form
+      @submit.prevent="signup()"
+      @input="submitValidation()"
+      class="ctn ctn--column form"
+    >
+      <div class="ctn--input">
+        <label for="email" class="text--label text--normal-f text--normal-w box"
+          >Email</label
+        >
         <input
           type="email"
           id="email"
@@ -12,14 +18,21 @@
           v-model="form.email"
           @input="emailValidation()"
           placeholder="exemple@groupomania.com"
+          class="input input--sign box text--normal-f text--light-w"
         />
-        <span v-if="validator.email"
+        <span
+          v-if="validator.email"
+          class="text--normal-f text--normal-w text--error"
           >Email invalide, doit être de la forme :
           exemple@groupomania.com.</span
         >
       </div>
-      <div>
-        <label for="password">Mot de Passe : </label>
+      <div class="ctn--input">
+        <label
+          for="password"
+          class="text--label text--normal-f text--normal-w box"
+          >Mot de Passe</label
+        >
         <input
           type="password"
           id="password"
@@ -28,15 +41,22 @@
           required
           v-model="form.password"
           @input="passwordValidation()"
+          class="input input--sign box text--normal-f text--light-w"
         />
-        <span v-if="validator.password"
+        <span
+          v-if="validator.password"
+          class="text--normal-f text--bold-w text--error"
           >Mot de passe invalide, doit contenir au moins 1 lettre majuscule, une
           miniscule, un chiffre, un caractère spécial et entre 8 et 16
           caractères.</span
         >
       </div>
-      <div>
-        <label for="passwordConf">Confirmez votre mot de passe :</label>
+      <div class="ctn--input">
+        <label
+          for="passwordConf"
+          class="text--label text--normal-f text--normal-w box"
+          >Confirmation</label
+        >
         <input
           type="password"
           id="passwordConf"
@@ -45,8 +65,13 @@
           required
           v-model="form.passwordConf"
           @input="passwordConfValidation()"
+          class="input input--sign box text--normal-f text--light-w"
         />
-        <span v-if="validator.passwordConf">Mots de passe différents.</span>
+        <span
+          v-if="validator.passwordConf"
+          class="text--normal-f text--bold-w text--error"
+          >Mots de passe différents.</span
+        >
       </div>
       <SubmitButton :label="label.submit" :disabled="disableSubmit" />
     </form>

@@ -1,9 +1,9 @@
 <template>
-  <div id="signup">
-    <h1>Inscription</h1>
-    <p>Description</p>
+  <div id="signup" class="bg--white sign">
+    <h1 class="title--main text--center">S'inscrire</h1>
+    <p class="text--normal-w text--center text--small-f">Rejoignez des centaines de groupomaniens sur le réseau social de votre entreprise !</p>
     <FormSignup></FormSignup>
-    <p>
+    <p class="text--normal-w text--small-f text--center">
       Déjà inscrit ?
       <a href="" @click.prevent="changeSignView()">Connectez vous !</a>
     </p>

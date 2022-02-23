@@ -2,7 +2,7 @@
   <div id="formsignin">
     <p
       v-if="error.invalidCredentials"
-      class="text--normal-f test--normal-w text--error"
+      class="text--normal-f text--normal-w text--error"
     >
       {{ label.invalidCredentials }}
     </p>
