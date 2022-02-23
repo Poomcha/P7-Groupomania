@@ -4,7 +4,7 @@
       <Nav></Nav>
       <router-view></router-view>
     </div>
-    <div v-else>
+    <div v-else class="ctn--sign">
       <Signin v-if="signin"></Signin>
       <Signup v-else></Signup>
     </div>
@@ -40,9 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
-// .main {
-
-// }
+// 
 </style>
 
 

@@ -11,4 +11,19 @@
   &--input {
     padding: 0.5rem;
   }
+  &--sign {
+    position: absolute;
+    top: 4rem;
+    @media screen and (min-width: $bp_tablet) {
+      top: 5rem;
+    }
+    @media screen and (min-width: $bp_laptop) {
+      top: 6rem;
+    }
+    @media screen and (min-width: $bp_laptop_large) {
+      top: 6rem;
+    }
+    @media screen and (min-width: $bp_big_screen) {
+    }
+  }
 }
