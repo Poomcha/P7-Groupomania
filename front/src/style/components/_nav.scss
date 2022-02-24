@@ -1,0 +1,12 @@
+.nav {
+  padding: 0.25rem;
+  @media screen and (min-width: $bp_laptop) {
+    padding: 0.25rem 1rem 0.25rem 1rem;
+  }
+  @media screen and (min-width: $bp_laptop) {
+  }
+  @media screen and (min-width: $bp_laptop_large) {
+  }
+  @media screen and (min-width: $bp_big_screen) {
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="main ctn">
-    <div v-if="isLoggedIn">
+    <div v-if="isLoggedIn" class="ctn--main-view">
       <Nav></Nav>
       <router-view></router-view>
     </div>

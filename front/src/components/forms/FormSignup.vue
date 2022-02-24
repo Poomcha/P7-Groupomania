@@ -16,13 +16,13 @@
           autocomplete="email"
           required
           v-model="form.email"
-          @input="emailValidation()"
-          placeholder="exemple@groupomania.com"
+          @change="emailValidation()"
+          placeholder="exemple@groupomania.fr"
           class="input input--sign box text--normal-f text--light-w"
         />
         <span
           v-if="validator.email"
-          class="text--normal-f text--normal-w text--error"
+          class="text--small-f text--bold-w text--error"
           >Email invalide, doit être de la forme :
           exemple@groupomania.com.</span
         >
@@ -40,12 +40,12 @@
           autocomplete="new-password"
           required
           v-model="form.password"
-          @input="passwordValidation()"
+          @change="passwordValidation()"
           class="input input--sign box text--normal-f text--light-w"
         />
         <span
           v-if="validator.password"
-          class="text--normal-f text--bold-w text--error"
+          class="text--small-f text--bold-w text--error"
           >Mot de passe invalide, doit contenir au moins 1 lettre majuscule, une
           miniscule, un chiffre, un caractère spécial et entre 8 et 16
           caractères.</span
@@ -69,7 +69,7 @@
         />
         <span
           v-if="validator.passwordConf"
-          class="text--normal-f text--bold-w text--error"
+          class="text--small-f text--bold-w text--error"
           >Mots de passe différents.</span
         >
       </div>

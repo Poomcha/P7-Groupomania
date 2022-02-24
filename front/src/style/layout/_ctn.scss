@@ -26,4 +26,13 @@
     @media screen and (min-width: $bp_big_screen) {
     }
   }
+  &--main-view {
+    position: absolute;
+    top: 2.5rem;
+    width: 100%;
+    background-color: $p_light;
+  }
+  &--space-between {
+    justify-content: space-between;
+  }
 }
