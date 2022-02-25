@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   &--column {
+    display: flex;
     flex-direction: column;
   }
   &--btn {
@@ -34,5 +35,11 @@
   }
   &--space-between {
     justify-content: space-between;
+  }
+  &--flex-end {
+    justify-content: flex-end;
+  }
+  &--flex-start {
+    justify-content: flex-start;
   }
 }

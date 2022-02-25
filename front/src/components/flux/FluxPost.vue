@@ -1,5 +1,5 @@
 <template>
-  <div id="flux-post">
+  <div id="flux-post" class="flux-post ctn ctn--column">
     <CardPost
       v-for="post in posts"
       :key="post.id"

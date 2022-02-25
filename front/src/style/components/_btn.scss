@@ -3,7 +3,16 @@
   border: none;
   border-radius: 9999em;
   padding: 0.75rem;
-  transition: all 500ms ease-out;
   &:hover {
+  }
+  &--bg_w {
+    background: white;
+  }
+  &--modify-delete {
+    span {
+      position: relative;
+      top: -0.25rem;
+      left: 0.25rem;
+    }
   }
 }
