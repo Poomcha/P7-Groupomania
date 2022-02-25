@@ -44,12 +44,6 @@ exports.updateProfile = (req, res, next) => {
             profilPictureURL: `${req.protocol}://${req.get('host')}/images/${
               req.file.filename
             }`,
-            position:
-              position === 'null'
-                ? 'Travaille chez Groupomania'
-                : req.body.position,
-            description:
-              req.body.description === 'null' ? '✌️' : req.body.description,
           }
         : req.body;
       db.Profile.update(
@@ -68,7 +62,7 @@ exports.updateProfile = (req, res, next) => {
           res.status(201).json({ message: 'Profile modified.' });
         })
         .catch((error) => {
-          res.status(400).json({ error });
+          res.status(400).json({ error: error });
         });
     })
     .catch((error) => {
