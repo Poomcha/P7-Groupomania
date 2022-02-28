@@ -1,5 +1,5 @@
 <template>
-  <div id="flux-profiles">
+  <div id="flux-profiles" class="flux-profile">
     <CardProfile
       v-for="profile in get_local_profiles"
       :key="profile.id"

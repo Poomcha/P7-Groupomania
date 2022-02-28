@@ -1,21 +1,27 @@
 <template>
-  <div id="cardprofile">
-    <a href="" @click.prevent="$emit('sendid', this.userId)">
-      <div id="picture-ctn">
+  <div id="cardprofile" class="card-profile">
+    <a
+      href=""
+      class="link text--normal-w text--normal-f ctn ctn--flex-start"
+      @click.prevent="$emit('sendid', this.userId)"
+    >
+      <div id="picture-ctn" class="card-profile__img-ctn">
         <img :src="profilePicURL" alt="Profile Picture" width="100" />
       </div>
-      <div id="firstname-ctn">
-        <span id="firstName">{{ firstName }}</span>
-      </div>
-      <div id="lastname-ctn">
-        <span id="lastName">{{ lastName }}</span>
-      </div>
-      <div id="email-ctn" v-if="email">{{ email }}</div>
-      <div id="position-ctn">
-        <span id="position">{{ position }}</span>
-      </div>
-      <div id="description-ctn">
-        <span id="description">{{ description }}</span>
+      <div class="card-profile__infos-ctn ctn--column">
+        <div class="ctn ctn--flex-start">
+          <div class="text--bold-w text--normal-f text--red-underline">
+            <span id="firstName">{{ firstName + " " }}</span>
+            <span id="lastName">{{ lastName }}</span>
+          </div>
+        </div>
+        <div id="email-ctn" v-if="email">{{ email }}</div>
+        <div id="position-ctn" class="text--light text--normal-f text--bold-w">
+          <span id="position">{{ position }}</span>
+        </div>
+        <div id="description-ctn" class="text--black text--small-f">
+          <span id="description">{{ description }}</span>
+        </div>
       </div>
     </a>
   </div>

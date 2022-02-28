@@ -10,10 +10,10 @@
     font-size: 0.6rem;
   }
   &--small-f {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   &--normal-f {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
   &--large-f {
     font-size: 1.2rem;
@@ -41,5 +41,11 @@
   }
   &--black {
     color: black;
+  }
+  &--light {
+    color: $b_light;
+  }
+  &--red-underline {
+    text-decoration: underline solid 2px $p_darker;
   }
 }
