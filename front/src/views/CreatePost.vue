@@ -1,5 +1,6 @@
 <template>
-  <div id="create-post">
+  <div id="create-post" class="create-post ctn ctn--column">
+    <h1 class="text--large-f text--bold-w text--label">Créer une publication</h1>
     <FormPost></FormPost>
   </div>
 </template>

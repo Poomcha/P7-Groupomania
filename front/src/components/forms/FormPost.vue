@@ -1,23 +1,37 @@
 <template>
-  <div id="form-post">
+  <div id="form-post" class="form-post">
     <form
+      class="ctn ctn--column ctn--space-between"
       enctype="multipart/form-data"
       @submit.prevent="createOrModifyPost()"
       @input="submitValidation()"
     >
-      <div>
+      <div class="ctn ctn--column">
+        <label v-if="!imagePreview"
+          for="upload-file"
+          class="btn text--btn text--center text--normal-w text--normal-f"
+          >Ajouter une image</label
+        >
+        <label v-else for="upload-file" class="btn text--btn text--center text--normal-w text--normal-f">Changer l'image</label>
         <input
+          class="input-file"
+          id="upload-file"
           type="file"
+          accept=".jpg, .jpeg, .png"
           @change="handleFileUpload($event)"
           :value="oldPicture"
         />
-        <span v-if="validator.file"
+        <img :src="imagePreview" class="img-preview" />
+        <span v-if="validator.file" class="text--error"
           >Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.</span
         >
       </div>
-      <div>
+      <div
+        class="text--normal-f text--normal-w text--label ctn--column input-wrap"
+      >
         <label for="title">{{ label.title }}</label>
         <input
+          class="input text--normal-f text--light-w"
           id="title"
           name="title"
           type="text"
@@ -25,22 +39,41 @@
           v-model="form.title"
           @change="titleValidation()"
         />
-        <span v-if="validator.title"
+        <span v-if="validator.title" class="text--error"
           >Le titre ne doit pas faire plus de 50 caractères.</span
         >
       </div>
-      <div>
+      <div
+        class="
+          text--normal-f text--normal-w text--label
+          ctn ctn--space-between
+          select-wrap
+        "
+      >
         <label for="type">{{ label.type }}</label>
-        <select name="type" id="type" v-model="form.type">
+        <select
+          name="type"
+          id="type"
+          v-model="form.type"
+          class="select text--normal-f text--normal-w text--label"
+        >
           <option v-for="type in types" :key="type" :value="type">
             {{ type }}
           </option>
         </select>
-        <span v-if="validator.type"></span>
+        <span v-if="validator.type" class="text--error"></span>
       </div>
-      <div>
+      <div
+        class="
+          text--normal-f text--normal-w text--label
+          ctn--column
+          input-wrap
+          textarea-wrap
+        "
+      >
         <label for="text">{{ label.text }}</label>
         <textarea
+          class="textarea text--normal-f text--light-w"
           id="text"
           name="text"
           type="textarea"
@@ -49,18 +82,20 @@
           @change="textValidation()"
         >
         </textarea>
-        <span v-if="validator.text"></span>
+        <span v-if="validator.text" class="text--error"></span>
       </div>
-      <CancelButton :label="label.cancel" @cancel="cancel()"></CancelButton>
-      <SubmitButton
-        v-if="this.$route.name === 'create-post'"
-        :label="label.submit"
-        :disabled="disableSubmit"
-      ></SubmitButton>
-      <SubmitButton
-        v-if="this.$route.name === 'modify-post'"
-        :label="label.modify"
-      ></SubmitButton>
+      <div class="ctn">
+        <CancelButton :label="label.cancel" @cancel="cancel()"></CancelButton>
+        <SubmitButton class="ctn ctn--flex-end"
+          v-if="this.$route.name === 'create-post'"
+          :label="label.submit"
+          :disabled="disableSubmit"
+        ></SubmitButton>
+        <SubmitButton
+          v-if="this.$route.name === 'modify-post'"
+          :label="label.modify"
+        ></SubmitButton>
+      </div>
     </form>
   </div>
 </template>
@@ -107,8 +142,9 @@ export default {
       },
       types: {
         default: "",
-        general: "général",
+        general: "Général",
       },
+      imagePreview: undefined,
       disableSubmit: true,
     };
   },
@@ -117,6 +153,7 @@ export default {
     handleFileUpload(event) {
       this.form.image = event.target.files[0];
       this.validator.file = validateImage(this.form.image);
+      this.imagePreview = URL.createObjectURL(this.form.image);
     },
     titleValidation() {
       this.validator.title = validateDescription(this.form.title);
