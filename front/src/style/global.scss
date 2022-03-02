@@ -5,7 +5,6 @@
 
 @import './components/input';
 @import './components/btn';
-@import './components/form';
 @import './components/icon';
 @import './components/nav';
 @import './components/link';
@@ -16,6 +15,8 @@
 @import './components/form-post';
 @import './components/card-profile';
 @import './components/flux-profile';
+@import './components/sidebar';
+@import './components/form-profile';
 
 @import './layout/ctn';
 @import './layout/box';
@@ -24,6 +25,7 @@
 
 @import './pages/sign';
 @import './pages/create-post';
+@import './pages/my-profile';
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 

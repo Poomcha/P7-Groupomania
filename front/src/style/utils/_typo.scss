@@ -48,4 +48,8 @@
   &--red-underline {
     text-decoration: underline solid 2px $p_darker;
   }
+  &--warning {
+    color: $p_darker;
+    font-size: 0.95rem;
+  }
 }

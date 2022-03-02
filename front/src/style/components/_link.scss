@@ -16,3 +16,15 @@
     }
   }
 }
+
+.linkActive {
+  img {
+    filter: invert(46%) sepia(29%) saturate(2333%) hue-rotate(313deg)
+      brightness(88%) contrast(98%);
+  }
+  color: $p_darker;
+}
+
+.activeProfileLink {
+  text-decoration: underline $p_darker 2px solid;
+}

@@ -1,20 +1,30 @@
 <template>
   <div id="nav" class="ctn ctn--space-between nav">
-    <router-link :to="pathToHome" class="link ctn"
+    <router-link
+      :to="pathToHome"
+      class="link ctn"
+      :class="{ linkActive: this.$route.name === pathToHome.name }"
       ><img class="icon" src="../assets/latest_news.svg" alt="" /><span
         v-if="isLargeScreen"
         class="text--normal-f text--normal-w link--router"
         >Actualités</span
       ></router-link
     >
-    <router-link :to="pathToCreatePost" class="link ctn"
+    <router-link
+      :to="pathToCreatePost"
+      class="link ctn"
+      :class="{ linkActive: this.$route.name === pathToCreatePost.name }"
       ><img class="icon" src="../assets/create_post.svg" alt="" /><span
         v-if="isLargeScreen"
         class="text--normal-f text--normal-w link--router"
         >Publier</span
       >
     </router-link>
-    <router-link :to="pathToProfiles" class="link ctn">
+    <router-link
+      :to="pathToProfiles"
+      class="link ctn"
+      :class="{ linkActive: this.$route.name === pathToProfiles.name }"
+    >
       <img class="icon" src="../assets/users.svg" alt="" />
       <span
         v-if="isLargeScreen"
@@ -22,7 +32,11 @@
         >Groupomaniens</span
       >
     </router-link>
-    <router-link :to="pathToProfile" class="link ctn">
+    <router-link
+      :to="pathToProfile"
+      class="link ctn"
+      :class="{ linkActive: this.$route.name === pathToProfile.name }"
+    >
       <img class="icon" src="../assets/my_profile.svg" alt="" />
       <span
         v-if="isLargeScreen"

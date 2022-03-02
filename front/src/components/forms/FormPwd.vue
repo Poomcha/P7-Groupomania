@@ -1,13 +1,18 @@
 <template>
   <div id="form-pwd">
     <form
+      class="ctn ctn--column ctn--space-between"
       v-if="!success"
       @submit.prevent="changePwd()"
       @input="submitValidation()"
     >
-      <div v-if="!isAdminRoute">
-        <label for="oldPassword">Ancien mot de passe : </label>
+      <div
+        v-if="!isAdminRoute"
+        class="text--normal-f text--normal-w text--label ctn--column input-wrap"
+      >
+        <label for="oldPassword">Ancien mot de passe</label>
         <input
+          class="input text--normal-f text--light-w"
           type="password"
           id="oldPassword"
           name="oldPassword"
@@ -16,9 +21,12 @@
           v-model="form.oldPassword"
         />
       </div>
-      <div>
-        <label for="password">Nouveau mot de passe : </label>
+      <div
+        class="text--normal-f text--normal-w text--label ctn--column input-wrap"
+      >
+        <label for="password">Nouveau mot de passe</label>
         <input
+          class="input text--normal-f text--light-w"
           type="password"
           id="password"
           name="password"
@@ -33,9 +41,12 @@
           caractères.</span
         >
       </div>
-      <div>
-        <label for="passwordConf">Confirmez votre mot de passe :</label>
+      <div
+        class="text--normal-f text--normal-w text--label ctn--column input-wrap"
+      >
+        <label for="passwordConf">Confirmez votre mot de passe</label>
         <input
+          class="input text--normal-f text--light-w"
           type="password"
           id="passwordConf"
           name="passwordConf"

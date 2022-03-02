@@ -7,7 +7,7 @@
       @input="submitValidation()"
     >
       <div class="ctn ctn--column">
-        <label v-if="!imagePreview"
+        <label v-if="!imagePreview && !oldPicture"
           for="upload-file"
           class="btn text--btn text--center text--normal-w text--normal-f"
           >Ajouter une image</label
@@ -19,9 +19,8 @@
           type="file"
           accept=".jpg, .jpeg, .png"
           @change="handleFileUpload($event)"
-          :value="oldPicture"
         />
-        <img :src="imagePreview" class="img-preview" />
+        <img :src="imagePreview ? imagePreview : oldPicture" class="img-preview" />
         <span v-if="validator.file" class="text--error"
           >Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.</span
         >

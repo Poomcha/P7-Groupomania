@@ -1,19 +1,45 @@
 <template>
-  <div id="formProfile">
+  <div id="formProfile" class="form-profile ctn ctn--column">
     <form
+      class="ctn ctn--column ctn--space-between"
       enctype="multipart/form-data"
       @submit.prevent="updateProfile()"
       @input="submitValidation()"
     >
-      <div>
-        <input type="file" @change="handleFileUpload($event)" />
-        <span v-if="validator.file"
+      <div class="ctn ctn--column">
+        <label
+          v-if="!imagePreview && !oldImg"
+          for="upload-file"
+          class="btn text--btn text--center text--normal-w text--normal-f"
+          >Ajouter une image</label
+        >
+        <label
+          v-else
+          for="upload-file"
+          class="btn text--btn text--center text--normal-w text--normal-f"
+          >Changer l'image</label
+        >
+        <input
+          class="input-file"
+          id="upload-file"
+          type="file"
+          accept=".jpg, .jpeg, .png"
+          @change="handleFileUpload($event)"
+        />
+        <img
+          :src="imagePreview ? imagegePreview : oldImg"
+          class="img-preview-profile"
+        />
+        <span v-if="validator.file" class="text--error"
           >Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.</span
         >
       </div>
-      <div>
+      <div
+        class="text--normal-f text--normal-w text--label ctn--column input-wrap"
+      >
         <label for="firstName">{{ label.firstName }}</label>
         <input
+          class="input text--normal-f text--light-w"
           id="firstName"
           name="firstName"
           type="text"
@@ -23,9 +49,12 @@
         />
         <span v-if="validator.fistName">Prénom invalide.</span>
       </div>
-      <div>
+      <div
+        class="text--normal-f text--normal-w text--label ctn--column input-wrap"
+      >
         <label for="lastName">{{ label.lastName }}</label>
         <input
+          class="input text--normal-f text--light-w"
           id="lastName"
           name="lastname"
           type="text"
@@ -35,9 +64,12 @@
         />
         <span v-if="validator.lastName">Nom invalide.</span>
       </div>
-      <div>
+      <div
+        class="text--normal-f text--normal-w text--label ctn--column input-wrap"
+      >
         <label for="position">{{ label.position }}</label>
         <input
+          class="input text--normal-f text--light-w"
           id="position"
           name="position"
           type="text"
@@ -47,9 +79,17 @@
         />
         <span v-if="validator.position">Nom de poste invalide.</span>
       </div>
-      <div>
+      <div
+        class="
+          text--normal-f text--normal-w text--label
+          ctn--column
+          input-wrap
+          textarea-wrap
+        "
+      >
         <label for="description">{{ label.description }}</label>
         <textarea
+          class="textarea text--normal-f text--light-w"
           id="description"
           name="description"
           type="text"
@@ -62,6 +102,7 @@
         >
       </div>
       <SubmitButton
+        class="ctn"
         :label="label.submit"
         :disabled="disableSubmit"
       ></SubmitButton>
@@ -96,7 +137,7 @@ export default {
         description: "Description",
       },
       form: {
-        image: this.oldImgURL,
+        image: this.oldImg,
         firstName: this.oldFirstName,
         lastName: this.oldLastName,
         position: this.oldPosition,
@@ -110,6 +151,7 @@ export default {
         description: false,
       },
       disableSubmit: true,
+      imagePreview: undefined,
     };
   },
   computed: {},
@@ -136,6 +178,7 @@ export default {
     handleFileUpload(event) {
       this.form.image = event.target.files[0];
       this.validator.file = validateImage(this.form.image);
+      this.imagePreview = URL.createObjectURL(this.form.image);
     },
     ...mapActions(["update_profile", "get_profile_status"]),
     updateProfile() {
@@ -168,9 +211,9 @@ export default {
       type: String,
       default: "",
     },
-    oldImgURL: {
+    oldImg: {
       type: String,
-      default: "",
+      default: undefined,
     },
   },
 };

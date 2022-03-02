@@ -1,7 +1,7 @@
 <template>
   <div id="card-post" class="card-post ctn--column">
     <div class="ctn ctn--space-between">
-      <div class="card-post__creator-infos" v-if="this.$route.name === 'home'">
+      <div class="card-post__creator-infos">
         <a
           href=""
           @click.prevent="goToProfile()"

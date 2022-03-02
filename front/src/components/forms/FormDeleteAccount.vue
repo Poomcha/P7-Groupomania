@@ -1,8 +1,8 @@
 <template>
-  <div id="delete-account">
-    <p>
-      Êtes-vous sûr de vouloir supprimer votre compte ? Attention cette action
-      est irréversible !
+  <div id="delete-account" class="ctn ctn--column ctn--space-between">
+    <p class="text--normal-w text--warning ctn--column input-wrap text--center">
+      Êtes-vous sûr de vouloir supprimer votre compte ?<br />
+      Attention cette action est irréversible !
     </p>
     <form @submit="deleteAccount()">
       <SubmitButton :label="this.label.delete"></SubmitButton>
