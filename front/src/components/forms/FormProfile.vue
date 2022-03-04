@@ -27,7 +27,7 @@
           @change="handleFileUpload($event)"
         />
         <img
-          :src="imagePreview ? imagegePreview : oldImg"
+          :src="imagePreview ? imagePreview : oldImg"
           class="img-preview-profile"
         />
         <span v-if="validator.file" class="text--error"

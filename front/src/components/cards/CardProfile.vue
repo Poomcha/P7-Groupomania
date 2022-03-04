@@ -19,7 +19,9 @@
             <span id="lastName">{{ lastName }}</span>
           </div>
         </div>
-        <div id="email-ctn" v-if="email">{{ email }}</div>
+        <div id="email-ctn" class="text--normal-w text--normal-f" v-if="email">
+          {{ email }}
+        </div>
         <div id="position-ctn" class="text--light text--normal-f text--bold-w">
           <span id="position">{{ position }}</span>
         </div>
@@ -70,8 +72,8 @@ export default {
   },
   computed: {
     isProfilesView() {
-      return this.$route.name === "profiles"
-    }
+      return this.$route.name === "profiles";
+    },
   },
 };
 </script>

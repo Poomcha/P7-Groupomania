@@ -1,15 +1,18 @@
 <template>
-  <div id="moderate-profile">
-    <ModifyButton
-      :label="updateProfile ? label.cancel : label.modifyProfile"
-      @click="modifyProfile"
-    ></ModifyButton>
-    <DeleteButton
-      v-if="updateProfile"
-      :label="label.delete"
-      @click="deleteProfile"
-    ></DeleteButton>
+  <div id="moderate-profile" class="moderate-profile">
+    <div class="moderate-profile__controllers ctn ctn--space-between">
+      <ModifyButton
+        :label="updateProfile ? label.cancel : label.modifyProfile"
+        @click="modifyProfile"
+      ></ModifyButton>
+      <DeleteButton
+        v-if="updateProfile"
+        :label="label.delete"
+        @click="deleteProfile"
+      ></DeleteButton>
+    </div>
     <FormProfile
+      class="moderate-profile__form"
       v-if="updateProfile"
       :oldFirstName="profile.firstName"
       :oldLastName="profile.lastName"
@@ -19,6 +22,7 @@
       @profileupdated="modifyProfile"
     ></FormProfile>
     <CardProfile
+      class="moderate-profile__card-profile"
       v-if="!updateProfile"
       :userId="profile.userId"
       :email="profile.User.email"
@@ -28,7 +32,7 @@
       :description="profile.description"
       :profilePicURL="profile.profilPictureURL"
     ></CardProfile>
-    <FormPwd v-if="!updateProfile"></FormPwd>
+    <FormPwd v-if="!updateProfile" class="moderate-profile__form-pwd"></FormPwd>
   </div>
 </template>
 <script>

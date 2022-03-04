@@ -1,15 +1,19 @@
-.create-post {
-  border: $p_darker solid 0.5rem;
+.profile {
   h1 {
-    margin: 1rem 0 1rem 0;
+    margin: 1rem 0 2rem 0;
+  }
+  &__card-profile {
     @media screen and (min-width: $bp_tablet) {
-      margin: 2rem 0 2rem 0;
+      margin-top: 3rem;
     }
     @media screen and (min-width: $bp_laptop) {
+      width: 60%;
     }
     @media screen and (min-width: $bp_laptop_large) {
+      width: 50%;
     }
     @media screen and (min-width: $bp_big_screen) {
+      width: 40%;
     }
   }
 }

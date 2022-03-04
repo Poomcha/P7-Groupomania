@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" class="ctn ctn--space-between nav">
+  <div id="nav" class="ctn ctn--space-between nav" v-if="disabled">
     <router-link
       :to="pathToHome"
       class="link ctn"
@@ -77,6 +77,9 @@ export default {
       } else {
         return false;
       }
+    },
+    disabled() {
+      return this.$store.getters.get_profile_status;
     },
   },
   created() {},
