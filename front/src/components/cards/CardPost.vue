@@ -1,5 +1,5 @@
 <template>
-  <div id="card-post" class="card-post ctn--column">
+  <figure id="card-post" class="card-post ctn--column">
     <div class="ctn ctn--space-between">
       <div class="card-post__creator-infos">
         <a
@@ -49,7 +49,7 @@
         </div>
       </a>
     </div>
-  </div>
+  </figure>
 </template>
 
 <script>

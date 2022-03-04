@@ -1,5 +1,5 @@
 <template>
-  <div id="flux-profiles" class="flux-profile">
+  <section id="flux-profiles" class="flux-profile">
     <CardProfile
       v-for="profile in get_local_profiles"
       :key="profile.id"
@@ -11,7 +11,7 @@
       :description="profile.description"
       @sendid="goToProfile($event)"
     ></CardProfile>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" class="ctn ctn--space-between nav" v-if="disabled">
+  <nav id="nav" class="ctn ctn--space-between nav" v-if="disabled">
     <router-link
       :to="pathToHome"
       class="link ctn"
@@ -52,7 +52,7 @@
         >Déconnexion</span
       >
     </router-link>
-  </div>
+  </nav>
 </template>
 
 <script>

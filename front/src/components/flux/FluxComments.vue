@@ -1,5 +1,5 @@
 <template>
-  <div id="flux-comments" class="flux-com">
+  <section id="flux-comments" class="flux-com">
     <CardCom
       v-for="com in get_local_coms"
       :key="com.id"
@@ -17,7 +17,7 @@
           : get_user_profile.profilPictureURL,
       }"
     ></CardCom>
-  </div>
+  </section>
 </template>
 
 <script>

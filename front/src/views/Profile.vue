@@ -1,5 +1,5 @@
 <template>
-  <div id="profile" class="ctn ctn--column profile">
+  <section id="profile" class="ctn ctn--column profile">
     <CardProfile class="profile__card-profile"
       :userId="get_local_profile.userId"
       :profilePicURL="
@@ -15,7 +15,7 @@
     ></CardProfile>
     <h1 class="text--large-f text--bold-w text--label text--center">Publications</h1>
     <FluxPost></FluxPost>
-  </div>
+  </section>
 </template>
 
 <script>

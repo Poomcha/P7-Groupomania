@@ -1,5 +1,5 @@
 <template>
-  <div
+  <figure
     id="cardprofile"
     class="card-profile"
     :class="{ cardProfilesView: isProfilesView }"
@@ -23,14 +23,14 @@
           {{ email }}
         </div>
         <div id="position-ctn" class="text--light text--normal-f text--bold-w">
-          <span id="position">{{ position }}</span>
+          <p id="position">{{ position }}</p>
         </div>
         <div id="description-ctn" class="text--black text--small-f">
-          <span id="description">{{ description }}</span>
+          <p id="description">{{ description }}</p>
         </div>
       </div>
     </a>
-  </div>
+  </figure>
 </template>
 
 <script>

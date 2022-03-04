@@ -1,5 +1,5 @@
 <template>
-  <div id="card-com" class="card-com ctn--column">
+  <figure id="card-com" class="card-com ctn--column">
     <div
       id="controllers"
       class="card-com__controllers ctn ctn--flex-end"
@@ -28,7 +28,7 @@
         @change-com="modifyCom"
       ></FormCom>
     </div>
-  </div>
+  </figure>
 </template>
 
 <script>

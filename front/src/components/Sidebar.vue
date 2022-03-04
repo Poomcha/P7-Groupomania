@@ -1,5 +1,5 @@
 <template>
-  <div id="sidebar" class="sidebar">
+  <aside id="sidebar" class="sidebar">
     <ul class="ctn--column">
       <li v-for="value in sidebar_items" :key="value">
         <a
@@ -11,7 +11,7 @@
         >
       </li>
     </ul>
-  </div>
+  </aside>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div id="post" class="post">
+  <article id="post" class="post">
     <div class="ctn ctn--space-between">
       <div class="post__creator-infos">
         <a
@@ -60,7 +60,7 @@
         <FormCom></FormCom>
       </div>
     </div>
-  </div>
+  </article>
 </template>
 
 <script>

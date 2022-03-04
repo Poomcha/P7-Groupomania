@@ -1,5 +1,5 @@
 <template>
-  <div id="my-posts">
+  <section id="my-posts">
     <CardPost
       v-for="post in get_my_posts"
       :key="post.id"
@@ -12,7 +12,7 @@
       :creatorLastName="get_user_profile.lastName"
       :creatorImgUrl="get_user_profile.profilPictureURL"
     ></CardPost>
-  </div>
+  </section>
 </template>
 
 <script>

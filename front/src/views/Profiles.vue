@@ -1,7 +1,7 @@
 <template>
-  <div id="profiles">
+  <section id="profiles">
     <FluxProfiles></FluxProfiles>
-  </div>
+  </section>
 </template>
 
 <script>
