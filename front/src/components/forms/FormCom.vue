@@ -1,21 +1,34 @@
 <template>
-  <div id="form-com" @submit.prevent="createOrModify()">
-    <form>
-      <label for="com">{{ label.com }}</label>
+  <div id="form-com" @submit.prevent="createOrModify()" class="form-com">
+    <form
+      class="ctn ctn--column form-com__form"
+      :class="{ changeMyCom: changeCom }"
+    >
+      <label for="com" class="text--label text--normal-w text--normal-f">{{
+        changeCom ? label.changeCom : label.com
+      }}</label>
       <textarea
         id="com"
         name="com"
         type="textarea"
+        class="textarea text--normal-f text--normal-w"
+        :class="{}"
         placeholder="Votre Commentaire"
         v-model="form.com"
         @change="comValidation()"
       >
       </textarea>
       <span v-if="validator.com"></span>
-      <button v-if="changeCom" @click="$emit('change-com')">
-        {{ label.cancel }}
-      </button>
-      <SubmitButton :label="label.submit"></SubmitButton>
+      <div class="ctn">
+        <button
+          v-if="changeCom"
+          @click="$emit('change-com')"
+          class="btn text--btn text--normal-w text--normal-f"
+        >
+          {{ label.cancel }}
+        </button>
+        <SubmitButton :label="label.submit"></SubmitButton>
+      </div>
     </form>
   </div>
 </template>
@@ -43,7 +56,8 @@ export default {
   data() {
     return {
       label: {
-        com: "Commentaire :",
+        com: "Commenter cette publication",
+        changeCom: "Modifier votre commentaire",
         submit: "Commenter",
         cancel: "Annuler",
       },

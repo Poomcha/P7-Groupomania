@@ -8,14 +8,25 @@
     width: 80%;
   }
   @media screen and (min-width: $bp_laptop) {
+    width: 60%;
   }
   @media screen and (min-width: $bp_laptop_large) {
+    width: 50%;
   }
   @media screen and (min-width: $bp_big_screen) {
+    width: 40%;
   }
   &__controllers {
     position: relative;
     top: -1rem;
+    @media screen and (min-width: $bp_tablet) {
+    }
+    @media screen and (min-width: $bp_laptop) {
+    }
+    @media screen and (min-width: $bp_laptop_large) {
+    }
+    @media screen and (min-width: $bp_big_screen) {
+    }
   }
   &__creator-infos {
     .img {

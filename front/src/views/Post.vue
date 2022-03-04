@@ -1,44 +1,57 @@
 <template>
-  <div id="post">
-    <div
-      id="controllers"
-      v-if="get_local_post.Profile.userId === get_user_id || is_moderator"
-    >
-      <ModifyButton :modifyThis="modifyPost"></ModifyButton>
-      <DeleteButton :deleteThis="deletePost"></DeleteButton>
+  <div id="post" class="post">
+    <div class="ctn ctn--space-between">
+      <div class="post__creator-infos">
+        <a
+          href=""
+          @click.prevent="goToProfile()"
+          class="ctn ctn--flex-start link"
+        >
+          <div>
+            <img
+              :src="get_local_post.Profile.profilPictureURL"
+              alt="Profil Picture"
+            />
+          </div>
+          <div>
+            <span class="text--normal-w">{{
+              get_local_post.Profile.firstName +
+              " " +
+              get_local_post.Profile.lastName
+            }}</span>
+          </div>
+        </a>
+      </div>
+      <div
+        id="controllers"
+        class="ctn ctn--flex-end post__controllers"
+        v-if="get_local_post.Profile.userId === get_user_id || is_moderator"
+      >
+        <ModifyButton :modifyThis="modifyPost"></ModifyButton>
+        <DeleteButton :deleteThis="deletePost"></DeleteButton>
+      </div>
     </div>
-    <Date type="POST" :id="get_local_post.id"></Date>
-    <div>
-      <a href="" @click.prevent="goToProfile()">
-        <div>
+    <div class="post__post-infos">
+      <Date type="POST" :id="get_local_post.id"></Date>
+      <div>
+        <h1 id="title-post-ctn" class="text--large-f text--normal-w">
+          {{ get_local_post.title }}
+        </h1>
+        <div id="post-img-ctn">
           <img
-            :src="get_local_post.Profile.profilPictureURL"
-            alt="Profil Picture"
-            width="100"
+            v-if="get_local_post.postPictureURL"
+            :src="get_local_post.postPictureURL"
+            alt="Post Picture"
           />
         </div>
-        <div>
-          <span>{{ get_local_post.Profile.firstName }}</span>
-        </div>
-        <div>
-          <span>{{ get_local_post.Profile.lastName }}</span>
-        </div>
-      </a>
-    </div>
-    <div>
-      <div id="post-img-ctn">
-        <img
-          :src="get_local_post.postPictureURL"
-          alt="Post Picture"
-          width="100"
-        />
-      </div>
-      <div>
-        <div id="title-post-ctn">{{ get_local_post.title }}</div>
-        <div id="content-post-ctn">{{ get_local_post.text }}</div>
+        <article id="content-post-ctn" class="text--normal-f text--normal-w">
+          {{ get_local_post.text }}
+        </article>
       </div>
     </div>
-    <div>{{ get_com_number_for_post(get_local_post.id) }} Commentaires</div>
+    <p class="text--label text--normal-f text--normal-w post__nb-com">
+      {{ get_com_number_for_post(get_local_post.id) }} Commentaires
+    </p>
     <div>
       <div>
         <FluxComments></FluxComments>

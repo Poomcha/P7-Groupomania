@@ -1,5 +1,9 @@
 <template>
-  <div id="cardprofile" class="card-profile">
+  <div
+    id="cardprofile"
+    class="card-profile"
+    :class="{ cardProfilesView: isProfilesView }"
+  >
     <a
       href=""
       class="link text--normal-w text--normal-f ctn ctn--flex-start"
@@ -64,6 +68,10 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    isProfilesView() {
+      return this.$route.name === "profiles"
+    }
+  },
 };
 </script>

@@ -1,22 +1,24 @@
 <template>
-  <div id="card-com">
+  <div id="card-com" class="card-com ctn--column">
     <div
       id="controllers"
-      v-if="profile.id === this.get_profile_id && !changeCom || is_moderator"
+      class="card-com__controllers ctn ctn--flex-end"
+      v-if="(profile.id === this.get_profile_id && !changeCom) || is_moderator"
     >
       <ModifyButton :modifyThis="modifyCom"></ModifyButton>
       <DeleteButton :deleteThis="deleteCom"></DeleteButton>
     </div>
-    <Date :type="this.type" :id="com.id"></Date>
-    <a href="" @click.prevent="goToProfile()">
-      <div>
-        <img :src="profile.profileImg" alt="Profile Picture" width="100" />
-        <span>{{ profile.firstName }}</span>
-        <span> {{ profile.lastName }}</span>
-      </div>
-    </a>
-    <div v-if="!this.changeCom">
-      <span>{{ com.text }}</span>
+    <div class="card-com__creator-infos" :class="{changingCom: changeCom}">
+      <a href="" @click.prevent="goToProfile()" class="ctn ctn--flex-start link">
+        <div>
+          <img :src="profile.profileImg" alt="Profile Picture"/>
+          <span class="text--normal-f text--normal-w">{{ profile.firstName + " " + profile.lastName }}</span>
+        </div>
+      </a>
+    </div>
+    <Date :type="this.type" :id="com.id" class="card-com__date"></Date>
+    <div v-if="!this.changeCom" class="card-com__com">
+      <p class="text--normal-w text--normal-f">{{ com.text }}</p>
     </div>
     <div v-else>
       <FormCom
@@ -78,7 +80,12 @@ export default {
     return { changeCom: false, type: "COM" };
   },
   computed: {
-    ...mapGetters(["get_profile_id", "get_change_com_status", "get_user_id", "is_moderator"]),
+    ...mapGetters([
+      "get_profile_id",
+      "get_change_com_status",
+      "get_user_id",
+      "is_moderator",
+    ]),
   },
   methods: {
     ...mapActions(["delete_my_com"]),
