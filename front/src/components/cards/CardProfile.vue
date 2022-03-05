@@ -10,7 +10,7 @@
       @click.prevent="$emit('sendid', this.userId)"
     >
       <div id="picture-ctn" class="card-profile__img-ctn">
-        <img :src="profilePicURL" alt="Profile Picture" width="100" />
+        <img :src="profilePicURL" alt="Profile Picture"/>
       </div>
       <div class="card-profile__infos-ctn ctn--column">
         <div class="ctn ctn--flex-start">
