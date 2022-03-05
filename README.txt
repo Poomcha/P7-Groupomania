@@ -38,7 +38,7 @@ Installation du projet :
 - Dans le répertoire /back, lancer la commande : "npx sequelize db:create"
 - Dans le répertoire /back, lancer la commande : "npx sequelize db:migrate"
 
-- Dans le répertoire /back, lancer la commande : "nodemon start"
+- Dans le répertoire /back, lancer la commande : "npm start nodemon"
 - Dans le répertoire /front, lancer la commande : "npm run serve"
 
 - Dans un navigateur, ouvrir une page à l'adresse : "http://localhost:8080"

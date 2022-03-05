@@ -90,7 +90,7 @@
           :label="label.submit"
           :disabled="disableSubmit"
         ></SubmitButton>
-        <SubmitButton
+        <SubmitButton class="ctn ctn--flex-end"
           v-if="this.$route.name === 'modify-post'"
           :label="label.modify"
         ></SubmitButton>
