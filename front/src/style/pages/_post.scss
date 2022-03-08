@@ -1,5 +1,9 @@
 .post {
   background-color: $p_lighter;
+  overflow: hidden;
+  text-overflow: clip;
+  word-wrap: break-word;
+  word-break: keep-all;
   @media screen and (min-width: $bp_tablet) {
     width: 80%;
     margin: auto;
@@ -36,6 +40,8 @@
     img {
       border-radius: 100%;
       width: 3.5rem;
+      height: 3.5rem;
+      object-fit: cover;
     }
   }
   &__post-infos {

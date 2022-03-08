@@ -31,6 +31,7 @@
   &__creator-infos {
     .img {
       margin: 0.5rem 0.5rem 0 0.5rem;
+
       border-radius: 100%;
     }
     span {
@@ -47,8 +48,11 @@
   }
   &__post-infos {
     padding: 0 0.5rem 0 0.5rem;
-    div {
-      text-overflow: wrap;
+    div p {
+      overflow: hidden;
+      text-overflow: clip;
+      word-wrap: break-word;
+      word-break: keep-all;
     }
     &__post-img-ctn {
       position: relative;
