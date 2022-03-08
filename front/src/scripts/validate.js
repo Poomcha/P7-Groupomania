@@ -55,7 +55,7 @@ const validateDescription = (description) => {
  * @returns { Boolean }
  */
 const validateImage = (file) => {
-  const authTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+  const authTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/webp'];
   const maxSize = 5242880;
 
   return authTypes.find((type) => file.type === type) && file.size <= maxSize
