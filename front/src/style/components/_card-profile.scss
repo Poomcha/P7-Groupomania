@@ -15,9 +15,14 @@
   }
   &__img-ctn {
     padding: 0.5rem;
+    width: 6rem;
+    height: 6rem;
     img {
       border-radius: 100%;
-      width: 6rem;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
   }
   &__infos-ctn {
