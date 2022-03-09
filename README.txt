@@ -1,6 +1,6 @@
 Pré-requis :
 - Avoir mySQL installé
-- Avoir Node.js installé, 14 au maximum
+- Avoir Node.js installé
 
 Installation du projet :
 - Dans le répertoire /back : lancer la commande "npm install"

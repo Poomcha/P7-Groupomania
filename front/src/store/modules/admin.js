@@ -1,5 +1,5 @@
 const state = {
-    local_post_to_modify = null,
+    local_post_to_modify: null,
 };
 const getters = {};
 const mutations = {};

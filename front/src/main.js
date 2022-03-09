@@ -17,8 +17,4 @@ axios.interceptors.response.use(undefined, function (error) {
   }
 });
 
-createApp(App).use(store).use(store)
-  .use(store)
-  .use(router)
-  .use(VueAxios, axios)
-  .mount('#app');
+createApp(App).use(store).use(router).use(VueAxios, axios).mount('#app');
