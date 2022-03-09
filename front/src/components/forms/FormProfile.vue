@@ -30,10 +30,10 @@
           :src="imagePreview ? imagePreview : oldImg"
           class="img-preview-profile"
         />
-        <span v-if="validator.file" class="text--error"
-          >Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.</span
-        >
       </div>
+      <p v-if="validator.file" class="text--error text--center">
+        Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.
+      </p>
       <div
         class="text--normal-f text--normal-w text--label ctn--column input-wrap"
       >

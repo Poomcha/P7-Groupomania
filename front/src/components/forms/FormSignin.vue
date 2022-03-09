@@ -2,7 +2,7 @@
   <div id="formsignin">
     <p
       v-if="error.invalidCredentials"
-      class="text--small-f text--normal-w text--error"
+      class="text--small-f text--normal-w text--error text--center"
     >
       {{ label.invalidCredentials }}
     </p>
@@ -26,12 +26,10 @@
           placeholder="exemple@groupomania.fr"
           class="input input--sign box text--normal-f text--light-w"
         />
-        <span
-          v-if="validator.email"
-          class="text--normal-f text--bold-w text--error"
-          >Email invalide.</span
-        >
       </div>
+      <p v-if="validator.email" class="text--normal-f text--bold-w text--error text--center">
+        Email invalide.
+      </p>
       <div class="ctn--input">
         <label
           for="password"

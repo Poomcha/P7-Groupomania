@@ -7,12 +7,18 @@
       @input="submitValidation()"
     >
       <div class="ctn ctn--column">
-        <label v-if="!imagePreview && !oldPicture"
+        <label
+          v-if="!imagePreview && !oldPicture"
           for="upload-file"
           class="btn text--btn text--center text--normal-w text--normal-f"
           >Ajouter une image</label
         >
-        <label v-else for="upload-file" class="btn text--btn text--center text--normal-w text--normal-f">Changer l'image</label>
+        <label
+          v-else
+          for="upload-file"
+          class="btn text--btn text--center text--normal-w text--normal-f"
+          >Changer l'image</label
+        >
         <input
           class="input-file"
           id="upload-file"
@@ -20,11 +26,14 @@
           accept=".jpg, .jpeg, .png"
           @change="handleFileUpload($event)"
         />
-        <img :src="imagePreview ? imagePreview : oldPicture" class="img-preview" />
-        <span v-if="validator.file" class="text--error"
-          >Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.</span
-        >
+        <img
+          :src="imagePreview ? imagePreview : oldPicture"
+          class="img-preview"
+        />
       </div>
+      <p v-if="validator.file" class="text--error text--center">
+        Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.
+      </p>
       <div
         class="text--normal-f text--normal-w text--label ctn--column input-wrap"
       >
@@ -38,10 +47,10 @@
           v-model="form.title"
           @change="titleValidation()"
         />
-        <span v-if="validator.title" class="text--error"
-          >Le titre ne doit pas faire plus de 50 caractères.</span
-        >
       </div>
+      <p v-if="validator.title" class="text--error text--center">
+        Le titre ne doit pas faire plus de 50 caractères.
+      </p>
       <div
         class="
           text--normal-f text--normal-w text--label
@@ -60,7 +69,6 @@
             {{ type }}
           </option>
         </select>
-        <span v-if="validator.type" class="text--error"></span>
       </div>
       <div
         class="
@@ -81,16 +89,17 @@
           @change="textValidation()"
         >
         </textarea>
-        <span v-if="validator.text" class="text--error"></span>
       </div>
       <div class="ctn">
         <CancelButton :label="label.cancel" @cancel="cancel()"></CancelButton>
-        <SubmitButton class="ctn ctn--flex-end"
+        <SubmitButton
+          class="ctn ctn--flex-end"
           v-if="this.$route.name === 'create-post'"
           :label="label.submit"
           :disabled="disableSubmit"
         ></SubmitButton>
-        <SubmitButton class="ctn ctn--flex-end"
+        <SubmitButton
+          class="ctn ctn--flex-end"
           v-if="this.$route.name === 'modify-post'"
           :label="label.modify"
         ></SubmitButton>

@@ -20,13 +20,13 @@
           placeholder="exemple@groupomania.fr"
           class="input input--sign box text--normal-f text--light-w"
         />
-        <span
-          v-if="validator.email"
-          class="text--small-f text--bold-w text--error"
-          >Email invalide, doit être de la forme :
-          exemple@groupomania.com.</span
-        >
       </div>
+      <p
+        v-if="validator.email"
+        class="text--small-f text--bold-w text--error text--center"
+      >
+        Email invalide, doit être de la forme : exemple@groupomania.com.
+      </p>
       <div class="ctn--input">
         <label
           for="password"
@@ -43,14 +43,14 @@
           @change="passwordValidation()"
           class="input input--sign box text--normal-f text--light-w"
         />
-        <span
-          v-if="validator.password"
-          class="text--small-f text--bold-w text--error"
-          >Mot de passe invalide, doit contenir au moins 1 lettre majuscule, une
-          miniscule, un chiffre, un caractère spécial et entre 8 et 16
-          caractères.</span
-        >
       </div>
+      <p
+        v-if="validator.password"
+        class="text--small-f text--bold-w text--error text--center"
+      >
+        Mot de passe invalide, doit contenir au moins 1 lettre majuscule, une
+        miniscule, un chiffre, un caractère spécial et entre 8 et 16 caractères.
+      </p>
       <div class="ctn--input">
         <label
           for="passwordConf"
@@ -67,12 +67,13 @@
           @input="passwordConfValidation()"
           class="input input--sign box text--normal-f text--light-w"
         />
-        <span
-          v-if="validator.passwordConf"
-          class="text--small-f text--bold-w text--error"
-          >Mots de passe différents.</span
-        >
       </div>
+      <p
+        v-if="validator.passwordConf"
+        class="text--small-f text--bold-w text--error text--center"
+      >
+        Mots de passe différents.
+      </p>
       <SubmitButton :label="label.submit" :disabled="disableSubmit" />
     </form>
   </div>
