@@ -1,4 +1,5 @@
 const db = require('../models/index');
+const { decodeToken } = require('../scripts/token');
 
 // Get all comments for a post:
 exports.getAllCommentForPost = (req, res, next) => {
@@ -38,6 +39,7 @@ exports.createCommentForPost = (req, res, next) => {
 
 // Modify a comment for a post:
 exports.modifyCommentForPost = (req, res, next) => {
+  const isModerator = decodeToken(req).isModerator;
   db.User.findOne({
     where: { id: req.session.user },
     attributes: ['isModerator', 'id'],
@@ -48,7 +50,7 @@ exports.modifyCommentForPost = (req, res, next) => {
         .then((profile) => {
           db.Comment.findOne({ where: { id: req.body.comId } })
             .then((comment) => {
-              if (comment.profileId === profile.id || user.isModerator) {
+              if (comment.profileId === profile.id || isModerator) {
                 db.Comment.update(
                   {
                     text: req.body.text,
@@ -99,6 +101,7 @@ exports.modifyCommentForPost = (req, res, next) => {
 
 // Delete a comment for a post:
 exports.deleteCommentForPost = (req, res, next) => {
+  const isModerator = decodeToken(req).isModerator;
   db.User.findOne({
     where: { id: req.session.user },
     attributes: ['isModerator', 'id'],
@@ -109,7 +112,7 @@ exports.deleteCommentForPost = (req, res, next) => {
         .then((profile) => {
           db.Comment.findOne({ where: { id: req.params.comId } })
             .then((comment) => {
-              if (comment.profileId === profile.id || user.isModerator) {
+              if (comment.profileId === profile.id || isModerator) {
                 db.Comment.destroy({
                   where: {
                     id: comment.id,

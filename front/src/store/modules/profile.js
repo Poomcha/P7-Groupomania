@@ -20,6 +20,10 @@ const getters = {
   get_one_local_profile: (state) => (userId) => {
     return state.local_profiles.find((profile) => profile.userId === userId);
   },
+  get_userId_from_profileId: (state) => (profileId) => {
+    return state.local_profiles.find((profile) => profile.id === profileId)
+      .userId;
+  },
 };
 
 const mutations = {
@@ -105,21 +109,22 @@ const actions = {
         console.log(error);
       });
   },
-  go_to_profile({ dispatch }, idObj) {
-    if (idObj.local_user_id === idObj.target_id || idObj.isModerator) {
+  go_to_profile({ getters, dispatch }, idObj) {
+    const target_user_id = idObj.target_user_id ? idObj.target_user_id : getters.get_userId_from_profileId(idObj.target_id);
+    if (idObj.local_user_id === target_user_id || idObj.isModerator) {
       idObj.isModerator
         ? router.push({
             name: 'moderate-profile',
-            params: { userId: idObj.target_id },
+            params: { userId: idObj.target_user_id },
           })
         : router.push({
             name: 'my-profile',
             params: { userId: idObj.local_user_id },
           });
     } else {
-      dispatch('get_one_profile', idObj.target_id)
+      dispatch('get_one_profile', target_user_id)
         .then(() => {
-          router.push({ name: 'profile', params: { userId: idObj.target_id } });
+          router.push({ name: 'profile', params: { userId: target_user_id } });
         })
         .catch((error) => {
           console.log(error);

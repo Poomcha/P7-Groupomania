@@ -27,7 +27,10 @@
           class="input input--sign box text--normal-f text--light-w"
         />
       </div>
-      <p v-if="validator.email" class="text--normal-f text--bold-w text--error text--center">
+      <p
+        v-if="validator.email"
+        class="text--normal-f text--bold-w text--error text--center"
+      >
         Email invalide.
       </p>
       <div class="ctn--input">

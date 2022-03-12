@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
-const session = require('express-session');
+require('express-session');
+const { decodeToken, createToken } = require('../scripts/token');
 
 const db = require('../models/index');
 
@@ -21,11 +22,9 @@ exports.signup = (req, res, next) => {
       });
       return user;
     })
-    .then((user) =>
+    .then(() =>
       res.status(201).json({
         message: 'User and his profil created.',
-        userId: user.id,
-        isModerator: user.isModerator,
       })
     )
     .catch((error) => res.status(400).json({ message: error }));
@@ -43,10 +42,12 @@ exports.signin = (req, res, next) => {
           }
           // Creating cookie
           req.session.user = user.id;
-          res.status(200).json({
+          // Creating Token
+          const token = createToken({
             userId: user.id,
             isModerator: user.isModerator,
           });
+          res.status(200).json({ userId: user.id, token });
         })
         .catch((error) => res.status(500).json({ error }));
     })
@@ -79,9 +80,10 @@ exports.logout = (req, res, next) => {
 
 // Changement de mot de passe:
 exports.changePassword = (req, res, next) => {
+  const isModerator = decodeToken(req).isModerator;
   db.User.findOne({ where: { id: req.session.user } })
     .then((user) => {
-      if (req.params.id === user.id || user.isModerator) {
+      if (req.params.id === user.id || isModerator) {
         bcrypt
           .hash(req.body.password, 10)
           .then((hash) => {
@@ -107,9 +109,10 @@ exports.changePassword = (req, res, next) => {
 
 // Suppression d'un utilisateur:
 exports.destroyUser = (req, res, next) => {
+  const isModerator = decodeToken(req).isModerator;
   db.User.findOne({ where: { id: req.session.user } })
     .then((user) => {
-      if (req.session.user === user.id || user.isModerator) {
+      if (req.session.user === user.id || isModerator) {
         db.User.destroy({ where: { id: req.params.id } })
           .then(() => {
             res.status(201).json({ message: 'User destroyed.' });

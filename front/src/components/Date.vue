@@ -9,6 +9,7 @@ export default {
   el: "#date",
   props: {
     id: {
+      type: String,
       required: true,
     },
     type: {

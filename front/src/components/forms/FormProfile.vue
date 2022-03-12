@@ -31,7 +31,7 @@
           class="img-preview-profile"
         />
       </div>
-      <p v-if="validator.file" class="text--error text--center">
+      <p v-if="validator.file" class="text--error text--center text--normal-f text--bold-w">
         Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.
       </p>
       <div

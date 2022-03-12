@@ -78,17 +78,18 @@ export default {
     this.$store.dispatch("commit_local_post", this.$route.params.postId);
   },
   created() {},
-  data() {},
   computed: {
     ...mapGetters([
       "get_local_post",
       "get_local_coms",
       "get_user_id",
       "get_com_number_for_post",
+      "is_moderator",
+      "get_user_email",
     ]),
   },
   methods: {
-    ...mapActions(["get_one_profile", "get_profile_id", "get_user_id"]),
+    ...mapActions(["get_one_profile", "get_profile_id"]),
     goToProfile() {
       this.$store.dispatch("go_to_profile", {
         local_profile_id: this.get_profile_id,

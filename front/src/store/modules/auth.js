@@ -1,10 +1,11 @@
 import axios from 'axios';
 import router from '../../router/index';
+
 const state = {
+  token: undefined,
   user: {
     email: null,
     _id: null,
-    isModerator: null,
     profileFilled: null,
     profile: {
       firstName: null,
@@ -17,7 +18,10 @@ const state = {
 };
 const getters = {
   is_logged_in(state) {
-    return state.user._id !== null ? true : false;
+    return state.token ? true : false;
+  },
+  get_token(state) {
+    return state.token;
   },
   get_user_id(state) {
     return state.user._id;
@@ -35,10 +39,13 @@ const getters = {
     return state.user.profile.id;
   },
   is_moderator(state) {
-    return state.user.isModerator;
+    return state.user.email == 'admin@groupomania.com' ? true : false;
   },
 };
 const mutations = {
+  set_token(state, token) {
+    state.token = token;
+  },
   set_user_email(state, email) {
     state.user.email = email;
   },
@@ -52,6 +59,7 @@ const mutations = {
     state.user.profileFilled = payload;
   },
   log_out(state) {
+    state.token = undefined;
     state.user = {
       email: null,
       _id: null,
@@ -64,9 +72,6 @@ const mutations = {
         profilPictureUrl: null,
       },
     };
-  },
-  set_user_rights(state, data) {
-    state.user.isModerator = data;
   },
 };
 const actions = {
@@ -89,12 +94,12 @@ const actions = {
           // Set user email and userId.
           commit('set_user_email', form.email);
           commit('set_user_id', res.data.userId);
-          commit('set_user_rights', res.data.isModerator);
+          commit('set_token', res.data.token);
           // Set profile if it exist, else redirect to profil completion view.
           axios
             .get(`users/${state.user._id}`)
             .then((res) => {
-              if (res.data.firstName) {
+              if (res.data.firstName !== null) {
                 // Set user profile
                 dispatch('change_profile_status', true);
                 commit('set_user_profile', res.data);
@@ -146,8 +151,8 @@ const actions = {
   change_profile_status({ commit }, payload) {
     commit('set_profile_status', payload);
   },
-  change_pwd({ state }, form) {
-    if (state.user.isModerator) {
+  change_pwd({ state, getters }, form) {
+    if (getters.is_moderator) {
       axios
         .put(`/${router.currentRoute.value.params.userId}`, {
           password: form.password,

@@ -1,4 +1,5 @@
 const db = require('../models/index');
+const { decodeToken } = require('../scripts/token');
 
 // Get all profile:
 exports.getAllProfile = (req, res, next) => {
@@ -72,9 +73,10 @@ exports.updateProfile = (req, res, next) => {
 
 // Supprimer un profil et un user:
 exports.deleteProfile = (req, res, next) => {
+  const isModerator = decodeToken(req).isModerator;
   db.User.findOne({ where: { id: req.session.user } })
     .then((user) => {
-      if (req.session.user === req.params.userId || user.isModerator) {
+      if (req.session.user === req.params.userId || isModerator) {
         db.Profile.destroy({ where: { userId: req.params.userId } })
           .then(() => {
             db.User.destroy({ where: { id: req.params.userId } })

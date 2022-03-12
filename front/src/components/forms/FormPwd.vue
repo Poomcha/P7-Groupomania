@@ -35,12 +35,14 @@
           v-model="form.password"
           @input="passwordValidation()"
         />
-        <span v-if="validator.password"
-          >Mot de passe invalide, doit contenir au moins 1 lettre majuscule, une
-          miniscule, un chiffre, un caractère spécial et entre 8 et 16
-          caractères.</span
-        >
       </div>
+      <p
+        v-if="validator.password"
+        class="text--center text--error text--small-f text--bold-w"
+      >
+        Mot de passe invalide, doit contenir au moins 1 lettre majuscule, une
+        miniscule, un chiffre, un caractère spécial et entre 8 et 16 caractères.
+      </p>
       <div
         class="text--normal-f text--normal-w text--label ctn--column input-wrap"
       >
@@ -55,11 +57,18 @@
           v-model="form.passwordConf"
           @input="passwordConfValidation()"
         />
-        <span v-if="validator.passwordConf">Mots de passe différents.</span>
       </div>
+      <p
+        v-if="validator.passwordConf"
+        class="text--center text--error text--small-f text--bold-w"
+      >
+        Mots de passe différents.
+      </p>
       <SubmitButton :label="label.submit" :disabled="disableSubmit" />
     </form>
-    <p v-else>Mot de passe modifié avec succès !</p>
+    <p v-else class="text--center text--normal-f text--bold-w">
+      Mot de passe modifié avec succès !
+    </p>
   </div>
 </template>
 

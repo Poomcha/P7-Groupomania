@@ -74,7 +74,6 @@ const actions = {
         comId: comObj.comId,
       })
       .then((res) => {
-        console.log(res.data);
         commit('update_local_com', {
           com: res.data,
           comId: res.data.id,

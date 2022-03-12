@@ -1,4 +1,5 @@
 const db = require('../models');
+const { decodeToken } = require('../scripts/token');
 
 // Get all posts:
 exports.getAllPosts = (req, res, next) => {
@@ -85,6 +86,8 @@ exports.createPost = (req, res, next) => {
 
 // Modify a post:
 exports.modifyPost = (req, res, next) => {
+  console.log(decodeToken(req));
+  const isModerator = decodeToken(req).isModerator;
   db.User.findOne({
     where: { id: req.session.user },
     attributes: ['isModerator', 'id'],
@@ -95,7 +98,7 @@ exports.modifyPost = (req, res, next) => {
         .then((profile) => {
           db.Post.findOne({ where: { id: req.params.postId } })
             .then((post) => {
-              if (post.profileId === profile.id || user.isModerator) {
+              if (post.profileId === profile.id || isModerator) {
                 const postObj = req.file
                   ? {
                       ...req.body,
@@ -143,6 +146,7 @@ exports.modifyPost = (req, res, next) => {
 
 // Delete a post:
 exports.deletepost = (req, res, next) => {
+  const isModerator = decodeToken(req).isModerator;
   db.User.findOne({
     where: { id: req.session.user },
     attributes: ['isModerator', 'id'],
@@ -153,7 +157,7 @@ exports.deletepost = (req, res, next) => {
         .then((profile) => {
           db.Post.findOne({ where: { id: req.params.postId } })
             .then((post) => {
-              if (post.profileId === profile.id || user.isModerator) {
+              if (post.profileId === profile.id || isModerator) {
                 db.Post.destroy({ where: { id: req.params.postId } })
                   .then(() => {
                     res

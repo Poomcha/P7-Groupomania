@@ -31,7 +31,7 @@
           class="img-preview"
         />
       </div>
-      <p v-if="validator.file" class="text--error text--center">
+      <p v-if="validator.file" class="text--error text--center text--normal-f text--bold-w">
         Fichiers autorisés : .jpg, .jpeg, .png, 5Mo maximum.
       </p>
       <div
@@ -48,7 +48,7 @@
           @change="titleValidation()"
         />
       </div>
-      <p v-if="validator.title" class="text--error text--center">
+      <p v-if="validator.title" class="text--error text--center text--normal-f text--bold-w">
         Le titre ne doit pas faire plus de 50 caractères.
       </p>
       <div

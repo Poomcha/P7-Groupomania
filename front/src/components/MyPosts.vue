@@ -11,6 +11,7 @@
       :creatorFirstName="get_user_profile.firstName"
       :creatorLastName="get_user_profile.lastName"
       :creatorImgUrl="get_user_profile.profilPictureURL"
+      :nbOfCom="get_com_number_for_post(post.id)"
     ></CardPost>
   </section>
 </template>
@@ -28,7 +29,7 @@ export default {
     this.$store.dispatch("commit_my_posts", this.$store.getters.get_profile_id);
   },
   computed: {
-    ...mapGetters(["get_my_posts", "get_user_profile"]),
+    ...mapGetters(["get_my_posts", "get_user_profile", "get_com_number_for_post"]),
   },
   watch: {},
 };

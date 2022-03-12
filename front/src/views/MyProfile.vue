@@ -61,7 +61,7 @@
           :title="post.title"
           :content="post.text"
           :imgUrl="post.postPictureURL"
-          :nbOfCom="get_nb_of_com(post.id)"
+          :nbOfCom="get_com_number_for_post(post.id)"
         ></CardPost>
       </section>
       <section id="delete-my-account" v-else-if="links.deleteAccount">
@@ -185,7 +185,7 @@ export default {
       "get_user_id",
       "get_com_post_from_user",
       "get_profile_id",
-      "get_nb_of_com",
+      "get_com_number_for_post",
     ]),
     seeBackLink() {
       return Object.values(this.links).find((value) => value);

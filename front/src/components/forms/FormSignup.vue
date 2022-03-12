@@ -23,7 +23,7 @@
       </div>
       <p
         v-if="validator.email"
-        class="text--small-f text--bold-w text--error text--center"
+        class="text--normal-f text--bold-w text--error text--center"
       >
         Email invalide, doit être de la forme : exemple@groupomania.com.
       </p>
@@ -46,7 +46,7 @@
       </div>
       <p
         v-if="validator.password"
-        class="text--small-f text--bold-w text--error text--center"
+        class="text--normal-f text--bold-w text--error text--center"
       >
         Mot de passe invalide, doit contenir au moins 1 lettre majuscule, une
         miniscule, un chiffre, un caractère spécial et entre 8 et 16 caractères.
@@ -70,7 +70,7 @@
       </div>
       <p
         v-if="validator.passwordConf"
-        class="text--small-f text--bold-w text--error text--center"
+        class="text--normal-f text--bold-w text--error text--center"
       >
         Mots de passe différents.
       </p>

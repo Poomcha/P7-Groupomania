@@ -33,18 +33,13 @@ export default {
   components: {
     CardPost,
   },
-  beforeCreate() {
-    this.$store.dispatch("commit_local_posts");
-    this.$store.dispatch("commit_my_posts", this.$store.getters.get_profile_id);
-  },
-  props: {
-  },
+  // beforeCreate() {
+  //   this.$store.dispatch("commit_local_posts");
+  //   this.$store.dispatch("commit_my_posts", this.$store.getters.get_profile_id);
+  // },
+  props: {},
   computed: {
-    ...mapGetters([
-      "get_local_posts",
-      "get_local_profile",
-      "get_nb_of_com"
-    ]),
+    ...mapGetters(["get_local_posts", "get_local_profile", "get_nb_of_com"]),
     posts() {
       return this.$route.name === "home"
         ? this.get_local_posts

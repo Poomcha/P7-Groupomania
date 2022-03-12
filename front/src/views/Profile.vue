@@ -1,6 +1,7 @@
 <template>
   <section id="profile" class="ctn ctn--column profile">
-    <CardProfile class="profile__card-profile"
+    <CardProfile
+      class="profile__card-profile"
       :userId="get_local_profile.userId"
       :profilePicURL="
         get_local_profile.profilPictureURL === null
@@ -13,7 +14,9 @@
       :position="get_local_profile.position"
       :description="get_local_profile.description"
     ></CardProfile>
-    <h1 class="text--large-f text--bold-w text--label text--center">Publications</h1>
+    <h1 class="text--large-f text--bold-w text--label text--center">
+      Publications
+    </h1>
     <FluxPost></FluxPost>
   </section>
 </template>

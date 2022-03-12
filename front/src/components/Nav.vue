@@ -4,7 +4,11 @@
       :to="pathToHome"
       class="link ctn"
       :class="{ linkActive: this.$route.name === pathToHome.name }"
-      ><img class="icon" src="../assets/latest_news.svg" alt="" /><span
+      ><img
+        class="icon"
+        src="../assets/latest_news.svg"
+        alt="Icône Actualités"
+      /><span
         v-if="isLargeScreen"
         class="text--normal-f text--normal-w link--router"
         >Actualités</span
@@ -14,7 +18,11 @@
       :to="pathToCreatePost"
       class="link ctn"
       :class="{ linkActive: this.$route.name === pathToCreatePost.name }"
-      ><img class="icon" src="../assets/create_post.svg" alt="" /><span
+      ><img
+        class="icon"
+        src="../assets/create_post.svg"
+        alt="Icône Créer Publication"
+      /><span
         v-if="isLargeScreen"
         class="text--normal-f text--normal-w link--router"
         >Publier</span
@@ -25,7 +33,7 @@
       class="link ctn"
       :class="{ linkActive: this.$route.name === pathToProfiles.name }"
     >
-      <img class="icon" src="../assets/users.svg" alt="" />
+      <img class="icon" src="../assets/users.svg" alt="Icône Groupomaniens" />
       <span
         v-if="isLargeScreen"
         class="text--normal-f text--normal-w link--router"
@@ -37,7 +45,7 @@
       class="link ctn"
       :class="{ linkActive: this.$route.name === pathToProfile.name }"
     >
-      <img class="icon" src="../assets/my_profile.svg" alt="" />
+      <img class="icon" src="../assets/my_profile.svg" alt="Icône Mon Profil" />
       <span
         v-if="isLargeScreen"
         class="text--normal-f text--normal-w link--router"
@@ -45,7 +53,7 @@
       >
     </router-link>
     <router-link to="/" @click="logout()" class="link ctn">
-      <img class="icon" src="../assets/logout.svg" alt="" />
+      <img class="icon" src="../assets/logout.svg" alt="Icône Logout" />
       <span
         v-if="isLargeScreen"
         class="text--normal-f text--normal-w link--router"

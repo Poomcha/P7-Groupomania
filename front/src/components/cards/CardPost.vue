@@ -135,7 +135,7 @@ export default {
       this.$store.dispatch("go_to_profile", {
         local_profile_id: this.get_profile_id,
         local_user_id: this.get_user_id,
-        target_id: this.creatorId,
+        target_user_id: this.creatorId,
       });
     },
     deletePost() {

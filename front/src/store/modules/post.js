@@ -29,7 +29,7 @@ const getters = {
     return formatDate(dates);
   },
   get_nb_of_com: (state) => (postId) => {
-    return state.posts.find((post) => post.id === postId).Comments.length;
+    return state.posts.find((post) => post.id === postId).Comments ? state.posts.find((post) => post.id === postId).Comments.length : "0";
   },
   get_com_post_from_user: (state) => (profileId) => {
     const posts = [];

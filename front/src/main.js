@@ -7,6 +7,8 @@ import VueAxios from 'vue-axios';
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://localhost:3000/';
+axios.defaults.headers.common['Authorization'] =
+  'Bearer ' + store.getters.get_token;
 
 axios.interceptors.response.use(undefined, function (error) {
   const originalRequest = error.config;
