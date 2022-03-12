@@ -38,6 +38,9 @@ Installation du projet :
 - Dans le répertoire /back, lancer la commande : "npx sequelize db:create"
 - Dans le répertoire /back, lancer la commande : "npx sequelize db:migrate"
 
+- Dans le répertoire /back, créer un fichier .env, coller cette ligne à l'intérieur : TOKEN_SECRET_PHRASE = "VOTRE PHRASE SECRETE DE SECURISATION DE TOKEN"
+  Remplacer la phrase entre guillemets par la phrase de votre choix.
+
 - Dans le répertoire /back, lancer la commande : "npm start nodemon"
 - Dans le répertoire /front, lancer la commande : "npm run serve"
 
@@ -45,3 +48,5 @@ Installation du projet :
 
 Créer un profil administratur :
 - l'email de l'administrateur doit être "admin@groupomania.com"
+
+- Si problème d'installation dû à innoDB, changer la valeur de la variable système de mysql innodb_default_row pour "dynammic"
