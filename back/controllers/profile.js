@@ -1,4 +1,5 @@
 const db = require('../models/index');
+const { access, constants, unlink } = require('fs');
 const { decodeToken } = require('../scripts/token');
 
 // Get all profile:
@@ -36,47 +37,84 @@ exports.getProfileById = (req, res, next) => {
 
 // Update a profile:
 exports.updateProfile = (req, res, next) => {
+  const isModerator = decodeToken(req).isModerator;
   db.Profile.findOne({ where: { userId: req.params.userId } })
-    .then(() => {
-      const profileObj = req.file
-        ? {
-            // Modifiable en fonction du JS frontend
-            ...req.body,
-            profilPictureURL: `${req.protocol}://${req.get('host')}/images/${
-              req.file.filename
-            }`,
+    .then((profile) => {
+      if (req.session.user === req.params.userId || isModerator) {
+        const imgPathArray = profile.profilPictureURL.split('/');
+        const imgPath = `./images/${imgPathArray[imgPathArray.length - 1]}`;
+        access(imgPath, constants.F_OK, (err) => {
+          if (!err) {
+            unlink(imgPath, (err) => {
+              if (err) {
+                console.log(err);
+              }
+              console.log(
+                `${imgPath.split('/')[imgPath.split('/').length - 1]} deleted.`
+              );
+            });
+          } else {
+            console.log(err);
           }
-        : req.body;
-      db.Profile.update(
-        {
-          ...profileObj,
-          position:
-            req.body.position === 'null'
-              ? 'Travaille chez Groupomania'
-              : req.body.position,
-          description:
-            req.body.description === 'null' ? '✌️' : req.body.description,
-        },
-        { where: { userId: req.params.userId } }
-      )
-        .then(() => {
-          res.status(201).json({ message: 'Profile modified.' });
-        })
-        .catch((error) => {
-          res.status(400).json({ error: error });
         });
+        const profileObj = req.file
+          ? {
+              // Modifiable en fonction du JS frontend
+              ...req.body,
+              profilPictureURL: `${req.protocol}://${req.get('host')}/images/${
+                req.file.filename
+              }`,
+            }
+          : req.body;
+        db.Profile.update(
+          {
+            ...profileObj,
+            position:
+              req.body.position === 'null'
+                ? 'Travaille chez Groupomania'
+                : req.body.position,
+            description:
+              req.body.description === 'null' ? '✌️' : req.body.description,
+          },
+          { where: { userId: req.params.userId } }
+        )
+          .then(() => {
+            res.status(201).json({ message: 'Profile modified.' });
+          })
+          .catch((error) => {
+            res.status(400).json({ error: error });
+          });
+      } else {
+        res.status(401).json({ message: 'Unauthorized access.' });
+      }
     })
     .catch((error) => {
-      res.status(404).json({ error });
+      res.status(404).json(error);
     });
 };
 
 // Supprimer un profil et un user:
 exports.deleteProfile = (req, res, next) => {
   const isModerator = decodeToken(req).isModerator;
-  db.User.findOne({ where: { id: req.session.user } })
-    .then((user) => {
+  db.Profile.findOne({ where: { userId: req.params.userId } })
+    .then((profile) => {
       if (req.session.user === req.params.userId || isModerator) {
+        const imgPathArray = profile.profilPictureURL.split('/');
+        const imgPath = `./images/${imgPathArray[imgPathArray.length - 1]}`;
+        access(imgPath, constants.F_OK, (err) => {
+          if (!err) {
+            unlink(imgPath, (err) => {
+              if (err) {
+                console.log(err);
+              }
+              console.log(
+                `${imgPath.split('/')[imgPath.split('/').length - 1]} deleted.`
+              );
+            });
+          } else {
+            console.log(err);
+          }
+        });
         db.Profile.destroy({ where: { userId: req.params.userId } })
           .then(() => {
             db.User.destroy({ where: { id: req.params.userId } })

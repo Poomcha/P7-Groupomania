@@ -1,4 +1,5 @@
 const db = require('../models');
+const { access, constants, unlink } = require('fs');
 const { decodeToken } = require('../scripts/token');
 
 // Get all posts:
@@ -86,7 +87,6 @@ exports.createPost = (req, res, next) => {
 
 // Modify a post:
 exports.modifyPost = (req, res, next) => {
-  console.log(decodeToken(req));
   const isModerator = decodeToken(req).isModerator;
   db.User.findOne({
     where: { id: req.session.user },
@@ -99,6 +99,26 @@ exports.modifyPost = (req, res, next) => {
           db.Post.findOne({ where: { id: req.params.postId } })
             .then((post) => {
               if (post.profileId === profile.id || isModerator) {
+                const imgPathArray = post.postPictureURL.split('/');
+                const imgPath = `./images/${
+                  imgPathArray[imgPathArray.length - 1]
+                }`;
+                access(imgPath, constants.F_OK, (err) => {
+                  if (!err) {
+                    unlink(imgPath, (err) => {
+                      if (err) {
+                        console.log(err);
+                      }
+                      console.log(
+                        `${
+                          imgPath.split('/')[imgPath.split('/').length - 1]
+                        } deleted.`
+                      );
+                    });
+                  } else {
+                    console.log(err);
+                  }
+                });
                 const postObj = req.file
                   ? {
                       ...req.body,
@@ -158,6 +178,26 @@ exports.deletepost = (req, res, next) => {
           db.Post.findOne({ where: { id: req.params.postId } })
             .then((post) => {
               if (post.profileId === profile.id || isModerator) {
+                const imgPathArray = post.postPictureURL.split('/');
+                const imgPath = `./images/${
+                  imgPathArray[imgPathArray.length - 1]
+                }`;
+                access(imgPath, constants.F_OK, (err) => {
+                  if (!err) {
+                    unlink(imgPath, (err) => {
+                      if (err) {
+                        console.log(err);
+                      }
+                      console.log(
+                        `${
+                          imgPath.split('/')[imgPath.split('/').length - 1]
+                        } deleted.`
+                      );
+                    });
+                  } else {
+                    console.log(err);
+                  }
+                });
                 db.Post.destroy({ where: { id: req.params.postId } })
                   .then(() => {
                     res
