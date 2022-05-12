@@ -8,7 +8,7 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    return queryInterface.addColumn('Users', 'isModerator', {
+    return queryInterface.addColumn('users', 'isModerator', {
       type: 'boolean',
       defaultValue: false,
       onUpdate: 'CASCADE',

@@ -79,7 +79,8 @@ const actions = {
     const data = { email: form.email, password: form.password };
     axios
       .post('/signup', data)
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         dispatch('sign_in', data);
       })
       .catch((error) => {
